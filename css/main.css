@@ -20,10 +20,16 @@
 @import './legacy-styles.css';
 
 /* ============================================
-   MOBILE FIX
+   MOBILE OPTIMIZATIONS
    Fixes content cutoff on mobile devices
    ============================================ */
 @import './mobile-fix.css';
+
+/* ============================================
+   COMPREHENSIVE MOBILE ENHANCEMENTS
+   Advanced mobile UX improvements
+   ============================================ */
+@import './mobile-enhancements.css';
 
 /* NOTE: The following modules are created but currently empty.
    Styles are loaded from legacy-styles.css above.

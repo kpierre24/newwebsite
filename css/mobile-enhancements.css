@@ -1,0 +1,706 @@
+/* ============================================
+   COMPREHENSIVE MOBILE ENHANCEMENTS
+   Applied: October 28, 2025
+   ============================================ */
+
+/* ============================================
+   1. ENHANCED TOUCH TARGETS
+   ============================================ */
+@media (max-width: 768px) {
+  /* Ensure all interactive elements meet 44x44px minimum (Apple/WCAG guideline) */
+  button,
+  .btn,
+  .cta-button,
+  a.button,
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  /* Larger tap targets for links in text */
+  p a,
+  li a {
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+  }
+
+  /* Theme toggle button - easier to tap */
+  .theme-toggle {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+
+  /* Nav toggle (hamburger) - larger tap area */
+  .nav-toggle {
+    padding: 0.75rem;
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* ============================================
+   2. IMPROVED TYPOGRAPHY FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Better readability - slightly larger base font */
+  html {
+    font-size: 16px; /* Ensure at least 16px to prevent iOS zoom on focus */
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.7; /* Increased for mobile readability */
+  }
+
+  /* Headings optimized for mobile */
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+    line-height: 1.3;
+    margin-bottom: 0.875rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  /* Paragraph spacing for better readability */
+  p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+
+  /* Better list spacing */
+  ul, ol {
+    margin-bottom: 1.25rem;
+  }
+
+  li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.625rem;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+}
+
+/* ============================================
+   3. ENHANCED FORM INPUTS FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Prevent iOS zoom on input focus */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important; /* Minimum to prevent zoom */
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+  }
+
+  textarea {
+    min-height: 150px; /* Better size for mobile typing */
+  }
+
+  /* Better spacing between form fields */
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
+
+  /* Larger, more visible labels */
+  label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    display: block;
+  }
+
+  /* Full-width buttons in forms */
+  .contact-form button,
+  .contact-form .submit-btn,
+  form button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
+    border-radius: 12px;
+  }
+
+  /* Better checkbox and radio sizes */
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+}
+
+/* ============================================
+   4. OPTIMIZED CARD LAYOUTS
+   ============================================ */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.75rem;
+    margin: 1.5rem 0;
+    border-radius: 16px;
+  }
+
+  /* Project cards - better mobile presentation */
+  .project-card,
+  .blog-card,
+  .service-card {
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+  }
+
+  /* Grid layouts - force single column on mobile */
+  .projects-grid,
+  .blog-grid,
+  .services-grid,
+  .cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  /* Better spacing for card content */
+  .card h2,
+  .card h3 {
+    margin-bottom: 1rem;
+  }
+
+  .card p {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ============================================
+   5. IMPROVED HERO SECTIONS FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .site-header,
+  .hero,
+  .hero-section {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-title,
+  .site-header h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle,
+  .site-header p {
+    font-size: 1.125rem !important;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Hero buttons - stack on mobile */
+  .hero-buttons,
+  .cta-actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .hero-buttons .cta-button,
+  .cta-actions .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header,
+  .hero,
+  .hero-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .hero-title,
+  .site-header h1 {
+    font-size: 1.875rem !important;
+  }
+}
+
+/* ============================================
+   6. BETTER SPACING AND RHYTHM
+   ============================================ */
+@media (max-width: 768px) {
+  /* Section spacing */
+  section {
+    padding: 3rem 1.5rem;
+    margin-bottom: 0;
+  }
+
+  /* Better spacing between major sections */
+  .section-gap {
+    margin-bottom: 3rem;
+  }
+
+  /* Footer spacing */
+  .site-footer {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  /* Container spacing */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 2.5rem 1rem;
+  }
+
+  .site-footer {
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ============================================
+   7. OPTIMIZED IMAGES FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Better image handling */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+
+  /* Project images */
+  .project-card img,
+  .blog-card img {
+    border-radius: 12px 12px 0 0;
+    object-fit: cover;
+    width: 100%;
+    max-height: 240px;
+  }
+
+  /* Avatar/profile images */
+  .profile-image,
+  .author-image,
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  /* Icon sizes */
+  .icon,
+  .feature-icon,
+  i.large {
+    font-size: 2.5rem;
+  }
+}
+
+/* ============================================
+   8. ENHANCED NAVIGATION FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Sticky nav optimization */
+  .main-nav {
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .nav-brand a {
+    font-size: 1.375rem;
+  }
+
+  /* Better nav link spacing in sidebar */
+  .nav-links a {
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* ============================================
+   9. IMPROVED CALL-TO-ACTION BUTTONS
+   ============================================ */
+@media (max-width: 768px) {
+  .cta-button,
+  .btn,
+  button.primary {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Maintain hover effects even on touch */
+  .cta-button:active,
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Button groups - stack vertically */
+  .button-group,
+  .btn-group {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .button-group .cta-button,
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   10. FLOATING ACTION BUTTONS OPTIMIZATION
+   ============================================ */
+@media (max-width: 768px) {
+  /* Scroll to top button */
+  .scroll-to-top {
+    right: 1rem;
+    bottom: 5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Floating contact button */
+  .floating-contact,
+  .floating-contact-btn {
+    right: 1rem;
+    bottom: 8rem;
+    width: 54px;
+    height: 54px;
+    font-size: 1.35rem;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  }
+
+  /* Ensure floating buttons don't overlap content */
+  body {
+    padding-bottom: 1rem;
+  }
+}
+
+/* ============================================
+   11. BETTER TABLE HANDLING ON MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    padding: 1rem;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  /* Alternating row colors for better readability */
+  tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+/* ============================================
+   12. MODALS OPTIMIZATION FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .modal-content,
+  .modal-dialog {
+    width: 95%;
+    max-width: 95%;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-close,
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   13. IMPROVED ACCESSIBILITY ON MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Larger focus indicators for touch */
+  *:focus,
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus {
+    outline: 3px solid var(--interactive-primary);
+    outline-offset: 3px;
+  }
+
+  /* Skip to content link */
+  .skip-link:focus {
+    top: 1rem;
+    left: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+
+  /* Better contrast for dark mode on mobile */
+  [data-theme="dark"] *:focus,
+  body.dark-mode *:focus {
+    outline-color: var(--accent-purple);
+  }
+}
+
+/* ============================================
+   14. ANIMATIONS OPTIMIZATION FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Reduce motion for better performance and accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Simplified animations for mobile performance */
+  [data-aos] {
+    transition-duration: 0.4s;
+  }
+
+  /* Disable complex hover animations (not needed on touch) */
+  .card:hover::before,
+  .project-card:hover::before {
+    animation: none;
+  }
+}
+
+/* ============================================
+   15. PERFORMANCE: REDUCE SHADOWS ON MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Lighter shadows for better performance */
+  .card,
+  .project-card,
+  .blog-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card:hover,
+  .project-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .modal-content {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ============================================
+   16. SAFE AREA INSETS (iPhone X+ Notch Support)
+   ============================================ */
+@media (max-width: 768px) {
+  /* Support for devices with notches */
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .main-nav {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
+  .site-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  /* Floating buttons respect safe areas */
+  .scroll-to-top,
+  .floating-contact-btn {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(5rem, calc(5rem + env(safe-area-inset-bottom)));
+  }
+}
+
+/* ============================================
+   17. LANDSCAPE ORIENTATION OPTIMIZATION
+   ============================================ */
+@media (max-width: 768px) and (orientation: landscape) {
+  /* Reduce vertical padding in landscape */
+  .site-header,
+  .hero,
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Smaller headings in landscape */
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Two-column layout for skills in landscape */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem;
+  }
+
+  /* Sidebar menu - reduce padding */
+  .nav-links {
+    padding: 4rem 2rem 2rem;
+  }
+
+  .nav-links a {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   18. PULL-TO-REFRESH OPTIMIZATION
+   ============================================ */
+@media (max-width: 768px) {
+  /* Prevent pull-to-refresh interference */
+  body {
+    overscroll-behavior-y: contain;
+  }
+
+  /* For fixed headers */
+  .main-nav {
+    overscroll-behavior: contain;
+  }
+}
+
+/* ============================================
+   19. TEXT SELECTION IMPROVEMENT
+   ============================================ */
+@media (max-width: 768px) {
+  /* Better text selection color for mobile */
+  ::selection {
+    background-color: var(--primary-200);
+    color: var(--text-primary);
+  }
+
+  ::-moz-selection {
+    background-color: var(--primary-200);
+    color: var(--text-primary);
+  }
+
+  [data-theme="dark"] ::selection,
+  body.dark-mode ::selection {
+    background-color: var(--primary-700);
+    color: var(--text-inverse);
+  }
+}
+
+/* ============================================
+   20. LOADING STATES FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Loading spinner - mobile optimized */
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+  }
+
+  /* Skeleton screens for better perceived performance */
+  .skeleton {
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06) 25%,
+      rgba(0, 0, 0, 0.15) 50%,
+      rgba(0, 0, 0, 0.06) 75%
+    );
+    background-size: 200% 100%;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
