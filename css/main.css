@@ -1,0 +1,34 @@
+/* ============================================
+   MAIN STYLESHEET
+   Modular CSS architecture with legacy fallback
+   ============================================ */
+
+/* Base Styles - Foundation */
+@import './base/variables.css';
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/accessibility.css';
+
+/* Layout - Structure */
+@import './layout/container.css';
+@import './layout/header.css';
+
+/* ============================================
+   LEGACY STYLES
+   Contains all original styles until migration
+   ============================================ */
+@import './legacy-styles.css';
+
+/* NOTE: The following modules are created but currently empty.
+   Styles are loaded from legacy-styles.css above.
+   Gradually extract styles from legacy file into these modules:
+   
+   - ./layout/navigation.css
+   - ./layout/footer.css
+   - ./components/buttons.css
+   - ./components/cards.css
+   - ./components/forms.css
+   - ./features/animations.css
+   - ./utilities/dark-mode.css
+   - etc.
+*/

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kendell Pierre - Full-Stack Developer | Web & Mobile App Development</title>
+  
+  <!-- Security Headers (Note: Some headers like X-Frame-Options work best via server, not meta tags) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cdn.jsdelivr.net https://unpkg.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Full-stack developer specializing in modern web applications, mobile apps, and user-centered design. Transforming ideas into engaging digital products. Available for new projects.">
+  <meta name="keywords" content="web developer, full-stack developer, mobile app development, React, Node.js, JavaScript, portfolio, Kendell Pierre">
+  <meta name="author" content="Kendell Pierre">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yourwebsite.com/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourwebsite.com/">
+  <meta property="og:title" content="Kendell Pierre - Full-Stack Developer | Web & Mobile Apps">
+  <meta property="og:description" content="Full-stack developer specializing in modern web applications, mobile apps, and user-centered design. Let's bring your digital vision to life.">
+  <meta property="og:image" content="https://yourwebsite.com/og-image.png">
+  <meta property="og:site_name" content="Kendell Pierre Portfolio">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@kentrini25">
+  <meta name="twitter:creator" content="@kentrini25">
+  <meta name="twitter:url" content="https://yourwebsite.com/">
+  <meta name="twitter:title" content="Kendell Pierre - Full-Stack Developer">
+  <meta name="twitter:description" content="Full-stack developer specializing in modern web applications, mobile apps, and user-centered design.">
+  <meta name="twitter:image" content="https://yourwebsite.com/twitter-card.png">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kendell Pierre",
+    "url": "https://yourwebsite.com",
+    "image": "https://yourwebsite.com/profile-image.jpg",
+    "sameAs": [
+      "https://github.com/kpierre24",
+      "https://twitter.com/kentrini25",
+      "https://facebook.com/kendellkevin"
+    ],
+    "jobTitle": "Full-Stack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    },
+    "description": "Full-stack developer specializing in modern web applications, mobile apps, and user-centered design.",
+    "email": "kpierre24@gmail.com",
+    "knowsAbout": ["Web Development", "Mobile App Development", "JavaScript", "React", "Node.js", "UI/UX Design"],
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "Your University"
+    }
+  }
+  </script>
+  
+  <!-- Performance optimizations -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="config/manifest.json">
+  <meta name="theme-color" content="#4e54c8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kendell Pierre">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  
+  <!-- Performance hints -->
+  <link rel="dns-prefetch" href="//via.placeholder.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  
+  <!-- Google Analytics 4 (Consent Mode) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Default consent to denied (GDPR compliant)
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+    
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      'anonymize_ip': true,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+  </script>
+</head>
+<body>
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Loading amazing content...</div>
+    <div class="loader-progress">
+      <div class="loader-progress-bar"></div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1>👋 Welcome to My Personal Website</h1>
+      <p class="tagline">
+        <span class="typing-text" id="typingText" aria-live="polite"></span>
+        <span class="cursor" aria-hidden="true">|</span>
+      </p>
+      <div class="floating-elements" aria-hidden="true">
+        <div class="floating-element" style="--delay: 0s">💻</div>
+        <div class="floating-element" style="--delay: 1s">🚀</div>
+        <div class="floating-element" style="--delay: 2s">✨</div>
+        <div class="floating-element" style="--delay: 0.5s">🎨</div>
+        <div class="floating-element" style="--delay: 1.5s">📱</div>
+      </div>
+    </div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
+  </header>
+
+  <!-- Enhanced Navigation with Quick Access -->
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="index.html" aria-label="Kendell's Portfolio - Home">
+          <span class="brand-icon">👨‍💻</span>
+          <span class="brand-text">Kendell</span>
+        </a>
+      </div>
+      
+      <!-- Quick Action Pills -->
+      <div class="nav-quick-actions">
+        <a href="pages/contact.html" class="quick-action hire-me">
+          <span class="pulse-dot"></span>
+          Hire Me
+        </a>
+        <a href="pages/projects.html" class="quick-action view-work">
+          View Work
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem" class="nav-home"><a href="index.html" class="active">Home</a></li>
+        <li role="menuitem" class="nav-about">
+          <a href="pages/about.html">About</a>
+          <div class="nav-dropdown">
+            <a href="#skills">Skills</a>
+            <a href="#process">Process</a>
+            <a href="#credentials">Credentials</a>
+          </div>
+        </li>
+        <li role="menuitem" class="nav-work">
+          <a href="pages/projects.html">Work</a>
+          <div class="nav-dropdown">
+            <a href="projects.html#featured">Featured</a>
+            <a href="projects.html#web">Web Apps</a>
+            <a href="projects.html#mobile">Mobile Apps</a>
+          </div>
+        </li>
+        <li role="menuitem"><a href="pages/blog.html">Blog</a></li>
+        <li role="menuitem"><a href="pages/contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="index.html">🏠 Home</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content" role="main">
+    <!-- Hero Section - Above the Fold Optimization -->
+    <section class="hero-section fade-in slide-up">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-down">
+          <span class="availability-dot"></span>
+          Available for new projects
+        </div>
+        <h1 class="hero-title" data-splitting>
+          <span class="hero-greeting" data-aos="fade-up" data-aos-delay="100">👋 Hi, I'm Kendell</span>
+          <span class="hero-main" data-aos="fade-up" data-aos-delay="200">I build digital experiences that</span>
+          <span class="hero-highlight typing-text" id="typingText" aria-live="polite" data-aos="fade-up" data-aos-delay="300">captivate users</span>
+        </h1>
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
+          Full-stack developer specializing in modern web applications, mobile apps, and user-centered design. 
+          <strong>Transforming ideas into engaging digital products</strong> that users love.
+        </p>
+        
+        <!-- Clear Value Propositions -->
+        <div class="value-props" data-aos="fade-up" data-aos-delay="500">
+          <div class="value-prop">
+            <span class="value-icon">⚡</span>
+            <span>Fast delivery in 48hrs</span>
+          </div>
+          <div class="value-prop">
+            <span class="value-icon">💎</span>
+            <span>Premium quality code</span>
+          </div>
+          <div class="value-prop">
+            <span class="value-icon">🎯</span>
+            <span>User-focused design</span>
+          </div>
+        </div>
+
+        <!-- Primary CTAs - Clear Hierarchy -->
+        <div class="hero-actions">
+          <a href="pages/contact.html" class="cta-primary interactive-btn" data-tooltip="Get started with your project">
+            <span class="btn-bg"></span>
+            <span class="btn-content">
+              <span class="cta-icon">🚀</span>
+              Start Your Project
+              <span class="cta-arrow">→</span>
+            </span>
+            <div class="btn-ripple"></div>
+          </a>
+          <a href="#work-samples" class="cta-secondary interactive-btn" data-tooltip="View project showcase">
+            <span class="btn-bg"></span>
+            <span class="btn-content">
+              <span class="cta-icon">👀</span>
+              See My Work
+            </span>
+            <div class="btn-ripple"></div>
+          </a>
+        </div>
+
+        <!-- Social Proof Indicators -->
+        <div class="social-proof">
+          <div class="proof-item">
+            <span class="proof-number counter" data-target="50">50</span>
+            <span class="proof-label">Happy Clients</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-number counter" data-target="25">25</span>
+            <span class="proof-label">Projects Done</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-number counter" data-target="3">3</span>
+            <span class="proof-label">Years Experience</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Visual Element -->
+      <div class="hero-visual">
+        <div class="floating-code">
+          <div class="code-line">const developer = {</div>
+          <div class="code-line">  name: 'Kendell',</div>
+          <div class="code-line">  skills: ['React', 'Vue', 'Node'],</div>
+          <div class="code-line">  passion: 'Building great UX'</div>
+          <div class="code-line">};</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Streamlined Work Samples -->
+    <section class="work-samples card fade-in slide-up" id="work-samples">
+      <div class="section-header">
+        <h2>🎨 Featured Work</h2>
+        <p class="section-subtitle">Recent projects that showcase my capabilities</p>
+        <a href="pages/projects.html" class="section-link">View all projects →</a>
+      </div>
+      
+      <div class="samples-grid">
+        <div class="sample-card featured loading-skeleton lazy-load" data-load-delay="500" data-aos="fade-up">
+          <div class="sample-image">
+            <div class="sample-placeholder">🛍️</div>
+            <div class="loading-overlay">
+              <div class="loading-spinner"></div>
+            </div>
+          </div>
+          <div class="sample-content">
+            <h3>E-commerce Platform</h3>
+            <p>Full-stack marketplace with 300% user engagement increase</p>
+            <div class="sample-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+            <a href="projects.html#ecommerce" class="sample-link interactive-link">
+              View Details →
+              <div class="link-progress"></div>
+            </a>
+          </div>
+        </div>
+        
+        <div class="sample-card loading-skeleton lazy-load" data-load-delay="700" data-aos="fade-up" data-aos-delay="200">
+          <div class="sample-image">
+            <div class="sample-placeholder">📱</div>
+            <div class="loading-overlay">
+              <div class="loading-spinner"></div>
+            </div>
+          </div>
+          <div class="sample-content">
+            <h3>Mobile Fitness App</h3>
+            <p>Cross-platform app with 10k+ downloads</p>
+            <div class="sample-tags">
+              <span class="tag">React Native</span>
+              <span class="tag">Firebase</span>
+            </div>
+            <a href="projects.html#fitness" class="sample-link interactive-link">
+              View Details →
+              <div class="link-progress"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Condensed Services with Expandable Details -->
+    <section class="services-overview card glass-card fade-in slide-up hover-lift">
+      <div class="morphing-bg"></div>
+      <h2 class="text-reveal neon-glow">✨ What I Do Best</h2>
+      <p class="section-intro">Click any service to learn more about my approach and process</p>
+      
+      <div class="services-grid stagger-container">
+        <div class="service-item expandable magnetic stagger-item" data-service="design" tabindex="0" role="button" aria-expanded="false" aria-controls="design-details">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">🎨</div>
+            <h3 id="design-title">UI/UX Design</h3>
+            <button class="expand-btn" aria-label="Expand UI/UX Design details" aria-describedby="design-title">
+              <span class="expand-icon" aria-hidden="true">+</span>
+            </button>
+          </div>
+          <p class="service-summary">Creating intuitive and beautiful user interfaces</p>
+          <div class="service-details" id="design-details" aria-hidden="true">
+            <div class="service-process">
+              <h4>My Design Process:</h4>
+              <ul role="list">
+                <li role="listitem">🔍 User research & analysis</li>
+                <li role="listitem">📐 Wireframing & prototyping</li>
+                <li role="listitem">🎨 Visual design & branding</li>
+                <li role="listitem">🧪 Usability testing & iteration</li>
+              </ul>
+            </div>
+            <div class="service-tools" role="list" aria-label="Design tools">
+              <span class="tool-badge" role="listitem">Figma</span>
+              <span class="tool-badge" role="listitem">Adobe XD</span>
+              <span class="tool-badge" role="listitem">Sketch</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="service-item expandable magnetic stagger-item" data-service="development">
+          <div class="service-header">
+            <div class="service-icon">⚡</div>
+            <h3>Web Development</h3>
+            <button class="expand-btn" aria-label="Expand details">
+              <span class="expand-icon">+</span>
+            </button>
+          </div>
+          <p class="service-summary">Building fast, responsive web applications</p>
+          <div class="service-details">
+            <div class="service-process">
+              <h4>Development Stack:</h4>
+              <ul>
+                <li>⚛️ React & Next.js</li>
+                <li>🟢 Node.js & Express</li>
+                <li>🗄️ Database design & optimization</li>
+                <li>☁️ Cloud deployment & scaling</li>
+              </ul>
+            </div>
+            <div class="service-tools">
+              <span class="tool-badge">React</span>
+              <span class="tool-badge">Vue.js</span>
+              <span class="tool-badge">TypeScript</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="service-item expandable magnetic stagger-item" data-service="mobile">
+          <div class="service-header">
+            <div class="service-icon">📱</div>
+            <h3>Mobile Apps</h3>
+            <button class="expand-btn" aria-label="Expand details">
+              <span class="expand-icon">+</span>
+            </button>
+          </div>
+          <p class="service-summary">Cross-platform mobile applications</p>
+          <div class="service-details">
+            <div class="service-process">
+              <h4>Mobile Solutions:</h4>
+              <ul>
+                <li>📱 React Native development</li>
+                <li>🔄 Cross-platform compatibility</li>
+                <li>🔗 API integration & offline support</li>
+                <li>📊 Analytics & performance monitoring</li>
+              </ul>
+            </div>
+            <div class="service-tools">
+              <span class="tool-badge">React Native</span>
+              <span class="tool-badge">Firebase</span>
+              <span class="tool-badge">Expo</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="service-item expandable magnetic stagger-item" data-service="optimization">
+          <div class="service-header">
+            <div class="service-icon">🚀</div>
+            <h3>Performance Optimization</h3>
+            <button class="expand-btn" aria-label="Expand details">
+              <span class="expand-icon">+</span>
+            </button>
+          </div>
+          <p class="service-summary">Speed, accessibility, and SEO optimization</p>
+          <div class="service-details">
+            <div class="service-process">
+              <h4>Optimization Areas:</h4>
+              <ul>
+                <li>⚡ Core Web Vitals improvement</li>
+                <li>♿ Accessibility compliance (WCAG)</li>
+                <li>🔍 SEO & technical optimization</li>
+                <li>📈 Performance monitoring & analytics</li>
+              </ul>
+            </div>
+            <div class="service-tools">
+              <span class="tool-badge">Lighthouse</span>
+              <span class="tool-badge">GTmetrix</span>
+              <span class="tool-badge">WebPageTest</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-particles" id="serviceParticles"></div>
+    </section>
+
+    <!-- Collapsible Testimonials Section -->
+    <section class="testimonials-compact card fade-in slide-up">
+      <div class="testimonials-header">
+        <h2>💬 Client Testimonials</h2>
+        <div class="testimonials-summary">
+          <div class="rating-overview">
+            <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+            <span class="rating-text">4.9/5 from 50+ clients</span>
+          </div>
+          <button class="view-all-testimonials" id="toggleTestimonials">
+            View All Reviews
+            <span class="toggle-icon">▼</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Featured Testimonial -->
+      <div class="featured-testimonial">
+        <blockquote>
+          "Kendell delivered an exceptional website that exceeded our expectations. 
+          The attention to detail and user experience is outstanding."
+        </blockquote>
+        <cite>
+          <strong>Sarah Johnson</strong>
+          <span>Product Manager, TechCorp</span>
+        </cite>
+      </div>
+      
+      <!-- Expandable Testimonials Grid -->
+      <div class="testimonials-expanded" id="testimonialsExpanded">
+        <div class="testimonials-grid">
+          <div class="testimonial-card compact">
+            <div class="testimonial-content">
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+              <p>"Professional, creative, and incredibly talented. Transformed our vision perfectly."</p>
+            </div>
+            <div class="testimonial-author">
+              <span class="author-name">Mike Chen</span>
+              <span class="author-role">Startup Founder</span>
+            </div>
+          </div>
+          
+          <div class="testimonial-card compact">
+            <div class="testimonial-content">
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+              <p>"The mobile app increased our user engagement by 300%. Highly recommend!"</p>
+            </div>
+            <div class="testimonial-author">
+              <span class="author-name">Alex Rodriguez</span>
+              <span class="author-role">CEO, InnovateLab</span>
+            </div>
+          </div>
+          
+          <div class="testimonial-card compact">
+            <div class="testimonial-content">
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+              <p>"Fast delivery, excellent communication, and beautiful results every time."</p>
+            </div>
+            <div class="testimonial-author">
+              <span class="author-name">Emma Davis</span>
+              <span class="author-role">Marketing Director</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Credentials -->
+    <section class="credentials card fade-in-up">
+      <h2>� Credentials & Achievements</h2>
+      <div class="credentials-grid">
+        <div class="credential-category fade-in-left stagger-1">
+          <h3>🎓 Education</h3>
+          <div class="credential-items">
+            <div class="credential-item">
+              <div class="credential-icon">🎓</div>
+              <div class="credential-details">
+                <h4>Computer Science Degree</h4>
+                <p>University of Technology</p>
+                <span class="credential-year">2021</span>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon">📜</div>
+              <div class="credential-details">
+                <h4>Web Development Bootcamp</h4>
+                <p>Coding Academy</p>
+                <span class="credential-year">2020</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="credential-category fade-in-up stagger-2">
+          <h3>🏅 Certifications</h3>
+          <div class="credential-items">
+            <div class="credential-item">
+              <div class="credential-icon">✅</div>
+              <div class="credential-details">
+                <h4>Google Analytics Certified</h4>
+                <p>Google</p>
+                <span class="credential-year">2024</span>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon">🔒</div>
+              <div class="credential-details">
+                <h4>Web Security Professional</h4>
+                <p>Security Institute</p>
+                <span class="credential-year">2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="credential-category fade-in-right stagger-3">
+          <h3>🏆 Awards</h3>
+          <div class="credential-items">
+            <div class="credential-item">
+              <div class="credential-icon">🥇</div>
+              <div class="credential-details">
+                <h4>Best Mobile App Design</h4>
+                <p>Dev Awards 2024</p>
+                <span class="credential-year">2024</span>
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="credential-icon">⭐</div>
+              <div class="credential-details">
+                <h4>Rising Developer</h4>
+                <p>Tech Community</p>
+                <span class="credential-year">2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process & Methodology -->
+    <section class="process card fade-in-up">
+      <h2>⚡ My Development Process</h2>
+      <div class="process-steps">
+        <div class="process-step fade-in-left stagger-1">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>🎯 Discovery & Planning</h3>
+            <p>Understanding your goals, target audience, and project requirements through detailed consultation.</p>
+            <ul>
+              <li>Requirements analysis</li>
+              <li>User research</li>
+              <li>Technical planning</li>
+              <li>Timeline creation</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="process-step fade-in-up stagger-2">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>🎨 Design & Prototyping</h3>
+            <p>Creating wireframes, mockups, and interactive prototypes to visualize the final product.</p>
+            <ul>
+              <li>Wireframe creation</li>
+              <li>UI/UX design</li>
+              <li>Interactive prototypes</li>
+              <li>Design system</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="process-step fade-in-right stagger-3">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>⚙️ Development & Testing</h3>
+            <p>Building the application with clean, scalable code and comprehensive testing.</p>
+            <ul>
+              <li>Frontend development</li>
+              <li>Backend integration</li>
+              <li>Quality assurance</li>
+              <li>Performance optimization</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="process-step fade-in-left stagger-4">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>🚀 Launch & Support</h3>
+            <p>Deploying your project and providing ongoing maintenance and support.</p>
+            <ul>
+              <li>Deployment setup</li>
+              <li>Performance monitoring</li>
+              <li>Maintenance support</li>
+              <li>Feature updates</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Skills Showcase -->
+    <section class="skill-showcase card glass-card fade-in-up hover-lift">
+      <h2 class="text-reveal">💻 Technical Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-item" data-skill="95">
+          <div class="skill-icon">⚛️</div>
+          <div class="skill-info">
+            <div class="skill-name">React & Next.js</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="95%"></div>
+              <div class="skill-percentage">95%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="90">
+          <div class="skill-icon">🟨</div>
+          <div class="skill-info">
+            <div class="skill-name">JavaScript & TypeScript</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="90%"></div>
+              <div class="skill-percentage">90%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="88">
+          <div class="skill-icon">🎨</div>
+          <div class="skill-info">
+            <div class="skill-name">UI/UX Design</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="88%"></div>
+              <div class="skill-percentage">88%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="85">
+          <div class="skill-icon">🟢</div>
+          <div class="skill-info">
+            <div class="skill-name">Node.js & APIs</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="85%"></div>
+              <div class="skill-percentage">85%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="92">
+          <div class="skill-icon">📱</div>
+          <div class="skill-info">
+            <div class="skill-name">Mobile Development</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="92%"></div>
+              <div class="skill-percentage">92%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="87">
+          <div class="skill-icon">☁️</div>
+          <div class="skill-info">
+            <div class="skill-name">Cloud & DevOps</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="87%"></div>
+              <div class="skill-percentage">87%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-particles" id="skillParticles"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq card fade-in-up">
+      <h2>❓ Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item fade-in-up stagger-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>What's your typical project timeline?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Project timelines vary based on complexity, but typically:</p>
+            <ul>
+              <li>Simple websites: 1-2 weeks</li>
+              <li>Complex web applications: 4-8 weeks</li>
+              <li>Mobile apps: 6-12 weeks</li>
+            </ul>
+            <p>I always provide detailed timelines during the planning phase.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item fade-in-up stagger-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Do you provide ongoing maintenance?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! I offer comprehensive maintenance packages including:</p>
+            <ul>
+              <li>Security updates and monitoring</li>
+              <li>Performance optimization</li>
+              <li>Content updates</li>
+              <li>Feature enhancements</li>
+              <li>24/7 technical support</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="faq-item fade-in-up stagger-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>What technologies do you specialize in?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>I specialize in modern web technologies including:</p>
+            <ul>
+              <li>Frontend: Vue.js, React, JavaScript ES6+, CSS3</li>
+              <li>Backend: Node.js, Firebase, APIs</li>
+              <li>Mobile: Progressive Web Apps, Mobile-first design</li>
+              <li>Tools: Git, Vite, Netlify, VS Code</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="faq-item fade-in-up stagger-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>How do you handle project communication?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>I believe in transparent, regular communication:</p>
+            <ul>
+              <li>Weekly progress reports</li>
+              <li>Real-time project dashboard</li>
+              <li>Video calls for major milestones</li>
+              <li>Slack/Email for quick questions</li>
+              <li>Final presentation and training</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Call to Action -->
+    <section class="card fade-in-up cta-enhanced">
+      <div class="cta-content">
+        <div class="cta-text fade-in-left">
+          <h2>🚀 Ready to Transform Your Digital Presence?</h2>
+          <p class="cta-description">
+            Let's collaborate to create something extraordinary. Whether you need a stunning website, 
+            powerful web application, or innovative mobile solution, I'm here to bring your vision to life.
+          </p>
+          <div class="cta-benefits">
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Free initial consultation</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Detailed project proposal</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Transparent pricing</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cta-actions fade-in-right">
+          <a href="pages/contact.html" class="cta-button primary magnetic">
+            <i class="fas fa-rocket"></i>
+            Start Your Project
+          </a>
+          <a href="pages/projects.html" class="cta-button secondary magnetic">
+            <i class="fas fa-eye"></i>
+            View Portfolio
+          </a>
+          <a href="#" class="cta-button outline magnetic" id="downloadResume">
+            <i class="fas fa-download"></i>
+            Download Resume
+          </a>
+        </div>
+      </div>
+      
+      <div class="cta-stats fade-in-up stagger-5">
+        <div class="stat-highlight">
+          <span class="stat-number counter" data-target="24">24</span>
+          <span class="stat-label">Hours Response Time</span>
+        </div>
+        <div class="stat-highlight">
+          <span class="stat-number counter" data-target="100">100</span>
+          <span class="stat-label">% Client Satisfaction</span>
+        </div>
+        <div class="stat-highlight">
+          <span class="stat-number counter" data-target="3">3</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Let's Connect</h3>
+        <div class="social-links">
+          <a href="https://github.com/kpierre24" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/kentrini25" target="_blank" rel="noopener" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://facebook.com/kendellkevin" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="mailto:kpierre24@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="pages/about.html">About</a>
+          <a href="pages/projects.html">Projects</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/contact.html">Contact</a>
+          <a href="pages/privacy.html">Privacy</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>📬 Newsletter</h3>
+        <p>Get weekly web dev tips & tutorials</p>
+        <form class="footer-newsletter" id="footerNewsletter">
+          <input type="email" placeholder="Your email" aria-label="Email for newsletter" required>
+          <button type="submit" aria-label="Subscribe">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+        <p class="footer-note">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kendell Pierre. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="pages/privacy.html">Privacy Policy</a>
+        <span>•</span>
+        <a href="privacy.html#terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="floating-contact" id="floating-contact">
+    <a href="pages/contact.html" class="floating-contact-btn" aria-label="Quick Contact">
+      <i class="fas fa-comments"></i>
+    </a>
+  </div>
+
+  <!-- Interactive Cursor Trail -->
+  <div class="cursor-trail" id="cursorTrail"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Smart FAB Menu -->
+  <div class="smart-fab" id="smartFab">
+    <button class="fab-main" id="fabMain" aria-label="Menu">
+      <i class="fas fa-plus"></i>
+    </button>
+    <div class="fab-submenu" id="fabSubmenu">
+      <button class="fab-item" title="Contact" onclick="document.getElementById('contact').scrollIntoView()">
+        <i class="fas fa-envelope"></i>
+      </button>
+      <button class="fab-item" title="Projects" onclick="window.location.href='projects.html'">
+        <i class="fas fa-briefcase"></i>
+      </button>
+      <button class="fab-item" title="Theme" id="themeToggleFab">
+        <i class="fas fa-palette"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Advanced Theme Switcher -->
+  <div class="theme-switcher" id="themeSwitcher" style="position: fixed; top: 20px; right: 20px; z-index: 1001;">
+    <div class="theme-toggle-ball"></div>
+  </div>
+
+  <!-- Notification System -->
+  <div class="notification-container" id="notificationContainer"></div>
+
+  <!-- Accessibility Live Regions -->
+  <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <div id="alertRegion" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Loading Progress Bar -->
+  <div class="page-loading-bar" id="pageLoadingBar" role="progressbar" aria-label="Page loading progress"></div>
+
+  <!-- Enhanced Plugin Libraries -->
+  <!-- GSAP for professional animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Typed.js for typing animations -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16/dist/typed.umd.js"></script>
+  
+  <!-- CountUp.js for number animations -->
+  <script src="https://cdn.jsdelivr.net/npm/countup@1.8.2/dist/countUp.min.js"></script>
+  
+  <!-- Vanilla Tilt for 3D card effects -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  
+  <!-- Rellax for parallax scrolling -->
+  <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
+  
+  <!-- GLightbox for image gallery -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- NEW UX ENHANCEMENTS -->
+  
+  <!-- Lenis - Ultra-smooth scrolling -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  
+  <!-- AOS - Animate On Scroll (Better scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Particles.js - Interactive particle backgrounds -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  
+  <!-- SweetAlert2 - Beautiful alerts/modals -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+  
+  <!-- Splitting.js - Advanced text animations -->
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+  
+  <!-- Barba.js - Smooth page transitions -->
+  <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.9.7/dist/barba.umd.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsent" class="cookie-consent">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h3>🍪 We Value Your Privacy</h3>
+        <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies. <a href="pages/privacy.html" style="color: #60a5fa; text-decoration: underline;">Learn more</a></p>
+      </div>
+      <div class="cookie-actions">
+        <button class="cookie-btn accept" id="acceptCookies">Accept All</button>
+        <button class="cookie-btn customize" id="customizeCookies">Customize</button>
+        <button class="cookie-btn decline" id="declineCookies">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Preferences Modal -->
+  <div id="cookieModal" class="cookie-modal">
+    <div class="cookie-modal-content">
+      <h2>Cookie Preferences</h2>
+      <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Manage your cookie preferences. Essential cookies cannot be disabled as they are required for the site to function.</p>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>Essential Cookies</h4>
+          <p>Required for basic site functionality</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" checked disabled>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>Analytics Cookies</h4>
+          <p>Help us understand how visitors use our site</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="analyticsCookies" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>Marketing Cookies</h4>
+          <p>Used to track visitors across websites</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="marketingCookies">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button class="cookie-btn accept" id="savePreferences" style="flex: 1;">Save Preferences</button>
+        <button class="cookie-btn decline" id="closeModal" style="flex: 1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/plugins/analytics.js"></script>
+  <script src="js/utils/security.js"></script>
+  <script src="js/utils/accessibility.js"></script>
+  
+  <!-- Cookie Consent Script -->
+  <script src="js/plugins/cookie-consent.js"></script>
+</body>
+</html>

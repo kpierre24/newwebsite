@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog articles about web development, programming tutorials, and tech insights by Kendell">
+  <meta name="keywords" content="web development, programming, tutorials, javascript, vue.js, tech blog">
+  <title>Blog & Articles - Kendell's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" aria-label="Kendell's Portfolio - Home">Kendell</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem"><a href="../index.html">Home</a></li>
+        <li role="menuitem"><a href="about.html">About</a></li>
+        <li role="menuitem"><a href="projects.html">Projects</a></li>
+        <li role="menuitem"><a href="blog.html" class="active">Blog</a></li>
+        <li role="menuitem"><a href="timeline.html">Timeline</a></li>
+        <li role="menuitem"><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="main-content" role="main">
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="highlight">Blog</span> & Articles
+        </h1>
+        <p class="hero-subtitle">
+          Insights, tutorials, and thoughts on web development, programming, and technology
+        </p>
+        
+        <!-- Blog Search & Filter -->
+        <div class="blog-controls">
+          <div class="search-container">
+            <input type="search" id="blog-search" placeholder="Search articles..." aria-label="Search blog articles">
+            <i class="fas fa-search search-icon"></i>
+          </div>
+          <div class="filter-container">
+            <select id="category-filter" aria-label="Filter by category">
+              <option value="all">All Categories</option>
+              <option value="tutorial">Tutorials</option>
+              <option value="case-study">Case Studies</option>
+              <option value="insights">Tech Insights</option>
+              <option value="javascript">JavaScript</option>
+              <option value="vue">Vue.js</option>
+              <option value="css">CSS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="featured-article card">
+      <div class="article-badge">Featured Article</div>
+      <div class="article-content">
+        <div class="article-meta">
+          <span class="category tutorial">Tutorial</span>
+          <span class="read-time">8 min read</span>
+          <time datetime="2025-10-20">October 20, 2025</time>
+        </div>
+        <h2 class="article-title">
+          <a href="#" class="article-link">Building Responsive Web Apps with Vue.js and CSS Grid</a>
+        </h2>
+        <p class="article-excerpt">
+          Learn how to create beautiful, responsive web applications using Vue.js components and modern CSS Grid layouts. This comprehensive guide covers best practices, real-world examples, and performance optimization techniques.
+        </p>
+        <div class="article-footer">
+          <div class="article-tags">
+            <span class="tag">#Vue.js</span>
+            <span class="tag">#CSS</span>
+            <span class="tag">#Responsive Design</span>
+          </div>
+          <a href="#" class="read-more-btn">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="article-image">
+        <div class="image-placeholder">
+          <i class="fab fa-vuejs"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-grid" id="blog-grid">
+      <div class="blog-filters-bar">
+        <h2>Latest Articles</h2>
+        <div class="results-count" id="results-count">Showing 6 articles</div>
+      </div>
+
+      <div class="articles-grid" id="articles-grid">
+        <!-- Tutorial Article -->
+        <article class="article-card" data-category="tutorial javascript">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fab fa-js-square"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category tutorial">Tutorial</span>
+              <time datetime="2025-10-15">Oct 15, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">Advanced JavaScript Patterns for Modern Web Development</a>
+            </h3>
+            <p class="article-excerpt">
+              Explore advanced JavaScript patterns including modules, closures, and async/await to write cleaner, more maintainable code.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 6 min read</span>
+                <span><i class="fas fa-heart"></i> 24 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Case Study Article -->
+        <article class="article-card" data-category="case-study vue">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fas fa-chart-line"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category case-study">Case Study</span>
+              <time datetime="2025-10-12">Oct 12, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">E-Commerce Platform: From Concept to 10K Users</a>
+            </h3>
+            <p class="article-excerpt">
+              A detailed breakdown of building a scalable e-commerce platform that grew to serve 10,000+ active users in 6 months.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 12 min read</span>
+                <span><i class="fas fa-heart"></i> 45 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tech Insights Article -->
+        <article class="article-card" data-category="insights">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category insights">Tech Insights</span>
+              <time datetime="2025-10-08">Oct 8, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">The Future of Web Development: Trends to Watch in 2025</a>
+            </h3>
+            <p class="article-excerpt">
+              Analyzing emerging trends in web development including AI integration, serverless architecture, and next-gen frameworks.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 8 min read</span>
+                <span><i class="fas fa-heart"></i> 67 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CSS Tutorial -->
+        <article class="article-card" data-category="tutorial css">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fab fa-css3-alt"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category tutorial">Tutorial</span>
+              <time datetime="2025-10-05">Oct 5, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">CSS Grid vs Flexbox: When to Use Which</a>
+            </h3>
+            <p class="article-excerpt">
+              Master CSS layout with this comprehensive comparison of Grid and Flexbox, including practical examples and use cases.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 10 min read</span>
+                <span><i class="fas fa-heart"></i> 38 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Performance Article -->
+        <article class="article-card" data-category="tutorial insights">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category tutorial">Tutorial</span>
+              <time datetime="2025-10-01">Oct 1, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">Web Performance Optimization: A Complete Guide</a>
+            </h3>
+            <p class="article-excerpt">
+              Learn how to optimize your web applications for speed with lazy loading, code splitting, and modern performance techniques.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 15 min read</span>
+                <span><i class="fas fa-heart"></i> 52 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vue.js Article -->
+        <article class="article-card" data-category="tutorial vue">
+          <div class="article-image">
+            <div class="image-placeholder">
+              <i class="fab fa-vuejs"></i>
+            </div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="category tutorial">Tutorial</span>
+              <time datetime="2025-09-28">Sep 28, 2025</time>
+            </div>
+            <h3 class="article-title">
+              <a href="#" class="article-link">Vue 3 Composition API: Best Practices</a>
+            </h3>
+            <p class="article-excerpt">
+              Dive deep into Vue 3's Composition API with practical examples, patterns, and best practices for building scalable applications.
+            </p>
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fas fa-clock"></i> 11 min read</span>
+                <span><i class="fas fa-heart"></i> 71 likes</span>
+              </div>
+              <a href="#" class="read-more-link">Read More</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="load-more-container">
+        <button id="load-more-btn" class="cta-button secondary">
+          <i class="fas fa-plus"></i>
+          Load More Articles
+        </button>
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section card">
+      <div class="newsletter-content">
+        <h2>Stay Updated</h2>
+        <p>Get the latest articles and tutorials delivered to your inbox</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <div class="form-group">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+            <button type="submit" class="cta-button primary">
+              <i class="fas fa-paper-plane"></i>
+              Subscribe
+            </button>
+          </div>
+        </form>
+        <p class="newsletter-note">No spam, unsubscribe anytime</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Let's Connect</h3>
+        <div class="social-links">
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="mailto:your.email@example.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Built With</h3>
+        <p>Vue.js • JavaScript • CSS3 • HTML5</p>
+        <p class="footer-note">Designed with ❤️ for great user experience</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kendell's Portfolio. All rights reserved.</p>
+      <p>Made with passion and lots of coffee ☕</p>
+    </div>
+  </footer>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="floating-contact" id="floating-contact">
+    <a href="contact.html" class="floating-contact-btn" aria-label="Quick Contact">
+      <i class="fas fa-comments"></i>
+    </a>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/plugins/analytics.js"></script>
+  <script src="../js/utils/security.js"></script>
+  <script src="../js/utils/accessibility.js"></script>
+</body>
+</html>

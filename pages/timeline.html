@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Timeline - Kendell's Portfolio</title>
+  <meta name="description" content="Interactive timeline showcasing Kendell's career progression, education, and achievements in web development.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- PWA -->
+  <link rel="manifest" href="../config/manifest.json">
+  <meta name="theme-color" content="#4e54c8">
+  
+  <!-- Performance -->
+  <link rel="preload" href="../css/main.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" aria-label="Kendell's Portfolio - Home">Kendell</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem"><a href="../index.html">Home</a></li>
+        <li role="menuitem"><a href="about.html">About</a></li>
+        <li role="menuitem"><a href="projects.html">Projects</a></li>
+        <li role="menuitem"><a href="blog.html">Blog</a></li>
+        <li role="menuitem"><a href="timeline.html" class="active">Timeline</a></li>
+        <li role="menuitem"><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content" role="main">
+    <!-- Timeline Hero -->
+    <section class="timeline-hero fade-in">
+      <div class="hero-content">
+        <h1 class="slide-in-left">My Journey</h1>
+        <p class="slide-in-right">Explore my career progression, educational milestones, and key achievements</p>
+        <div class="timeline-stats scale-in">
+          <div class="stat-item">
+            <div class="stat-number" data-target="5">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Technologies Mastered</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Controls -->
+    <section class="timeline-controls fade-in">
+      <div class="control-group">
+        <h2>Filter Timeline</h2>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All Events</button>
+          <button class="filter-btn" data-filter="career">Career</button>
+          <button class="filter-btn" data-filter="education">Education</button>
+          <button class="filter-btn" data-filter="achievement">Achievements</button>
+          <button class="filter-btn" data-filter="project">Projects</button>
+        </div>
+      </div>
+      <div class="view-controls">
+        <button class="view-btn active" data-view="vertical">
+          <i class="fas fa-list"></i> Vertical
+        </button>
+        <button class="view-btn" data-view="horizontal">
+          <i class="fas fa-arrows-alt-h"></i> Horizontal
+        </button>
+      </div>
+    </section>
+
+    <!-- Interactive Timeline -->
+    <section class="timeline-section fade-in">
+      <div class="timeline-container" id="timelineContainer">
+        
+        <!-- Timeline Item: Education Start -->
+        <div class="timeline-item" data-category="education" data-year="2019">
+          <div class="timeline-marker education">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="timeline-content slide-in-right">
+            <div class="timeline-date">September 2019</div>
+            <h3>Started Computer Science Degree</h3>
+            <p>Began my journey in Computer Science at University, focusing on software engineering fundamentals, algorithms, and data structures.</p>
+            <div class="timeline-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Foundations</span>
+            </div>
+            <div class="timeline-details">
+              <div class="detail-item">
+                <strong>Institution:</strong> Local University
+              </div>
+              <div class="detail-item">
+                <strong>Focus Areas:</strong> Software Engineering, Web Development
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: First Project -->
+        <div class="timeline-item" data-category="project" data-year="2020">
+          <div class="timeline-marker project">
+            <i class="fas fa-code"></i>
+          </div>
+          <div class="timeline-content slide-in-left">
+            <div class="timeline-date">March 2020</div>
+            <h3>First Web Application</h3>
+            <p>Built my first full-stack web application using HTML, CSS, JavaScript, and Node.js. A task management system that sparked my passion for web development.</p>
+            <div class="timeline-tags">
+              <span class="tag">Project</span>
+              <span class="tag">Full-Stack</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="timeline-achievements">
+              <div class="achievement">
+                <i class="fas fa-star"></i>
+                <span>First complete web application</span>
+              </div>
+              <div class="achievement">
+                <i class="fas fa-users"></i>
+                <span>50+ users in first month</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Internship -->
+        <div class="timeline-item" data-category="career" data-year="2021">
+          <div class="timeline-marker career">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="timeline-content slide-in-right">
+            <div class="timeline-date">June 2021</div>
+            <h3>Software Development Intern</h3>
+            <p>Joined a local tech startup as a Software Development Intern, working on React applications and learning industry best practices.</p>
+            <div class="timeline-tags">
+              <span class="tag">Career</span>
+              <span class="tag">React</span>
+              <span class="tag">Internship</span>
+            </div>
+            <div class="timeline-skills">
+              <h4>Skills Developed:</h4>
+              <div class="skill-pills">
+                <span class="skill-pill">React</span>
+                <span class="skill-pill">Redux</span>
+                <span class="skill-pill">Git</span>
+                <span class="skill-pill">Agile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Achievement -->
+        <div class="timeline-item" data-category="achievement" data-year="2021">
+          <div class="timeline-marker achievement">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="timeline-content slide-in-left">
+            <div class="timeline-date">August 2021</div>
+            <h3>Hackathon Winner</h3>
+            <p>Won first place in a regional hackathon with a team of 4, building a social impact app focused on environmental sustainability.</p>
+            <div class="timeline-tags">
+              <span class="tag">Achievement</span>
+              <span class="tag">Hackathon</span>
+              <span class="tag">Team Work</span>
+            </div>
+            <div class="timeline-media">
+              <div class="media-placeholder">
+                <i class="fas fa-image"></i>
+                <span>Award Photo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Advanced Studies -->
+        <div class="timeline-item" data-category="education" data-year="2022">
+          <div class="timeline-marker education">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="timeline-content slide-in-right">
+            <div class="timeline-date">January 2022</div>
+            <h3>Advanced Web Development Specialization</h3>
+            <p>Completed advanced coursework in modern web frameworks, cloud computing, and software architecture patterns.</p>
+            <div class="timeline-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Specialization</span>
+              <span class="tag">Cloud</span>
+            </div>
+            <div class="timeline-certifications">
+              <div class="cert-item">
+                <i class="fas fa-certificate"></i>
+                <span>AWS Cloud Practitioner</span>
+              </div>
+              <div class="cert-item">
+                <i class="fas fa-certificate"></i>
+                <span>React Developer Certification</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Freelance Start -->
+        <div class="timeline-item" data-category="career" data-year="2022">
+          <div class="timeline-marker career">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="timeline-content slide-in-left">
+            <div class="timeline-date">September 2022</div>
+            <h3>Started Freelance Career</h3>
+            <p>Began taking on freelance projects while studying, building websites and applications for small businesses and startups.</p>
+            <div class="timeline-tags">
+              <span class="tag">Career</span>
+              <span class="tag">Freelance</span>
+              <span class="tag">Entrepreneurship</span>
+            </div>
+            <div class="timeline-metrics">
+              <div class="metric">
+                <span class="metric-value">15+</span>
+                <span class="metric-label">Projects Completed</span>
+              </div>
+              <div class="metric">
+                <span class="metric-value">98%</span>
+                <span class="metric-label">Client Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Graduation -->
+        <div class="timeline-item" data-category="education" data-year="2023">
+          <div class="timeline-marker education">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="timeline-content slide-in-right">
+            <div class="timeline-date">May 2023</div>
+            <h3>Computer Science Degree Completed</h3>
+            <p>Graduated with honors in Computer Science, specializing in Web Development and Software Engineering.</p>
+            <div class="timeline-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Graduation</span>
+              <span class="tag">Honors</span>
+            </div>
+            <div class="timeline-achievements">
+              <div class="achievement">
+                <i class="fas fa-medal"></i>
+                <span>Magna Cum Laude</span>
+              </div>
+              <div class="achievement">
+                <i class="fas fa-star"></i>
+                <span>Outstanding Student Award</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item: Current Role -->
+        <div class="timeline-item" data-category="career" data-year="2024">
+          <div class="timeline-marker career current">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <div class="timeline-content slide-in-left">
+            <div class="timeline-date">Present</div>
+            <h3>Full-Stack Developer & Consultant</h3>
+            <p>Currently working as a full-stack developer and consultant, helping businesses build modern web applications and improve their digital presence.</p>
+            <div class="timeline-tags">
+              <span class="tag">Career</span>
+              <span class="tag">Current</span>
+              <span class="tag">Consulting</span>
+            </div>
+            <div class="timeline-current-focus">
+              <h4>Current Focus Areas:</h4>
+              <ul>
+                <li>Modern React & Next.js applications</li>
+                <li>Cloud-native architectures</li>
+                <li>Performance optimization</li>
+                <li>User experience design</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Timeline Summary -->
+    <section class="timeline-summary fade-in">
+      <div class="summary-content">
+        <h2>Key Takeaways from My Journey</h2>
+        <div class="summary-grid">
+          <div class="summary-item scale-in stagger-1">
+            <div class="summary-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Continuous Growth</h3>
+            <p>From student to professional, I've maintained a commitment to learning and growing in the ever-evolving tech landscape.</p>
+          </div>
+          <div class="summary-item scale-in stagger-2">
+            <div class="summary-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3>Collaborative Spirit</h3>
+            <p>Whether in hackathons, internships, or freelance projects, I thrive in collaborative environments and value teamwork.</p>
+          </div>
+          <div class="summary-item scale-in stagger-3">
+            <div class="summary-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3>Innovation Focus</h3>
+            <p>I'm passionate about using technology to solve real-world problems and create meaningful digital experiences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn" class="social-link">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#" aria-label="GitHub" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" aria-label="Twitter" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <p>&copy; 2024 Kendell. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  <script src="../js/features/timeline.js"></script>
+  <script src="../js/plugins/analytics.js"></script>
+  <script src="../js/utils/security.js"></script>
+  <script src="../js/utils/accessibility.js"></script>
+</body>
+</html>

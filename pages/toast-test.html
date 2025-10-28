@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast Notifications Test - Kendell Pierre</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .test-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 600px;
+      width: 100%;
+    }
+    .test-btn {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+      font-weight: 600;
+    }
+    .success-btn { background: linear-gradient(135deg, #10b981, #059669); }
+    .error-btn { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .warning-btn { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .info-btn { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    h1 {
+      text-align: center;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .instructions {
+      text-align: center;
+      color: #666;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍞 Toast Notifications Test</h1>
+  <p class="instructions">Click the buttons below to test different toast notification types. Watch the top-right corner!</p>
+  
+  <div class="test-buttons">
+    <button class="test-btn success-btn" onclick="testSuccess()">
+      ✅ Success Toast
+    </button>
+    
+    <button class="test-btn error-btn" onclick="testError()">
+      ❌ Error Toast
+    </button>
+    
+    <button class="test-btn warning-btn" onclick="testWarning()">
+      ⚠️ Warning Toast
+    </button>
+    
+    <button class="test-btn info-btn" onclick="testInfo()">
+      ℹ️ Info Toast
+    </button>
+  </div>
+
+  <div class="test-buttons" style="margin-top: 2rem;">
+    <button class="test-btn success-btn" onclick="testMultiple()">
+      🎉 Show Multiple
+    </button>
+    
+    <button class="test-btn info-btn" onclick="testLong()">
+      📝 Long Message
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function testSuccess() {
+      showSuccessToast('Message sent successfully! 🎉');
+    }
+
+    function testError() {
+      showErrorToast('Oops! Something went wrong.');
+    }
+
+    function testWarning() {
+      showWarningToast('Please check your input fields.');
+    }
+
+    function testInfo() {
+      showInfoToast('New features available! Check them out.');
+    }
+
+    function testMultiple() {
+      setTimeout(() => showInfoToast('First notification'), 0);
+      setTimeout(() => showSuccessToast('Second notification'), 500);
+      setTimeout(() => showWarningToast('Third notification'), 1000);
+      setTimeout(() => showSuccessToast('All done!'), 1500);
+    }
+
+    function testLong() {
+      showInfoToast('This is a longer notification message to demonstrate how the toast handles extended content. It should still look great!', 5000);
+    }
+
+    // Welcome message
+    setTimeout(() => {
+      showInfoToast('Welcome! Try clicking the buttons above. 👆');
+    }, 500);
+  </script>
+</body>
+</html>

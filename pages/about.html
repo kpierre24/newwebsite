@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+  <header class="site-header">
+    <div class="container">
+      <h1>👋 Hi, I'm Kendell</h1>
+      <p class="tagline">Creative developer blending code and design</p>
+    </div>
+  </header>
+
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" aria-label="Kendell's Portfolio - Home">Kendell</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem"><a href="../index.html">Home</a></li>
+        <li role="menuitem"><a href="about.html" class="active">About</a></li>
+        <li role="menuitem"><a href="projects.html">Projects</a></li>
+        <li role="menuitem"><a href="blog.html">Blog</a></li>
+        <li role="menuitem"><a href="timeline.html">Timeline</a></li>
+        <li role="menuitem"><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card fade-in">
+      <h2>🧑‍💻 Who I Am</h2>
+      <p>
+        I'm a web and mobile developer passionate about building intuitive, beautiful, and functional applications. I thrive on solving technical puzzles and crafting seamless user experiences.
+      </p>
+    </section>
+
+    <section class="card fade-in">
+      <h2>🛠️ Skills</h2>
+      <ul class="skills-list">
+        <li>HTML, CSS, JavaScript, Vue.js</li>
+        <li>Git, GitHub, Netlify, Vite</li>
+        <li>Debugging & Deployment</li>
+        <li>Documentation & UX Writing</li>
+      </ul>
+    </section>
+
+    <section class="card fade-in">
+      <h2>🎯 Interests</h2>
+      <p>
+        I love creative projects—from cooking class portfolios to crypto dashboards. I value clean design, structured layouts, and tools that make life easier.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Kendell's Portfolio</p>
+  </footer>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+    ↑
+  </button>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

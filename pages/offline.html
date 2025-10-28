@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - Kendell Pierre</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .offline-content {
+      max-width: 500px;
+    }
+    
+    .offline-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .retry-button {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .retry-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .offline-tips {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .offline-tips h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.125rem;
+    }
+    
+    .offline-tips ul {
+      text-align: left;
+      list-style: none;
+    }
+    
+    .offline-tips li {
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+    
+    .offline-tips li::before {
+      content: "✓ ";
+      margin-right: 0.5rem;
+      color: #4ade80;
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-content">
+    <div class="offline-icon">📡</div>
+    <h1>You're Offline</h1>
+    <p>Looks like you've lost your internet connection. Don't worry, some content may still be available from cache!</p>
+    
+    <button class="retry-button" onclick="location.reload()">
+      🔄 Try Again
+    </button>
+    
+    <div class="offline-tips">
+      <h3>While you're offline:</h3>
+      <ul>
+        <li>Check your internet connection</li>
+        <li>View cached pages from your recent visits</li>
+        <li>Come back when you're online for the full experience</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

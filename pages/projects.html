@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio projects showcasing web development expertise in Vue.js, React, and modern web technologies">
+  <title>Projects - Kendell's Portfolio</title>
+  
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="preload" href="main.js" as="script">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="manifest" href="../config/manifest.json">
+  <meta name="theme-color" content="#4e54c8">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" aria-label="Kendell's Portfolio - Home">Kendell</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem"><a href="../index.html">Home</a></li>
+        <li role="menuitem"><a href="about.html">About</a></li>
+        <li role="menuitem"><a href="projects.html" class="active">Projects</a></li>
+        <li role="menuitem"><a href="blog.html">Blog</a></li>
+        <li role="menuitem"><a href="timeline.html">Timeline</a></li>
+        <li role="menuitem"><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="main-content" role="main">
+    <!-- Projects Hero Section -->
+    <section class="projects-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          My <span class="highlight">Projects</span>
+        </h1>
+        <p class="hero-subtitle">
+          A collection of web applications, tools, and experiments showcasing modern development practices
+        </p>
+        
+        <!-- Projects Stats -->
+        <div class="projects-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="total-projects">12</span>
+            <span class="stat-label">Total Projects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="technologies-used">8</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="github-stars">45</span>
+            <span class="stat-label">GitHub Stars</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Filters -->
+    <section class="project-filters card">
+      <div class="filter-header">
+        <h2>Filter Projects</h2>
+        <button id="clear-filters" class="clear-filters-btn">Clear All</button>
+      </div>
+      
+      <div class="filter-controls">
+        <!-- Search Filter -->
+        <div class="search-filter">
+          <div class="search-container">
+            <input type="search" id="project-search" placeholder="Search projects..." aria-label="Search projects">
+            <i class="fas fa-search search-icon"></i>
+          </div>
+        </div>
+        
+        <!-- Technology Filter -->
+        <div class="technology-filter">
+          <h3>Technologies</h3>
+          <div class="filter-tags" id="tech-filters">
+            <button class="filter-tag active" data-tech="all">All</button>
+            <button class="filter-tag" data-tech="vue">Vue.js</button>
+            <button class="filter-tag" data-tech="react">React</button>
+            <button class="filter-tag" data-tech="javascript">JavaScript</button>
+            <button class="filter-tag" data-tech="node">Node.js</button>
+            <button class="filter-tag" data-tech="css">CSS3</button>
+            <button class="filter-tag" data-tech="firebase">Firebase</button>
+            <button class="filter-tag" data-tech="mongodb">MongoDB</button>
+          </div>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="category-filter">
+          <h3>Categories</h3>
+          <div class="filter-tags" id="category-filters">
+            <button class="filter-tag active" data-category="all">All</button>
+            <button class="filter-tag" data-category="web-app">Web Apps</button>
+            <button class="filter-tag" data-category="tool">Tools</button>
+            <button class="filter-tag" data-category="library">Libraries</button>
+            <button class="filter-tag" data-category="experiment">Experiments</button>
+          </div>
+        </div>
+        
+        <!-- Sort Options -->
+        <div class="sort-filter">
+          <h3>Sort By</h3>
+          <select id="sort-select" aria-label="Sort projects">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="name">Name A-Z</option>
+            <option value="stars">Most Stars</option>
+            <option value="complexity">Complexity</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Active Filters Display -->
+      <div class="active-filters" id="active-filters">
+        <span class="filter-label">Active filters:</span>
+        <div class="active-filter-tags" id="active-filter-tags"></div>
+      </div>
+      
+      <!-- Results Count -->
+      <div class="results-summary">
+        <span id="results-count">Showing 12 of 12 projects</span>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-grid" id="projects-grid">
+      <!-- Vue.js E-Commerce Project -->
+      <article class="project-card" 
+               data-tech="vue,javascript,firebase,css" 
+               data-category="web-app"
+               data-stars="23"
+               data-date="2024-10-15"
+               data-complexity="5">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fab fa-vuejs"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('ecommerce')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">E-Commerce Platform</h3>
+            <div class="project-meta">
+              <span class="project-date">Oct 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 23</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 5</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            Full-featured e-commerce platform with shopping cart, payment integration, and admin dashboard. Built with Vue.js and Firebase.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag vue">Vue.js</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">CSS Grid</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- React Task Manager -->
+      <article class="project-card" 
+               data-tech="react,javascript,node,mongodb" 
+               data-category="web-app"
+               data-stars="18"
+               data-date="2024-09-20"
+               data-complexity="4">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fab fa-react"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('taskmanager')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">Task Management App</h3>
+            <div class="project-meta">
+              <span class="project-date">Sep 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 18</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 3</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            Collaborative task management with real-time updates, drag-and-drop functionality, and team features.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag react">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Socket.io</span>
+            <span class="tech-tag">MongoDB</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Weather Dashboard -->
+      <article class="project-card" 
+               data-tech="javascript,css" 
+               data-category="web-app"
+               data-stars="12"
+               data-date="2024-08-10"
+               data-complexity="3">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('weather')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">Weather Dashboard</h3>
+            <div class="project-meta">
+              <span class="project-date">Aug 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 12</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 2</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            Interactive weather dashboard with forecasts, maps, and beautiful visualizations using modern APIs.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Weather API</span>
+            <span class="tech-tag">Chart.js</span>
+            <span class="tech-tag">CSS3</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CSS Animation Library -->
+      <article class="project-card" 
+               data-tech="css,javascript" 
+               data-category="library"
+               data-stars="8"
+               data-date="2024-07-15"
+               data-complexity="2">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fab fa-css3-alt"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('animations')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">CSS Animation Library</h3>
+            <div class="project-meta">
+              <span class="project-date">Jul 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 8</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 1</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            Lightweight CSS animation library with 50+ pre-built animations and easy-to-use classes.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">SCSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Animations</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Portfolio Website -->
+      <article class="project-card" 
+               data-tech="javascript,css,html" 
+               data-category="web-app"
+               data-stars="15"
+               data-date="2024-06-01"
+               data-complexity="3">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('portfolio')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">Portfolio Website</h3>
+            <div class="project-meta">
+              <span class="project-date">Jun 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 15</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 4</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            This responsive portfolio website showcasing projects, blog, and professional experience.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">PWA</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dev Tool -->
+      <article class="project-card" 
+               data-tech="node,javascript" 
+               data-category="tool"
+               data-stars="6"
+               data-date="2024-05-10"
+               data-complexity="2">
+        <div class="project-image">
+          <div class="image-placeholder">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <a href="#" class="action-btn" aria-label="View live demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a href="#" class="action-btn" aria-label="View source code">
+                <i class="fab fa-github"></i>
+              </a>
+              <button class="action-btn" onclick="openProjectModal('devtool')" aria-label="View details">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">Development CLI Tool</h3>
+            <div class="project-meta">
+              <span class="project-date">May 2024</span>
+              <div class="project-stats">
+                <span class="stat"><i class="fas fa-star"></i> 6</span>
+                <span class="stat"><i class="fas fa-code-branch"></i> 2</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="project-description">
+            Command-line tool for automating common development tasks and project scaffolding.
+          </p>
+          
+          <div class="project-tech">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">CLI</span>
+            <span class="tech-tag">NPM</span>
+            <span class="tech-tag">Terminal</span>
+          </div>
+          
+          <div class="project-complexity">
+            <span class="complexity-label">Complexity:</span>
+            <div class="complexity-dots">
+              <span class="dot active"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Load More Button -->
+    <div class="load-more-container">
+      <button id="load-more-projects" class="cta-button secondary">
+        <i class="fas fa-plus"></i>
+        Load More Projects
+      </button>
+    </div>
+
+    <!-- GitHub CTA -->
+    <section class="github-cta card">
+      <div class="cta-content">
+        <div class="cta-icon">
+          <i class="fab fa-github"></i>
+        </div>
+        <div class="cta-text">
+          <h2>Explore More on GitHub</h2>
+          <p>Check out all my repositories, contributions, and open-source projects</p>
+        </div>
+        <div class="cta-actions">
+          <a href="https://github.com/kpierre24" target="_blank" rel="noopener" class="cta-button primary">
+            <i class="fab fa-github"></i>
+            Visit GitHub Profile
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Let's Connect</h3>
+        <div class="social-links">
+          <a href="https://github.com/kpierre24" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/kentrini25" target="_blank" rel="noopener" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://facebook.com/kendellkevin" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="mailto:kpierre24@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Built With</h3>
+        <p>Vue.js • JavaScript • CSS3 • HTML5</p>
+        <p class="footer-note">Designed with ❤️ for great user experience</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kendell's Portfolio. All rights reserved.</p>
+      <p>Made with passion and lots of coffee ☕</p>
+    </div>
+  </footer>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
+  <div class="floating-contact" id="floating-contact">
+    <a href="contact.html" class="floating-contact-btn" aria-label="Quick Contact">
+      <i class="fas fa-comments"></i>
+    </a>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="project-modal" id="project-modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeProjectModal()" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h2 id="modal-project-title">Project Title</h2>
+        <div class="modal-actions">
+          <a href="#" id="modal-demo-link" class="modal-btn primary">
+            <i class="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+          <a href="#" id="modal-code-link" class="modal-btn secondary">
+            <i class="fab fa-github"></i>
+            Source Code
+          </a>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image">
+          <div class="image-placeholder" id="modal-image">
+            <i class="fas fa-image"></i>
+          </div>
+        </div>
+        <div class="modal-details">
+          <p id="modal-description">Project description will appear here...</p>
+          <div class="modal-tech">
+            <h3>Technologies Used:</h3>
+            <div id="modal-tech-tags"></div>
+          </div>
+          <div class="modal-features">
+            <h3>Key Features:</h3>
+            <ul id="modal-features-list"></ul>
+          </div>
+          <div class="modal-stats">
+            <div class="stat-item">
+              <span class="stat-label">GitHub Stars:</span>
+              <span id="modal-stars">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Last Updated:</span>
+              <span id="modal-date">Jan 2024</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Status:</span>
+              <span id="modal-status">Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card fade-in slide-up">
+      <h2>🛠️ My Work</h2>
+      <p>Here are some of the projects I've worked on recently. Click on any project to learn more!</p>
+      
+      <div class="project-grid">
+        <div class="project-card" data-project="1">
+          <div class="project-image">
+            <div class="project-placeholder">📱</div>
+            <div class="project-overlay">
+              <button class="view-project-btn">View Details</button>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3>Mobile App Dashboard</h3>
+            <p>A responsive mobile app built with Vue.js and Firebase for real-time data management</p>
+            <div class="project-tags">
+              <span class="tag">Vue.js</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Mobile</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="2">
+          <div class="project-image">
+            <div class="project-placeholder">🍳</div>
+            <div class="project-overlay">
+              <button class="view-project-btn">View Details</button>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3>Cooking Class Portfolio</h3>
+            <p>An elegant portfolio website with structured documentation and recipe management</p>
+            <div class="project-tags">
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Portfolio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="3">
+          <div class="project-image">
+            <div class="project-placeholder">📊</div>
+            <div class="project-overlay">
+              <button class="view-project-btn">View Details</button>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3>Crypto Trend Dashboard</h3>
+            <p>Real-time cryptocurrency tracking dashboard with interactive charts and analytics</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">APIs</span>
+              <span class="tag">Charts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="modal-body" id="modalBody">
+          <!-- Project details will be injected here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Kendell's Portfolio</p>
+  </footer>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+    ↑
+  </button>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/plugins/analytics.js"></script>
+  <script src="../js/utils/security.js"></script>
+  <script src="../js/utils/accessibility.js"></script>
+</body>
+</html>
