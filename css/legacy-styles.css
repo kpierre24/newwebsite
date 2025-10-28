@@ -3727,50 +3727,221 @@ body.dark-mode .performance-metrics {
   }
 }
 
-/* Responsive */
+/* ============================================
+   ENHANCED MOBILE SIDEBAR MENU
+   Modern, Beautiful, Animated Design
+   ============================================ */
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
+    z-index: 1002;
+    position: relative;
   }
 
+  /* Beautiful Gradient Sidebar with Blur Effect */
   .nav-links {
     position: fixed;
-    top: 70px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background-color: #fff;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    background: linear-gradient(135deg, 
+      rgba(99, 102, 241, 0.95) 0%, 
+      rgba(139, 92, 246, 0.95) 50%, 
+      rgba(236, 72, 153, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    transition: left 0.3s ease;
-    padding-top: 2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    align-items: stretch;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    padding: 6rem 2rem 2rem;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    z-index: 1001;
+  }
+
+  /* Dark mode sidebar */
+  [data-theme="dark"] .nav-links,
+  body.dark-mode .nav-links {
+    background: linear-gradient(135deg, 
+      rgba(30, 27, 75, 0.98) 0%, 
+      rgba(55, 48, 163, 0.98) 50%, 
+      rgba(79, 70, 229, 0.98) 100%);
   }
 
   .nav-links.active {
+    right: 0;
+  }
+
+  /* Backdrop overlay with blur */
+  .nav-links::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 100%;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .nav-links.active::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Decorative gradient accent at top */
+  .nav-links::after {
+    content: '';
+    position: absolute;
+    top: 0;
     left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.8), 
+      transparent);
+    animation: shimmer 3s infinite;
   }
 
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Menu items with staggered animation */
   .nav-links li {
-    margin: 15px 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s ease;
   }
 
+  .nav-links.active li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Staggered animation delay for each item */
+  .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+  .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+  .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+  .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+  .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+  .nav-links.active li:nth-child(6) { transition-delay: 0.35s; }
+
+  /* Beautiful menu links */
   .nav-links a {
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    padding: 1.25rem 1.75rem;
+    color: white;
+    font-weight: 600;
+    border-radius: 16px;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
 
+  /* Icon spacing (if you have icons in nav) */
+  .nav-links a svg,
+  .nav-links a i {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover effect with shine */
+  .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.3), 
+      transparent);
+    transition: left 0.5s ease;
+  }
+
+  .nav-links a:hover::before {
+    left: 100%;
+  }
+
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(10px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links a:hover svg,
+  .nav-links a:hover i {
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  /* Active link with special styling */
+  .nav-links a.active {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(5px);
+  }
+
+  .nav-links a.active::after {
+    content: '→';
+    position: absolute;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  /* Remove bottom line effect on mobile */
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Animated hamburger to X transformation */
   .nav-toggle.active .hamburger-line:nth-child(1) {
     transform: rotate(-45deg) translate(-5px, 6px);
+    background: linear-gradient(135deg, #ec4899, #f97316);
   }
 
   .nav-toggle.active .hamburger-line:nth-child(2) {
     opacity: 0;
+    transform: scale(0);
   }
 
   .nav-toggle.active .hamburger-line:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+    background: linear-gradient(135deg, #ec4899, #f97316);
+  }
+
+  /* Add theme toggle to sidebar on mobile */
+  .theme-toggle {
+    position: relative;
+    z-index: 1002;
   }
 
   .card {
