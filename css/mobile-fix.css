@@ -1,0 +1,201 @@
+/* ============================================
+   MOBILE CONTENT CUTOFF FIX
+   Applied: October 28, 2025
+   ============================================ */
+
+/* Ensure proper viewport handling and prevent horizontal overflow */
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Fix container to have proper padding on mobile */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Ensure all sections have proper padding on mobile */
+section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Fix header padding on mobile */
+.site-header {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Fix navigation on mobile */
+.main-nav .container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Prevent images from overflowing */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix cards and content wrappers */
+.card,
+.project-card,
+.skill-card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure text doesn't overflow */
+* {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Fix for pre and code blocks that might overflow */
+pre,
+code {
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: normal;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .site-header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Fix for very long words or URLs */
+  p, li, td, th {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Ensure grids don't overflow */
+  .skills-grid,
+  .projects-grid,
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Fix any absolute positioned elements */
+  .hero-content,
+  .about-content {
+    position: relative;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .site-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Reduce font sizes if needed to prevent overflow */
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Fix for tables on mobile */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+}
+
+/* Fix for buttons that might be too wide */
+.btn,
+button,
+.cta-button {
+  max-width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Ensure footer content doesn't overflow */
+.site-footer {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+.site-footer .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Fix for any flex containers that might overflow */
+@media (max-width: 768px) {
+  .flex-row,
+  .flex-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Prevent horizontal scrolling from animations */
+@media (max-width: 768px) {
+  [data-aos] {
+    transform: none !important;
+  }
+
+  .aos-init[data-aos] {
+    transform: none !important;
+  }
+}
