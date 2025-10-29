@@ -9,7 +9,8 @@ class SecurityManager {
       'cdnjs.cloudflare.com',
       'www.googletagmanager.com',
       'cdn.emailjs.com',
-      'api.emailjs.com'
+      'api.emailjs.com',
+      'api.allorigins.win'
     ]);
     
     this.init();
@@ -47,7 +48,7 @@ class SecurityManager {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
       "img-src 'self' data: https:",
-      "connect-src 'self' https://api.emailjs.com https://www.google-analytics.com",
+      "connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://api.allorigins.win",
       "base-uri 'self'",
       "form-action 'self' https://api.emailjs.com"
     ].join('; ');
@@ -262,6 +263,31 @@ class SecurityManager {
 
     const originalFetch = window.fetch;
     window.fetch = async (...args) => {
+      const url = args[0];
+      
+      // Check if URL is from a trusted domain
+      if (typeof url === 'string') {
+        try {
+          const urlObj = new URL(url);
+          const hostname = urlObj.hostname;
+          
+          // Allow trusted domains
+          const isTrusted = Array.from(this.trustedDomains).some(domain => 
+            hostname === domain || hostname.endsWith('.' + domain)
+          );
+          
+          if (!isTrusted) {
+            console.warn('Blocked fetch to untrusted domain:', hostname);
+            throw new TypeError('Failed to fetch. Refused to connect because it violates the document\'s Content Security Policy.');
+          }
+        } catch (e) {
+          // If URL parsing fails, it might be a relative URL (which is safe)
+          if (!url.startsWith('/') && !url.startsWith('.')) {
+            throw e;
+          }
+        }
+      }
+      
       rapidRequests++;
       
       if (rapidRequests > requestLimit) {

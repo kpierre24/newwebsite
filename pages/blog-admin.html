@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Feed Manager - Admin Panel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    
+    .section {
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      color: #1a1a2e;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .feeds-list {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .feed-item {
+      background: #f8f9fa;
+      padding: 1.25rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .feed-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: #667eea;
+    }
+    
+    .feed-info {
+      flex: 1;
+    }
+    
+    .feed-name {
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.25rem;
+    }
+    
+    .feed-url {
+      font-size: 0.85rem;
+      color: #666;
+      word-break: break-all;
+    }
+    
+    .feed-meta {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    
+    .feed-badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      background: white;
+      color: #667eea;
+      font-weight: 500;
+    }
+    
+    .feed-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #f8f9fa;
+      color: #666;
+    }
+    
+    .btn-secondary:hover {
+      background: #e9ecef;
+    }
+    
+    .btn-danger {
+      background: #ff6b6b;
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #ff5252;
+    }
+    
+    .add-feed-form {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: none;
+      margin-top: 1rem;
+    }
+    
+    .add-feed-form.active {
+      display: block;
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      color: #1a1a2e;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+    
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    
+    .alert.show {
+      display: block;
+    }
+    
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .alert-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    
+    .refresh-btn {
+      margin-bottom: 1rem;
+    }
+    
+    @media (max-width: 640px) {
+      .feed-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .feed-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📰 Blog Feed Manager</h1>
+    <p class="subtitle">Manage RSS feeds for your automatic blog</p>
+    
+    <div class="alert alert-info" id="infoAlert">
+      <strong>Note:</strong> Changes made here are for preview only. To make permanent changes, edit the feeds array in <code>js/blog-feed.js</code>
+    </div>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-value" id="feedCount">0</div>
+        <div class="stat-label">Active Feeds</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="articleCount">0</div>
+        <div class="stat-label">Total Articles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="categoryCount">0</div>
+        <div class="stat-label">Categories</div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">
+        🔄 Current Feeds
+        <button class="btn-primary refresh-btn" onclick="refreshFeeds()" style="margin-left: auto;">
+          Refresh Articles
+        </button>
+      </div>
+      
+      <div id="feedsList" class="feeds-list">
+        <!-- Feeds will be loaded here -->
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">
+        ➕ Add New Feed
+        <button class="btn-primary" onclick="toggleAddForm()" id="toggleFormBtn" style="margin-left: auto;">
+          Add Feed
+        </button>
+      </div>
+      
+      <div class="add-feed-form" id="addFeedForm">
+        <form onsubmit="addFeed(event)">
+          <div class="form-group">
+            <label for="feedName">Feed Name *</label>
+            <input type="text" id="feedName" placeholder="e.g., Dev.to" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="feedUrl">RSS Feed URL *</label>
+            <input type="url" id="feedUrl" placeholder="https://example.com/feed" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="feedCategory">Default Category</label>
+            <select id="feedCategory">
+              <option value="ai">AI & Machine Learning</option>
+              <option value="microsoft">Microsoft</option>
+              <option value="software-development">Software Development</option>
+              <option value="css">CSS & Design</option>
+              <option value="vue">Vue.js</option>
+              <option value="javascript">JavaScript</option>
+              <option value="google">Google</option>
+              <option value="ux-design">UI/UX Design</option>
+              <option value="mobile-development">Mobile Development</option>
+              <option value="business-tech">Business & Tech</option>
+              <option value="cloud-devops">Cloud & DevOps</option>
+              <option value="web-security">Web Security</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="feedIcon">Icon Class (Font Awesome)</label>
+            <input type="text" id="feedIcon" placeholder="fab fa-dev" value="fas fa-rss">
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="toggleAddForm()">Cancel</button>
+            <button type="submit" class="btn-primary">Add Feed</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="alert alert-success" id="successAlert"></div>
+  </div>
+  
+  <script>
+    // Default feeds (matches blog-feed.js - tested and working)
+    let feeds = [
+      // AI & Machine Learning
+      { name: 'OpenAI Blog', url: 'https://openai.com/blog/rss/', category: 'ai', icon: 'fas fa-brain' },
+      { name: 'Google AI Blog', url: 'https://blog.google/technology/ai/rss/', category: 'ai', icon: 'fas fa-robot' },
+      { name: 'Microsoft AI Blog', url: 'https://blogs.microsoft.com/ai/feed/', category: 'ai', icon: 'fas fa-microchip' },
+      { name: 'Towards Data Science', url: 'https://towardsdatascience.com/feed', category: 'ai', icon: 'fas fa-chart-line' },
+      
+      // Microsoft Ecosystem
+      { name: 'Microsoft DevBlogs - .NET', url: 'https://devblogs.microsoft.com/dotnet/feed/', category: 'microsoft', icon: 'fab fa-microsoft' },
+      { name: 'Azure Updates', url: 'https://azurecomcdn.azureedge.net/en-us/updates/feed/', category: 'microsoft', icon: 'fas fa-cloud' },
+      { name: 'Visual Studio Blog', url: 'https://devblogs.microsoft.com/visualstudio/feed/', category: 'microsoft', icon: 'fas fa-code' },
+      { name: 'PowerShell Team Blog', url: 'https://devblogs.microsoft.com/powershell/feed/', category: 'microsoft', icon: 'fas fa-terminal' },
+      
+      // Software Development
+      { name: 'Dev.to', url: 'https://dev.to/feed', category: 'software-development', icon: 'fab fa-dev' },
+      { name: 'freeCodeCamp', url: 'https://www.freecodecamp.org/news/rss/', category: 'software-development', icon: 'fab fa-free-code-camp' },
+      { name: 'GitHub Blog', url: 'https://github.blog/feed/', category: 'software-development', icon: 'fab fa-github' },
+      { name: 'Stack Overflow Blog', url: 'https://stackoverflow.blog/feed/', category: 'software-development', icon: 'fab fa-stack-overflow' },
+      { name: 'Martin Fowler', url: 'https://martinfowler.com/feed.atom', category: 'software-development', icon: 'fas fa-book' },
+      { name: 'The Verge - Tech', url: 'https://www.theverge.com/rss/index.xml', category: 'software-development', icon: 'fas fa-newspaper' },
+      
+      // CSS & Design
+      { name: 'CSS-Tricks', url: 'https://css-tricks.com/feed/', category: 'css', icon: 'fab fa-css3-alt' },
+      { name: 'Codrops', url: 'https://tympanus.net/codrops/feed/', category: 'css', icon: 'fas fa-paint-brush' },
+      { name: 'Smashing Magazine', url: 'https://www.smashingmagazine.com/feed/', category: 'css', icon: 'fas fa-newspaper' },
+      { name: 'A List Apart', url: 'https://alistapart.com/main/feed/', category: 'css', icon: 'fas fa-list-alt' },
+      
+      // Vue.js
+      { name: 'Vue.js News', url: 'https://news.vuejs.org/rss', category: 'vue', icon: 'fab fa-vuejs' },
+      { name: 'Vue.js Blog', url: 'https://blog.vuejs.org/feed.rss', category: 'vue', icon: 'fab fa-vuejs' },
+      { name: 'VueDose', url: 'https://vuedose.tips/rss.xml', category: 'vue', icon: 'fab fa-vuejs' },
+      
+      // JavaScript
+      { name: 'JavaScript Weekly', url: 'https://javascriptweekly.com/rss', category: 'javascript', icon: 'fab fa-js-square' },
+      { name: 'Node Weekly', url: 'https://nodeweekly.com/rss', category: 'javascript', icon: 'fab fa-node-js' },
+      { name: 'Echo JS', url: 'https://www.echojs.com/rss', category: 'javascript', icon: 'fab fa-js' },
+      { name: 'Frontend Focus', url: 'https://frontendfoc.us/rss', category: 'javascript', icon: 'fas fa-code' },
+      
+      // Google Ecosystem
+      { name: 'Web.dev', url: 'https://web.dev/feed.xml', category: 'google', icon: 'fas fa-globe' },
+      { name: 'Chrome Developers', url: 'https://developer.chrome.com/feeds/blog.xml', category: 'google', icon: 'fab fa-chrome' },
+      { name: 'Google Testing Blog', url: 'https://testing.googleblog.com/feeds/posts/default', category: 'google', icon: 'fas fa-vial' },
+      { name: 'Google Open Source', url: 'https://opensource.googleblog.com/feeds/posts/default', category: 'google', icon: 'fab fa-google' }
+    ];
+    
+    let articleCount = 0;
+    
+    function loadFeeds() {
+      const feedsList = document.getElementById('feedsList');
+      feedsList.innerHTML = feeds.map((feed, index) => `
+        <div class="feed-item">
+          <div class="feed-info">
+            <div class="feed-name">${feed.name}</div>
+            <div class="feed-url">${feed.url}</div>
+            <div class="feed-meta">
+              <span class="feed-badge">${feed.category}</span>
+              <span class="feed-badge">${feed.icon}</span>
+            </div>
+          </div>
+          <div class="feed-actions">
+            <button class="btn-danger" onclick="removeFeed(${index})">Remove</button>
+          </div>
+        </div>
+      `).join('');
+      
+      updateStats();
+    }
+    
+    function updateStats() {
+      document.getElementById('feedCount').textContent = feeds.length;
+      
+      const categories = [...new Set(feeds.map(f => f.category))];
+      document.getElementById('categoryCount').textContent = categories.length;
+      
+      // Estimate articles (assume 10 per feed)
+      document.getElementById('articleCount').textContent = feeds.length * 10;
+    }
+    
+    function toggleAddForm() {
+      const form = document.getElementById('addFeedForm');
+      const btn = document.getElementById('toggleFormBtn');
+      
+      form.classList.toggle('active');
+      btn.textContent = form.classList.contains('active') ? 'Cancel' : 'Add Feed';
+    }
+    
+    function addFeed(event) {
+      event.preventDefault();
+      
+      const newFeed = {
+        name: document.getElementById('feedName').value,
+        url: document.getElementById('feedUrl').value,
+        category: document.getElementById('feedCategory').value,
+        icon: document.getElementById('feedIcon').value
+      };
+      
+      feeds.push(newFeed);
+      loadFeeds();
+      
+      // Reset form
+      event.target.reset();
+      toggleAddForm();
+      
+      showSuccess(`Added ${newFeed.name} successfully! Remember to update js/blog-feed.js with this feed.`);
+      generateCode();
+    }
+    
+    function removeFeed(index) {
+      const feed = feeds[index];
+      if (confirm(`Remove ${feed.name}?`)) {
+        feeds.splice(index, 1);
+        loadFeeds();
+        showSuccess(`Removed ${feed.name}`);
+        generateCode();
+      }
+    }
+    
+    function refreshFeeds() {
+      showSuccess('Refreshing feeds... This would reload articles on the blog page.');
+      setTimeout(() => {
+        document.getElementById('successAlert').style.display = 'none';
+      }, 3000);
+    }
+    
+    function showSuccess(message) {
+      const alert = document.getElementById('successAlert');
+      alert.textContent = message;
+      alert.classList.add('show');
+      
+      setTimeout(() => {
+        alert.classList.remove('show');
+      }, 5000);
+    }
+    
+    function generateCode() {
+      console.log('Copy this to js/blog-feed.js (feeds array):');
+      console.log(JSON.stringify(feeds, null, 2));
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFeeds();
+      document.getElementById('infoAlert').classList.add('show');
+    });
+  </script>
+</body>
+</html>

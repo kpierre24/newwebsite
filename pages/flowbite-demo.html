@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowbite Components Demo - Kendell Pierre</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f5f7ff',
+              100: '#ebefff',
+              200: '#d6dffe',
+              300: '#b3c3fe',
+              400: '#8da0fc',
+              500: '#667eea',
+              600: '#4e54c8',
+              700: '#3f44a8',
+              800: '#2f3689',
+              900: '#1f2669'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Flowbite CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/flowbite-custom.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+  <!-- Navigation -->
+  <nav class="flowbite-navbar fixed w-full z-20 top-0 start-0 bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="../index.html" class="flex items-center space-x-3">
+        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">👨‍💻 Kendell Pierre</span>
+      </a>
+      <div class="flex items-center space-x-3">
+        <button id="theme-toggle" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg p-2.5">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          </svg>
+        </button>
+        <a href="../index.html" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
+          Back to Site
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-20 pb-12">
+    <div class="max-w-screen-xl mx-auto px-4">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          🎨 Flowbite Components Demo
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Explore all Flowbite UI components integrated with your portfolio's brand colors
+        </p>
+      </div>
+
+      <!-- Buttons Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Buttons</h2>
+        <div class="flex flex-wrap gap-4">
+          <button class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5">
+            Primary Button
+          </button>
+          <button class="flowbite-btn-primary text-white font-medium rounded-lg text-sm px-5 py-2.5">
+            Gradient Button
+          </button>
+          <button class="text-primary-600 border border-primary-600 hover:bg-primary-600 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5">
+            Outline Button
+          </button>
+          <button class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5">
+            Secondary
+          </button>
+          <button class="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5">
+            Success
+          </button>
+          <button class="text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5">
+            Danger
+          </button>
+        </div>
+      </section>
+
+      <!-- Cards Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Cards</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="flowbite-card max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Standard Card</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">A standard Flowbite card with shadow and border.</p>
+            <a href="#" class="inline-flex items-center text-primary-600 hover:underline">
+              Read more
+              <svg class="w-3 h-3 ms-2.5" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Card 2 with Gradient -->
+          <div class="flowbite-card flowbite-card-gradient max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Gradient Card</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">With your brand gradient background overlay!</p>
+            <button class="text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-4 py-2">
+              Click Me
+            </button>
+          </div>
+
+          <!-- Card 3 with Image -->
+          <div class="flowbite-card max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="h-48 bg-gradient-to-r from-primary-500 to-primary-600 rounded-t-lg flex items-center justify-center">
+              <span class="text-6xl">🚀</span>
+            </div>
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Image Card</h5>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Card with a visual header section.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forms Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Forms</h2>
+        <div class="max-w-2xl">
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
+              <input type="text" id="name" class="flowbite-input-focus bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="John Doe" required />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+              <input type="email" id="email" class="flowbite-input-focus bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="name@example.com" required />
+            </div>
+            <div>
+              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+              <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Write your thoughts here..."></textarea>
+            </div>
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600" />
+              </div>
+              <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the terms and conditions</label>
+            </div>
+            <button type="submit" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5">
+              Submit
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Alerts Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Alerts</h2>
+        <div class="space-y-4">
+          <div class="flowbite-alert-success flex items-center p-4 rounded-lg border" role="alert">
+            <svg class="flex-shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <div class="ms-3 text-sm font-medium">Success! Your action was completed successfully.</div>
+          </div>
+          
+          <div class="flowbite-alert-error flex items-center p-4 rounded-lg border" role="alert">
+            <svg class="flex-shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+            </svg>
+            <div class="ms-3 text-sm font-medium">Error! Something went wrong. Please try again.</div>
+          </div>
+
+          <div class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 border border-blue-200" role="alert">
+            <svg class="flex-shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd"/>
+            </svg>
+            <div class="ms-3 text-sm font-medium">Info! Here's some important information for you.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badges Section -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Badges</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">Default</span>
+          <span class="flowbite-badge-gradient text-xs font-medium px-2.5 py-0.5 rounded">Gradient</span>
+          <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Success</span>
+          <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Error</span>
+          <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Warning</span>
+          <span class="bg-primary-100 text-primary-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Pill Badge</span>
+          <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full border border-gray-500">Outline</span>
+        </div>
+      </section>
+
+      <!-- Modal Trigger -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Modal</h2>
+        <button data-modal-target="demo-modal" data-modal-toggle="demo-modal" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5">
+          Open Modal
+        </button>
+      </section>
+
+      <!-- Dropdown -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Dropdown</h2>
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-primary-600 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center" type="button">
+          Dropdown menu
+          <svg class="w-2.5 h-2.5 ms-3" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        </button>
+        <div id="dropdown" class="flowbite-dropdown z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Dashboard</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Settings</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Earnings</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Sign out</a></li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="demo-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Flowbite Modal Example
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="demo-modal">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 md:p-5 space-y-4">
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            This is a Flowbite modal integrated with your portfolio's brand colors and styling.
+          </p>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            All Flowbite components work seamlessly with your existing mobile enhancements!
+          </p>
+        </div>
+        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-hide="demo-modal" type="button" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5">I accept</button>
+          <button data-modal-hide="demo-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 rounded-lg text-sm font-medium px-5 py-2.5 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">Decline</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flowbite JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  
+  <!-- Dark Mode Toggle -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('dark-mode', document.documentElement.classList.contains('dark'));
+    });
+
+    // Load dark mode preference
+    if (localStorage.getItem('dark-mode') === 'true') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
+</body>
+</html>

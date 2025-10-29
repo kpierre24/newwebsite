@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Kendell Pierre</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .resume-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    
+    .resume-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid var(--primary-color, #4a90e2);
+    }
+    
+    .resume-header h1 {
+      color: #004080;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    
+    .resume-contact {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .resume-contact a {
+      color: var(--primary-color, #4a90e2);
+      text-decoration: none;
+    }
+    
+    .resume-contact a:hover {
+      text-decoration: underline;
+    }
+    
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary-color, #4a90e2);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(74, 144, 226, 0.3);
+    }
+    
+    .download-btn:hover {
+      background: #357abd;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+    }
+    
+    .download-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .resume-section {
+      margin-bottom: 30px;
+    }
+    
+    .resume-section h2 {
+      color: #004080;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .resume-section h3 {
+      color: #333;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    
+    .job-entry {
+      margin-bottom: 20px;
+    }
+    
+    .job-title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .job-date {
+      float: right;
+      font-style: italic;
+      color: #666;
+    }
+    
+    .resume-section ul {
+      margin: 10px 0;
+      padding-left: 25px;
+    }
+    
+    .resume-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    
+    .skills-text {
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    @media (max-width: 768px) {
+      .resume-container {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+      
+      .resume-header h1 {
+        font-size: 2em;
+      }
+      
+      .job-date {
+        float: none;
+        display: block;
+        margin-top: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" aria-label="Home">KP</a>
+      </div>
+      
+      <div class="nav-quick-actions">
+        <a href="#" class="quick-action-pill">🔍 Search</a>
+        <a href="#" class="quick-action-pill">🌙 Dark</a>
+      </div>
+      
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <ul class="nav-links" role="menubar">
+        <li role="menuitem" class="nav-home"><a href="../index.html">Home</a></li>
+        <li role="menuitem" class="nav-about">
+          <a href="about.html">About</a>
+          <div class="nav-dropdown">
+            <a href="../index.html#skills">Skills</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#credentials">Credentials</a>
+          </div>
+        </li>
+        <li role="menuitem" class="nav-work">
+          <a href="projects.html">Work</a>
+          <div class="nav-dropdown">
+            <a href="projects.html#featured">Featured</a>
+            <a href="projects.html#web">Web Apps</a>
+            <a href="projects.html#mobile">Mobile Apps</a>
+          </div>
+        </li>
+        <li role="menuitem"><a href="blog.html">Blog</a></li>
+        <li role="menuitem"><a href="resume.html" class="active">Resume</a></li>
+        <li role="menuitem"><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li aria-current="page">📄 Resume</li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content" role="main">
+    <div class="resume-container">
+      <div class="resume-header">
+        <h1>Kendell Pierre</h1>
+        <div class="resume-contact">
+          Apt 5, Church Street, Cunupia<br>
+          <strong>Mobile:</strong> (868) 762-6226 | 
+          <strong>Email:</strong> <a href="mailto:kpierre24@gmail.com">kpierre24@gmail.com</a>
+        </div>
+        <a href="../Professional Resume.pdf" download="Kendell_Pierre_Resume.pdf" class="download-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Download PDF Resume
+        </a>
+      </div>
+
+      <div class="resume-section">
+        <h2>Professional Summary</h2>
+        <p>
+          Highly motivated and customer-oriented professional with extensive experience in IT, business analysis, 
+          and customer service. Seeking to leverage strong interpersonal, analytical, and technical skills 
+          to contribute productively to a challenging organization.
+        </p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Core Competencies</h2>
+        <h3>Technical Skills</h3>
+        <p class="skills-text">
+          Business Analysis, Frontend Development, IT Support, UX/UI Design, Business Process Modelling, 
+          Web Design (HTML, CSS, JavaScript), Database Management, AI Systems, Graphic Design, 
+          Computer Hardware Repair, Microsoft Office Suite, Scotiabank Banking Platform, 
+          NALIS Cataloguing Systems.
+        </p>
+
+        <h3>Professional Skills</h3>
+        <p class="skills-text">
+          Problem Solving, Analytical Thinking, Customer-Oriented Service, Working Under Pressure, 
+          Meeting Tight Deadlines, Strong Interpersonal Skills.
+        </p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Professional Experience</h2>
+        
+        <div class="job-entry">
+          <p class="job-title">Business Analyst / Junior Software Developer / IT Specialist, Randell Lamont Technologies, Chaguanas <span class="job-date">Feb 2024 – Present</span></p>
+          <ul>
+            <li>Perform business analysis to identify user needs and system requirements for new projects.</li>
+            <li>Contribute to frontend development tasks, enhancing user interfaces and experience.</li>
+            <li>Manage diverse IT specialist functions, including end-user support, system troubleshooting, and network maintenance.</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p class="job-title">Inventory Clerk, Aioli Restaurant <span class="job-date">2021 – Feb 2024</span></p>
+          <ul>
+            <li>Managed and maintained accurate inventory levels for all restaurant supplies and ingredients.</li>
+            <li>Tracked stock usage, placed timely orders with suppliers, and verified deliveries.</li>
+            <li>Conducted regular stocktakes and reported discrepancies to management.</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p class="job-title">Library Assistant I, National Library (NALIS) – St. George's College, Barataria <span class="job-date">Oct 2009 – Nov 2018</span></p>
+          <ul>
+            <li>Assisted students and faculty with research, resource location, and using library systems.</li>
+            <li>Managed book circulation, processed new materials, and maintained the library database.</li>
+            <li>Used NALIS cataloguing and data entry systems proficiently.</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p class="job-title">Contract Assistant, Guardian Asset Management, Guardian Holdings Ltd., Port of Spain <span class="job-date">Nov 2008 – Mar 2009</span></p>
+          <ul>
+            <li>Provided administrative and contractual support within the asset management division.</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p class="job-title">Temporary Clerk I, Ministry of Finance, Customs and Excise Division, Port of Spain <span class="job-date">Sep 2008 – Nov 2008</span></p>
+          <ul>
+            <li>Served as an Accounts Assistant, focusing on accounts and sales receivables.</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p class="job-title">Multi-Role Bank Professional, Scotiabank Trinidad and Tobago Ltd. <span class="job-date">Oct 2005 – Apr 2008</span></p>
+          <ul>
+            <li>Held progressively responsible roles including Bank Teller, Customer Support Clerk, Personal Banking Assistant, and Sales Officer Trainee.</li>
+            <li>Gained in-depth knowledge of the bank's entire banking platform and customer service protocols.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h2>Education & Qualifications</h2>
+
+        <div class="job-entry">
+          <p><strong>Cambridge GCE A-Level, St. Francis Boys' College (2002 – 2005)</strong></p>
+          <ul>
+            <li>Business Studies (C)</li>
+            <li>Accounting (D)</li>
+            <li>Economics (E)</li>
+            <li>General Paper (D)</li>
+          </ul>
+        </div>
+
+        <div class="job-entry">
+          <p><strong>Caribbean Examinations Council (CXC) - General, St. Francis Boys' College (1997 – 2002)</strong></p>
+          <ul>
+            <li>English Language (I)</li>
+            <li>Principles of Business (I)</li>
+            <li>Principles of Accounts (I)</li>
+            <li>Information Technology (I)</li>
+            <li>Spanish (II)</li>
+            <li>Chemistry (II)</li>
+            <li>Mathematics (II)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h2>References</h2>
+        <ul>
+          <li><strong>Regina Joseph</strong> — Teacher II, Ministry of Education. Phone: (868) 380-8620</li>
+          <li><strong>Randell Lamont</strong> — IT Consultant, Randell Lamont Technologies. Phone: (868) 762-0735</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="../Professional Resume.pdf" download="Kendell_Pierre_Resume.pdf" class="download-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Download PDF Resume
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Kendell Pierre. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>

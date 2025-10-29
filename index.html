@@ -6,7 +6,7 @@
   <title>Kendell Pierre - Full-Stack Developer | Web & Mobile App Development</title>
   
   <!-- Security Headers (Note: Some headers like X-Frame-Options work best via server, not meta tags) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cdn.jsdelivr.net https://unpkg.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -71,6 +71,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  <!-- Tailwind CSS (required for Flowbite) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f5f7ff',
+              100: '#ebefff',
+              200: '#d6dffe',
+              300: '#b3c3fe',
+              400: '#8da0fc',
+              500: '#667eea',
+              600: '#4e54c8',
+              700: '#3f44a8',
+              800: '#2f3689',
+              900: '#1f2669'
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Flowbite CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  
+  <!-- Custom Styles (after Tailwind & Flowbite) -->
   <link rel="stylesheet" href="css/main.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   
@@ -188,6 +221,7 @@
           </div>
         </li>
         <li role="menuitem"><a href="pages/blog.html">Blog</a></li>
+        <li role="menuitem"><a href="pages/resume.html">Resume</a></li>
         <li role="menuitem"><a href="pages/contact.html" class="nav-cta">Contact</a></li>
       </ul>
     </div>
@@ -216,8 +250,8 @@
           <span class="hero-highlight typing-text" id="typingText" aria-live="polite" data-aos="fade-up" data-aos-delay="300">captivate users</span>
         </h1>
         <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
-          Full-stack developer specializing in modern web applications, mobile apps, and user-centered design. 
-          <strong>Transforming ideas into engaging digital products</strong> that users love.
+          Business Analyst, Junior Software Developer, and IT Specialist with expertise in frontend development, business analysis, and technical support. 
+          <strong>Combining analytical thinking with technical skills to create user-centered digital solutions.</strong> Passionate about leveraging technology to solve real-world business challenges.
         </p>
         
         <!-- Clear Value Propositions -->
@@ -255,6 +289,14 @@
             </span>
             <div class="btn-ripple"></div>
           </a>
+          <a href="pages/resume.html" class="cta-secondary interactive-btn" data-tooltip="View my professional resume">
+            <span class="btn-bg"></span>
+            <span class="btn-content">
+              <span class="cta-icon">📄</span>
+              View Resume
+            </span>
+            <div class="btn-ripple"></div>
+          </a>
         </div>
 
         <!-- Social Proof Indicators -->
@@ -265,11 +307,11 @@
           </div>
           <div class="proof-item">
             <span class="proof-number counter" data-target="25">25</span>
-            <span class="proof-label">Projects Done</span>
+            <span class="proof-label">Projects Completed</span>
           </div>
           <div class="proof-item">
-            <span class="proof-number counter" data-target="3">3</span>
-            <span class="proof-label">Years Experience</span>
+            <span class="proof-number counter" data-target="2">2</span>
+            <span class="proof-label">Years in Dev Role</span>
           </div>
         </div>
       </div>
@@ -278,9 +320,10 @@
       <div class="hero-visual">
         <div class="floating-code">
           <div class="code-line">const developer = {</div>
-          <div class="code-line">  name: 'Kendell',</div>
-          <div class="code-line">  skills: ['React', 'Vue', 'Node'],</div>
-          <div class="code-line">  passion: 'Building great UX'</div>
+          <div class="code-line">  name: 'Kendell Pierre',</div>
+          <div class="code-line">  role: 'Business Analyst & Dev',</div>
+          <div class="code-line">  skills: ['HTML/CSS/JS', 'UX/UI', 'Business Analysis'],</div>
+          <div class="code-line">  passion: 'Tech + Business Solutions'</div>
           <div class="code-line">};</div>
         </div>
       </div>
@@ -290,27 +333,31 @@
     <section class="work-samples card fade-in slide-up" id="work-samples">
       <div class="section-header">
         <h2>🎨 Featured Work</h2>
-        <p class="section-subtitle">Recent projects that showcase my capabilities</p>
+        <p class="section-subtitle">Real-world applications I've built and contributed to</p>
         <a href="pages/projects.html" class="section-link">View all projects →</a>
       </div>
       
       <div class="samples-grid">
         <div class="sample-card featured loading-skeleton lazy-load" data-load-delay="500" data-aos="fade-up">
           <div class="sample-image">
-            <div class="sample-placeholder">🛍️</div>
+            <div class="sample-placeholder">☕</div>
             <div class="loading-overlay">
               <div class="loading-spinner"></div>
             </div>
           </div>
           <div class="sample-content">
-            <h3>E-commerce Platform</h3>
-            <p>Full-stack marketplace with 300% user engagement increase</p>
+            <h3>Judy's Cafe Management System</h3>
+            <p>Comprehensive multi-branch cafe management with POS, inventory, CRM, and analytics</p>
             <div class="sample-tags">
-              <span class="tag">React</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">MongoDB</span>
+              <span class="tag">Vue 3</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">Pinia</span>
             </div>
-            <a href="projects.html#ecommerce" class="sample-link interactive-link">
+            <div class="sample-features">
+              <small>✓ Point of Sale • Inventory • Employee Management • Branch Control • IoT Integration</small>
+            </div>
+            <a href="projects.html#judys-cafe" class="sample-link interactive-link">
               View Details →
               <div class="link-progress"></div>
             </a>
@@ -319,19 +366,24 @@
         
         <div class="sample-card loading-skeleton lazy-load" data-load-delay="700" data-aos="fade-up" data-aos-delay="200">
           <div class="sample-image">
-            <div class="sample-placeholder">📱</div>
+            <div class="sample-placeholder">🎓</div>
             <div class="loading-overlay">
               <div class="loading-spinner"></div>
             </div>
           </div>
           <div class="sample-content">
-            <h3>Mobile Fitness App</h3>
-            <p>Cross-platform app with 10k+ downloads</p>
+            <h3>ClassroomHQ - Learning Management System</h3>
+            <p>Modern LMS with accessibility features, real-time communication, and advanced analytics</p>
             <div class="sample-tags">
-              <span class="tag">React Native</span>
-              <span class="tag">Firebase</span>
+              <span class="tag">Next.js 15</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">WCAG AA</span>
+              <span class="tag">Framer Motion</span>
             </div>
-            <a href="projects.html#fitness" class="sample-link interactive-link">
+            <div class="sample-features">
+              <small>✓ Multi-role Support • Course Management • Progress Tracking • Accessibility First</small>
+            </div>
+            <a href="projects.html#classroomhq" class="sample-link interactive-link">
               View Details →
               <div class="link-progress"></div>
             </a>
@@ -349,27 +401,27 @@
       <div class="services-grid stagger-container">
         <div class="service-item expandable magnetic stagger-item" data-service="design" tabindex="0" role="button" aria-expanded="false" aria-controls="design-details">
           <div class="service-header">
-            <div class="service-icon" aria-hidden="true">🎨</div>
-            <h3 id="design-title">UI/UX Design</h3>
-            <button class="expand-btn" aria-label="Expand UI/UX Design details" aria-describedby="design-title">
+            <div class="service-icon" aria-hidden="true">📊</div>
+            <h3 id="design-title">Business Analysis</h3>
+            <button class="expand-btn" aria-label="Expand Business Analysis details" aria-describedby="design-title">
               <span class="expand-icon" aria-hidden="true">+</span>
             </button>
           </div>
-          <p class="service-summary">Creating intuitive and beautiful user interfaces</p>
+          <p class="service-summary">Identifying business needs and system requirements</p>
           <div class="service-details" id="design-details" aria-hidden="true">
             <div class="service-process">
-              <h4>My Design Process:</h4>
+              <h4>My Analysis Process:</h4>
               <ul role="list">
-                <li role="listitem">🔍 User research & analysis</li>
-                <li role="listitem">📐 Wireframing & prototyping</li>
-                <li role="listitem">🎨 Visual design & branding</li>
-                <li role="listitem">🧪 Usability testing & iteration</li>
+                <li role="listitem">🔍 Requirements gathering & documentation</li>
+                <li role="listitem">📐 Business process modeling</li>
+                <li role="listitem">� User needs analysis</li>
+                <li role="listitem">📈 System requirement specifications</li>
               </ul>
             </div>
-            <div class="service-tools" role="list" aria-label="Design tools">
-              <span class="tool-badge" role="listitem">Figma</span>
-              <span class="tool-badge" role="listitem">Adobe XD</span>
-              <span class="tool-badge" role="listitem">Sketch</span>
+            <div class="service-tools" role="list" aria-label="Analysis tools">
+              <span class="tool-badge" role="listitem">Process Modeling</span>
+              <span class="tool-badge" role="listitem">Requirements Docs</span>
+              <span class="tool-badge" role="listitem">User Stories</span>
             </div>
           </div>
         </div>
@@ -377,79 +429,80 @@
         <div class="service-item expandable magnetic stagger-item" data-service="development">
           <div class="service-header">
             <div class="service-icon">⚡</div>
-            <h3>Web Development</h3>
+            <h3>Frontend Development</h3>
             <button class="expand-btn" aria-label="Expand details">
               <span class="expand-icon">+</span>
             </button>
           </div>
-          <p class="service-summary">Building fast, responsive web applications</p>
+          <p class="service-summary">Building responsive, user-friendly web interfaces</p>
           <div class="service-details">
             <div class="service-process">
               <h4>Development Stack:</h4>
               <ul>
-                <li>⚛️ React & Next.js</li>
-                <li>🟢 Node.js & Express</li>
-                <li>🗄️ Database design & optimization</li>
-                <li>☁️ Cloud deployment & scaling</li>
+                <li>🟢 Vue.js & Composition API</li>
+                <li>⚛️ Next.js & React</li>
+                <li>🎨 HTML5, CSS3, JavaScript/TypeScript</li>
+                <li>📱 Responsive & mobile-first design</li>
               </ul>
             </div>
             <div class="service-tools">
-              <span class="tool-badge">React</span>
-              <span class="tool-badge">Vue.js</span>
+              <span class="tool-badge">Vue 3</span>
+              <span class="tool-badge">Next.js</span>
               <span class="tool-badge">TypeScript</span>
+              <span class="tool-badge">Tailwind CSS</span>
             </div>
           </div>
         </div>
         
         <div class="service-item expandable magnetic stagger-item" data-service="mobile">
           <div class="service-header">
-            <div class="service-icon">📱</div>
-            <h3>Mobile Apps</h3>
+            <div class="service-icon">�️</div>
+            <h3>IT Support & Systems</h3>
             <button class="expand-btn" aria-label="Expand details">
               <span class="expand-icon">+</span>
             </button>
           </div>
-          <p class="service-summary">Cross-platform mobile applications</p>
+          <p class="service-summary">Technical support and system troubleshooting</p>
           <div class="service-details">
             <div class="service-process">
-              <h4>Mobile Solutions:</h4>
+              <h4>IT Services:</h4>
               <ul>
-                <li>📱 React Native development</li>
-                <li>🔄 Cross-platform compatibility</li>
-                <li>🔗 API integration & offline support</li>
-                <li>📊 Analytics & performance monitoring</li>
+                <li>�️ System troubleshooting & maintenance</li>
+                <li>🌐 Network support & configuration</li>
+                <li>�️ Database management & optimization</li>
+                <li>� User support & training</li>
               </ul>
             </div>
             <div class="service-tools">
-              <span class="tool-badge">React Native</span>
-              <span class="tool-badge">Firebase</span>
-              <span class="tool-badge">Expo</span>
+              <span class="tool-badge">Windows/Linux</span>
+              <span class="tool-badge">Networking</span>
+              <span class="tool-badge">Database Systems</span>
             </div>
           </div>
         </div>
         
         <div class="service-item expandable magnetic stagger-item" data-service="optimization">
           <div class="service-header">
-            <div class="service-icon">🚀</div>
-            <h3>Performance Optimization</h3>
+            <div class="service-icon">♿</div>
+            <h3>Accessibility & UX</h3>
             <button class="expand-btn" aria-label="Expand details">
               <span class="expand-icon">+</span>
             </button>
           </div>
-          <p class="service-summary">Speed, accessibility, and SEO optimization</p>
+          <p class="service-summary">WCAG-compliant, accessible user experiences</p>
           <div class="service-details">
             <div class="service-process">
-              <h4>Optimization Areas:</h4>
+              <h4>UX & Accessibility:</h4>
               <ul>
-                <li>⚡ Core Web Vitals improvement</li>
-                <li>♿ Accessibility compliance (WCAG)</li>
-                <li>🔍 SEO & technical optimization</li>
-                <li>📈 Performance monitoring & analytics</li>
+                <li>♿ WCAG AA/AAA compliance</li>
+                <li>🎨 User-centered design</li>
+                <li>� Responsive & mobile-optimized</li>
+                <li>⚡ Performance & usability</li>
               </ul>
             </div>
             <div class="service-tools">
-              <span class="tool-badge">Lighthouse</span>
-              <span class="tool-badge">GTmetrix</span>
+              <span class="tool-badge">WCAG Standards</span>
+              <span class="tool-badge">Screen Readers</span>
               <span class="tool-badge">WebPageTest</span>
             </div>
           </div>
@@ -461,14 +514,14 @@
     <!-- Collapsible Testimonials Section -->
     <section class="testimonials-compact card fade-in slide-up">
       <div class="testimonials-header">
-        <h2>💬 Client Testimonials</h2>
+        <h2>💬 Professional References</h2>
         <div class="testimonials-summary">
           <div class="rating-overview">
             <span class="rating-stars">⭐⭐⭐⭐⭐</span>
-            <span class="rating-text">4.9/5 from 50+ clients</span>
+            <span class="rating-text">Trusted by educators and IT professionals</span>
           </div>
           <button class="view-all-testimonials" id="toggleTestimonials">
-            View All Reviews
+            View References
             <span class="toggle-icon">▼</span>
           </button>
         </div>
@@ -477,12 +530,13 @@
       <!-- Featured Testimonial -->
       <div class="featured-testimonial">
         <blockquote>
-          "Kendell delivered an exceptional website that exceeded our expectations. 
-          The attention to detail and user experience is outstanding."
+          "Kendell demonstrates exceptional analytical and technical skills, consistently delivering 
+          quality solutions and providing excellent support to end-users. A valuable team member with 
+          strong problem-solving abilities."
         </blockquote>
         <cite>
-          <strong>Sarah Johnson</strong>
-          <span>Product Manager, TechCorp</span>
+          <strong>Randell Lamont</strong>
+          <span>IT Consultant, Randell Lamont Technologies</span>
         </cite>
       </div>
       
@@ -492,33 +546,33 @@
           <div class="testimonial-card compact">
             <div class="testimonial-content">
               <div class="stars">⭐⭐⭐⭐⭐</div>
-              <p>"Professional, creative, and incredibly talented. Transformed our vision perfectly."</p>
+              <p>"Kendell has consistently shown dedication, professionalism, and a strong work ethic throughout his career."</p>
             </div>
             <div class="testimonial-author">
-              <span class="author-name">Mike Chen</span>
-              <span class="author-role">Startup Founder</span>
+              <span class="author-name">Regina Joseph</span>
+              <span class="author-role">Teacher II, Ministry of Education</span>
             </div>
           </div>
           
           <div class="testimonial-card compact">
             <div class="testimonial-content">
               <div class="stars">⭐⭐⭐⭐⭐</div>
-              <p>"The mobile app increased our user engagement by 300%. Highly recommend!"</p>
+              <p>"A reliable professional with excellent technical skills and customer service orientation. Great at problem-solving."</p>
             </div>
             <div class="testimonial-author">
-              <span class="author-name">Alex Rodriguez</span>
-              <span class="author-role">CEO, InnovateLab</span>
+              <span class="author-name">Former Colleague</span>
+              <span class="author-role">NALIS, St. George's College</span>
             </div>
           </div>
           
           <div class="testimonial-card compact">
             <div class="testimonial-content">
               <div class="stars">⭐⭐⭐⭐⭐</div>
-              <p>"Fast delivery, excellent communication, and beautiful results every time."</p>
+              <p>"Strong analytical thinking and interpersonal skills. Excels at working under pressure and meeting deadlines."</p>
             </div>
             <div class="testimonial-author">
-              <span class="author-name">Emma Davis</span>
-              <span class="author-role">Marketing Director</span>
+              <span class="author-name">Professional Reference</span>
+              <span class="author-role">Scotiabank Trinidad and Tobago</span>
             </div>
           </div>
         </div>
@@ -527,7 +581,7 @@
 
     <!-- Professional Credentials -->
     <section class="credentials card fade-in-up">
-      <h2>� Credentials & Achievements</h2>
+      <h2>🎓 Credentials & Achievements</h2>
       <div class="credentials-grid">
         <div class="credential-category fade-in-left stagger-1">
           <h3>🎓 Education</h3>
@@ -535,61 +589,61 @@
             <div class="credential-item">
               <div class="credential-icon">🎓</div>
               <div class="credential-details">
-                <h4>Computer Science Degree</h4>
-                <p>University of Technology</p>
-                <span class="credential-year">2021</span>
+                <h4>Cambridge GCE A-Level</h4>
+                <p>St. Francis Boys' College</p>
+                <span class="credential-year">2002 - 2005</span>
               </div>
             </div>
             <div class="credential-item">
               <div class="credential-icon">📜</div>
               <div class="credential-details">
-                <h4>Web Development Bootcamp</h4>
-                <p>Coding Academy</p>
-                <span class="credential-year">2020</span>
+                <h4>CXC General - 7 Subjects</h4>
+                <p>St. Francis Boys' College</p>
+                <span class="credential-year">1997 - 2002</span>
               </div>
             </div>
           </div>
         </div>
         
         <div class="credential-category fade-in-up stagger-2">
-          <h3>🏅 Certifications</h3>
+          <h3>💼 Experience Highlights</h3>
           <div class="credential-items">
             <div class="credential-item">
-              <div class="credential-icon">✅</div>
+              <div class="credential-icon">💻</div>
               <div class="credential-details">
-                <h4>Google Analytics Certified</h4>
-                <p>Google</p>
-                <span class="credential-year">2024</span>
+                <h4>Business Analyst & Developer</h4>
+                <p>Randell Lamont Technologies</p>
+                <span class="credential-year">Feb 2024 - Present</span>
               </div>
             </div>
             <div class="credential-item">
-              <div class="credential-icon">🔒</div>
+              <div class="credential-icon">�</div>
               <div class="credential-details">
-                <h4>Web Security Professional</h4>
-                <p>Security Institute</p>
-                <span class="credential-year">2023</span>
+                <h4>Library Assistant I</h4>
+                <p>NALIS - 9 Years Service</p>
+                <span class="credential-year">2009 - 2018</span>
               </div>
             </div>
           </div>
         </div>
         
         <div class="credential-category fade-in-right stagger-3">
-          <h3>🏆 Awards</h3>
+          <h3>🏆 Professional Strengths</h3>
           <div class="credential-items">
             <div class="credential-item">
-              <div class="credential-icon">🥇</div>
+              <div class="credential-icon">🎯</div>
               <div class="credential-details">
-                <h4>Best Mobile App Design</h4>
-                <p>Dev Awards 2024</p>
-                <span class="credential-year">2024</span>
+                <h4>Business Analysis</h4>
+                <p>Requirements & Process Modeling</p>
+                <span class="credential-year">Expert</span>
               </div>
             </div>
             <div class="credential-item">
-              <div class="credential-icon">⭐</div>
+              <div class="credential-icon">⚡</div>
               <div class="credential-details">
-                <h4>Rising Developer</h4>
-                <p>Tech Community</p>
-                <span class="credential-year">2023</span>
+                <h4>Problem Solving</h4>
+                <p>Analytical & Customer-Oriented</p>
+                <span class="credential-year">Advanced</span>
               </div>
             </div>
           </div>
@@ -663,21 +717,10 @@
     <section class="skill-showcase card glass-card fade-in-up hover-lift">
       <h2 class="text-reveal">💻 Technical Expertise</h2>
       <div class="skills-grid">
-        <div class="skill-item" data-skill="95">
-          <div class="skill-icon">⚛️</div>
-          <div class="skill-info">
-            <div class="skill-name">React & Next.js</div>
-            <div class="skill-progress">
-              <div class="skill-progress-fill" data-width="95%"></div>
-              <div class="skill-percentage">95%</div>
-            </div>
-          </div>
-        </div>
-        
         <div class="skill-item" data-skill="90">
-          <div class="skill-icon">🟨</div>
+          <div class="skill-icon">�</div>
           <div class="skill-info">
-            <div class="skill-name">JavaScript & TypeScript</div>
+            <div class="skill-name">Business Analysis & Process Modeling</div>
             <div class="skill-progress">
               <div class="skill-progress-fill" data-width="90%"></div>
               <div class="skill-percentage">90%</div>
@@ -686,9 +729,9 @@
         </div>
         
         <div class="skill-item" data-skill="88">
-          <div class="skill-icon">🎨</div>
+          <div class="skill-icon">💻</div>
           <div class="skill-info">
-            <div class="skill-name">UI/UX Design</div>
+            <div class="skill-name">Frontend Development (HTML/CSS/JS)</div>
             <div class="skill-progress">
               <div class="skill-progress-fill" data-width="88%"></div>
               <div class="skill-percentage">88%</div>
@@ -697,9 +740,9 @@
         </div>
         
         <div class="skill-item" data-skill="85">
-          <div class="skill-icon">🟢</div>
+          <div class="skill-icon">🎨</div>
           <div class="skill-info">
-            <div class="skill-name">Node.js & APIs</div>
+            <div class="skill-name">UX/UI Design & Web Design</div>
             <div class="skill-progress">
               <div class="skill-progress-fill" data-width="85%"></div>
               <div class="skill-percentage">85%</div>
@@ -707,24 +750,35 @@
           </div>
         </div>
         
-        <div class="skill-item" data-skill="92">
-          <div class="skill-icon">📱</div>
+        <div class="skill-item" data-skill="88">
+          <div class="skill-icon">�</div>
           <div class="skill-info">
-            <div class="skill-name">Mobile Development</div>
+            <div class="skill-name">Node.js, Firebase & MongoDB</div>
             <div class="skill-progress">
-              <div class="skill-progress-fill" data-width="92%"></div>
-              <div class="skill-percentage">92%</div>
+              <div class="skill-progress-fill" data-width="88%"></div>
+              <div class="skill-percentage">88%</div>
             </div>
           </div>
         </div>
         
-        <div class="skill-item" data-skill="87">
-          <div class="skill-icon">☁️</div>
+        <div class="skill-item" data-skill="82">
+          <div class="skill-icon">�️</div>
           <div class="skill-info">
-            <div class="skill-name">Cloud & DevOps</div>
+            <div class="skill-name">Database Management & Systems</div>
             <div class="skill-progress">
-              <div class="skill-progress-fill" data-width="87%"></div>
-              <div class="skill-percentage">87%</div>
+              <div class="skill-progress-fill" data-width="82%"></div>
+              <div class="skill-percentage">82%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="skill-item" data-skill="80">
+          <div class="skill-icon">🤖</div>
+          <div class="skill-info">
+            <div class="skill-name">AI Systems & Modern Tech Tools</div>
+            <div class="skill-progress">
+              <div class="skill-progress-fill" data-width="80%"></div>
+              <div class="skill-percentage">80%</div>
             </div>
           </div>
         </div>
@@ -738,66 +792,68 @@
       <div class="faq-container">
         <div class="faq-item fade-in-up stagger-1">
           <button class="faq-question" aria-expanded="false">
-            <span>What's your typical project timeline?</span>
+            <span>What services do you provide?</span>
             <i class="fas fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
-            <p>Project timelines vary based on complexity, but typically:</p>
+            <p>I offer a range of IT and development services including:</p>
             <ul>
-              <li>Simple websites: 1-2 weeks</li>
-              <li>Complex web applications: 4-8 weeks</li>
-              <li>Mobile apps: 6-12 weeks</li>
+              <li>Business Analysis & Requirements Gathering</li>
+              <li>Frontend Web Development (HTML, CSS, JavaScript)</li>
+              <li>UX/UI Design & Web Design</li>
+              <li>IT Support & System Troubleshooting</li>
+              <li>Database Management</li>
             </ul>
-            <p>I always provide detailed timelines during the planning phase.</p>
+            <p>I focus on understanding business needs and delivering practical solutions.</p>
           </div>
         </div>
         
         <div class="faq-item fade-in-up stagger-2">
           <button class="faq-question" aria-expanded="false">
-            <span>Do you provide ongoing maintenance?</span>
+            <span>What is your background and experience?</span>
             <i class="fas fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
-            <p>Yes! I offer comprehensive maintenance packages including:</p>
+            <p>I bring diverse experience from multiple sectors:</p>
             <ul>
-              <li>Security updates and monitoring</li>
-              <li>Performance optimization</li>
-              <li>Content updates</li>
-              <li>Feature enhancements</li>
-              <li>24/7 technical support</li>
+              <li>Current: Business Analyst/Developer at Randell Lamont Technologies (2024-Present)</li>
+              <li>9 years in library information services at NALIS (2009-2018)</li>
+              <li>Banking and customer service at Scotiabank (2005-2008)</li>
+              <li>Strong foundation in business studies and IT from St. Francis Boys' College</li>
             </ul>
           </div>
         </div>
         
         <div class="faq-item fade-in-up stagger-3">
           <button class="faq-question" aria-expanded="false">
-            <span>What technologies do you specialize in?</span>
+            <span>What technologies do you work with?</span>
             <i class="fas fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
-            <p>I specialize in modern web technologies including:</p>
+            <p>I work with modern web technologies and business tools:</p>
             <ul>
-              <li>Frontend: Vue.js, React, JavaScript ES6+, CSS3</li>
-              <li>Backend: Node.js, Firebase, APIs</li>
-              <li>Mobile: Progressive Web Apps, Mobile-first design</li>
-              <li>Tools: Git, Vite, Netlify, VS Code</li>
+              <li>Frontend: HTML, CSS, JavaScript</li>
+              <li>Business: Business Process Modeling, Requirements Analysis</li>
+              <li>IT Support: System troubleshooting, Network maintenance</li>
+              <li>Tools: Microsoft Office Suite, Database Management, AI Systems</li>
+              <li>Design: UX/UI Design, Graphic Design</li>
             </ul>
           </div>
         </div>
         
         <div class="faq-item fade-in-up stagger-4">
           <button class="faq-question" aria-expanded="false">
-            <span>How do you handle project communication?</span>
+            <span>What makes you a good fit for my project?</span>
             <i class="fas fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
-            <p>I believe in transparent, regular communication:</p>
+            <p>I bring unique strengths to every project:</p>
             <ul>
-              <li>Weekly progress reports</li>
-              <li>Real-time project dashboard</li>
-              <li>Video calls for major milestones</li>
-              <li>Slack/Email for quick questions</li>
-              <li>Final presentation and training</li>
+              <li>Strong analytical and problem-solving skills</li>
+              <li>Customer-oriented service approach</li>
+              <li>Ability to work under pressure and meet deadlines</li>
+              <li>Excellent interpersonal and communication skills</li>
+              <li>Business analysis background ensures I understand your needs</li>
             </ul>
           </div>
         </div>
@@ -808,55 +864,56 @@
     <section class="card fade-in-up cta-enhanced">
       <div class="cta-content">
         <div class="cta-text fade-in-left">
-          <h2>🚀 Ready to Transform Your Digital Presence?</h2>
+          <h2>🚀 Let's Work Together</h2>
           <p class="cta-description">
-            Let's collaborate to create something extraordinary. Whether you need a stunning website, 
-            powerful web application, or innovative mobile solution, I'm here to bring your vision to life.
+            Looking for a business analyst, developer, or IT specialist? I bring analytical thinking, 
+            technical skills, and a customer-oriented approach to every project. Let's discuss how 
+            I can help your organization succeed.
           </p>
           <div class="cta-benefits">
             <div class="benefit-item">
               <i class="fas fa-check-circle"></i>
-              <span>Free initial consultation</span>
+              <span>Business analysis expertise</span>
             </div>
             <div class="benefit-item">
               <i class="fas fa-check-circle"></i>
-              <span>Detailed project proposal</span>
+              <span>Frontend development skills</span>
             </div>
             <div class="benefit-item">
               <i class="fas fa-check-circle"></i>
-              <span>Transparent pricing</span>
+              <span>IT support experience</span>
             </div>
           </div>
         </div>
         
         <div class="cta-actions fade-in-right">
           <a href="pages/contact.html" class="cta-button primary magnetic">
-            <i class="fas fa-rocket"></i>
-            Start Your Project
+            <i class="fas fa-envelope"></i>
+            Get in Touch
           </a>
-          <a href="pages/projects.html" class="cta-button secondary magnetic">
-            <i class="fas fa-eye"></i>
-            View Portfolio
+          <a href="pages/resume.html" class="cta-button secondary magnetic">
+            <i class="fas fa-file-alt"></i>
+            View Resume
           </a>
-          <a href="#" class="cta-button outline magnetic" id="downloadResume">
+          <a href="Professional Resume.pdf" download="Kendell_Pierre_Resume.pdf" class="cta-button outline magnetic" id="downloadResume">
             <i class="fas fa-download"></i>
-            Download Resume
+            Download Resume PDF
           </a>
         </div>
       </div>
       
       <div class="cta-stats fade-in-up stagger-5">
         <div class="stat-highlight">
-          <span class="stat-number counter" data-target="24">24</span>
-          <span class="stat-label">Hours Response Time</span>
+          <span class="stat-number counter" data-target="2">2</span>
+          <span class="stat-label">Years in Dev Role</span>
         </div>
         <div class="stat-highlight">
-          <span class="stat-number counter" data-target="100">100</span>
-          <span class="stat-label">% Client Satisfaction</span>
+          <span class="stat-number counter" data-target="15">15</span>
+          <span class="stat-label">Years Total Experience</span>
         </div>
         <div class="stat-highlight">
-          <span class="stat-number counter" data-target="3">3</span>
-          <span class="stat-label">Years Experience</span>
+          <span class="stat-number counter" data-target="6">6</span>
+          <span class="stat-label">Organizations Served</span>
         </div>
       </div>
     </section>
@@ -1076,6 +1133,9 @@
   
   <!-- Cookie Consent Script -->
   <script src="js/plugins/cookie-consent.js"></script>
+  
+  <!-- Flowbite JS (required for interactive components) -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
   
   <!-- Advanced Mobile Enhancements -->
   <script src="js/progressive-images.js"></script>

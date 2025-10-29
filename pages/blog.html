@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/blog-modern.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -56,12 +57,18 @@
           <div class="filter-container">
             <select id="category-filter" aria-label="Filter by category">
               <option value="all">All Categories</option>
-              <option value="tutorial">Tutorials</option>
-              <option value="case-study">Case Studies</option>
-              <option value="insights">Tech Insights</option>
-              <option value="javascript">JavaScript</option>
-              <option value="vue">Vue.js</option>
-              <option value="css">CSS</option>
+              <option value="ai">🤖 AI & Machine Learning</option>
+              <option value="microsoft">🔷 Microsoft</option>
+              <option value="software-development">💻 Software Development</option>
+              <option value="css">🎨 CSS & Design</option>
+              <option value="vue">🟢 Vue.js</option>
+              <option value="javascript">⚡ JavaScript</option>
+              <option value="google">🔴 Google</option>
+              <option value="ux-design">🎨 UI/UX Design</option>
+              <option value="mobile-development">📱 Mobile Development</option>
+              <option value="business-tech">💼 Business & Tech</option>
+              <option value="cloud-devops">☁️ Cloud & DevOps</option>
+              <option value="web-security">🔐 Web Security</option>
             </select>
           </div>
         </div>
@@ -356,7 +363,32 @@
     </a>
   </div>
 
+  <!-- Embedded Article Reader Modal -->
+  <div class="article-reader-modal" id="articleReaderModal" role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+    <div class="reader-container">
+      <div class="reader-header">
+        <h2 id="readerTitle">Article Reader</h2>
+        <div class="reader-controls">
+          <button class="reader-btn" id="openOriginal" title="Open in new tab">
+            <i class="fas fa-external-link-alt"></i>
+            <span>Open Original</span>
+          </button>
+          <button class="close-reader" id="closeReader" aria-label="Close reader">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="reader-content" id="readerContent">
+        <div class="reader-loading">
+          <div class="spinner"></div>
+          <p>Loading article...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="../js/main.js"></script>
+  <script src="../js/blog-feed.js"></script>
   <script src="../js/plugins/analytics.js"></script>
   <script src="../js/utils/security.js"></script>
   <script src="../js/utils/accessibility.js"></script>
