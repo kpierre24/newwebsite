@@ -9313,10 +9313,25 @@ body.cursor-click .cursor-dot {
   transform: scale(0.5);
 }
 
-@media (max-width: 768px) {
+/* Hide custom cursor on mobile/tablet */
+@media (max-width: 1023px) {
   .cursor-dot, .cursor-outline {
-    display: none;
+    display: none !important;
   }
+  
+  /* Ensure default cursor is always visible on mobile */
+  body, body * {
+    cursor: auto !important;
+  }
+}
+
+/* Fallback: Show default cursor if custom cursor elements don't exist */
+body:not(:has(.cursor-dot)) {
+  cursor: auto !important;
+}
+
+body:not(:has(.cursor-dot)) * {
+  cursor: auto !important;
 }
 
 /* =============================================

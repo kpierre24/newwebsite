@@ -8,9 +8,12 @@ class SecurityManager {
       'fonts.gstatic.com',
       'cdnjs.cloudflare.com',
       'www.googletagmanager.com',
+      'www.google-analytics.com',
       'cdn.emailjs.com',
       'api.emailjs.com',
-      'api.allorigins.win'
+      'api.allorigins.win',
+      'corsproxy.io',
+      'cors-anywhere.herokuapp.com'
     ]);
     
     this.init();
@@ -44,11 +47,12 @@ class SecurityManager {
   generateCSPPolicy() {
     return [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.emailjs.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.emailjs.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
       "img-src 'self' data: https:",
-      "connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://api.allorigins.win",
+      "connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://api.allorigins.win https://corsproxy.io",
+      "frame-src 'self' https:",
       "base-uri 'self'",
       "form-action 'self' https://api.emailjs.com"
     ].join('; ');
@@ -267,9 +271,19 @@ class SecurityManager {
       
       // Check if URL is from a trusted domain
       if (typeof url === 'string') {
+        // Allow relative URLs (safe)
+        if (url.startsWith('/') || url.startsWith('.') || url.startsWith('data:')) {
+          return originalFetch(...args);
+        }
+        
         try {
           const urlObj = new URL(url);
           const hostname = urlObj.hostname;
+          
+          // Allow localhost
+          if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return originalFetch(...args);
+          }
           
           // Allow trusted domains
           const isTrusted = Array.from(this.trustedDomains).some(domain => 
@@ -281,10 +295,12 @@ class SecurityManager {
             throw new TypeError('Failed to fetch. Refused to connect because it violates the document\'s Content Security Policy.');
           }
         } catch (e) {
-          // If URL parsing fails, it might be a relative URL (which is safe)
-          if (!url.startsWith('/') && !url.startsWith('.')) {
+          // If it's already a TypeError we threw, re-throw it
+          if (e instanceof TypeError && e.message.includes('Content Security Policy')) {
             throw e;
           }
+          // Otherwise it's a URL parsing error, which means relative URL - allow it
+          return originalFetch(...args);
         }
       }
       

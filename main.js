@@ -1835,7 +1835,12 @@ function initRippleEffects() {
 
 // Enhanced Custom Cursor
 function initCustomCursor() {
-  if (window.innerWidth < 768) return; // Skip on mobile
+  // Only enable custom cursor on desktop (not mobile/tablet) and when pointer device is available
+  if (window.innerWidth < 1024 || !window.matchMedia('(pointer: fine)').matches) {
+    // Ensure default cursor is visible on non-desktop
+    document.body.style.cursor = '';
+    return; // Skip on mobile/tablet or touch devices
+  }
 
   // Create cursor dot
   const cursorDot = document.createElement('div');
@@ -1850,6 +1855,7 @@ function initCustomCursor() {
   let mouseX = 0, mouseY = 0;
   let dotX = 0, dotY = 0;
   let outlineX = 0, outlineY = 0;
+  let isAnimating = true;
 
   // Track mouse position
   document.addEventListener('mousemove', (e) => {
@@ -1859,6 +1865,8 @@ function initCustomCursor() {
 
   // Smooth cursor animation
   function animateCursor() {
+    if (!isAnimating) return;
+    
     // Dot follows quickly
     dotX += (mouseX - dotX) * 0.3;
     dotY += (mouseY - dotY) * 0.3;
@@ -1898,11 +1906,31 @@ function initCustomCursor() {
     document.body.classList.remove('cursor-click');
   });
 
-  // Hide default cursor on interactive elements
+  // Hide default cursor ONLY after custom cursor is created and working
   document.body.style.cursor = 'none';
   document.querySelectorAll(interactiveElements).forEach(el => {
     el.style.cursor = 'none';
   });
+  
+  // Handle window resize - restore default cursor if window becomes too small
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth < 1024) {
+        isAnimating = false;
+        cursorDot.remove();
+        cursorOutline.remove();
+        document.body.style.cursor = '';
+        document.querySelectorAll(interactiveElements).forEach(el => {
+          el.style.cursor = '';
+        });
+        console.log('🖱️ Custom cursor disabled (window too small)');
+      }
+    }, 250);
+  });
+  
+  console.log('✅ Custom cursor initialized');
 }
 
 

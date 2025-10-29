@@ -6,7 +6,12 @@
 class BlogFeedManager {
   constructor() {
     // Using AllOrigins as CORS proxy + direct RSS parsing
-    this.corsProxy = 'https://api.allorigins.win/raw?url=';
+    // Fallback to corsproxy.io if AllOrigins fails
+    this.corsProxies = [
+      'https://api.allorigins.win/raw?url=',
+      'https://corsproxy.io/?'
+    ];
+    this.currentProxyIndex = 0;
     
     // Tech blog RSS feeds - Comprehensive coverage (tested and working)
     this.feeds = [
@@ -453,40 +458,60 @@ class BlogFeedManager {
   }
   
   async fetchFeed(feedConfig) {
-    try {
-      // Fetch RSS feed through CORS proxy
-      const response = await fetch(`${this.corsProxy}${encodeURIComponent(feedConfig.url)}`);
-      
-      if (!response.ok) {
-        console.warn(`Feed ${feedConfig.name} returned HTTP ${response.status}.`);
-        return [];
+    // Try each CORS proxy until one works
+    for (let proxyIndex = 0; proxyIndex < this.corsProxies.length; proxyIndex++) {
+      try {
+        const corsProxy = this.corsProxies[proxyIndex];
+        
+        // Fetch RSS feed through CORS proxy
+        const response = await fetch(`${corsProxy}${encodeURIComponent(feedConfig.url)}`, {
+          signal: AbortSignal.timeout(10000) // 10 second timeout
+        });
+        
+        if (!response.ok) {
+          console.warn(`Feed ${feedConfig.name} returned HTTP ${response.status} with proxy ${proxyIndex + 1}.`);
+          continue; // Try next proxy
+        }
+        
+        const xmlText = await response.text();
+        
+        // Check if response is actually XML/HTML, not an error page
+        if (!xmlText.includes('<?xml') && !xmlText.includes('<rss') && !xmlText.includes('<feed')) {
+          console.warn(`Feed ${feedConfig.name} returned invalid XML with proxy ${proxyIndex + 1}.`);
+          continue; // Try next proxy
+        }
+        
+        // Parse RSS/Atom XML
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        
+        // Check for parsing errors
+        const parseError = xmlDoc.querySelector('parsererror');
+        if (parseError) {
+          console.warn(`Feed ${feedConfig.name} XML parsing error with proxy ${proxyIndex + 1}.`);
+          continue; // Try next proxy
+        }
+        
+        // Parse items (works for both RSS and Atom)
+        const items = this.parseItems(xmlDoc, feedConfig);
+        
+        if (items.length === 0) {
+          console.warn(`Feed ${feedConfig.name} returned no items with proxy ${proxyIndex + 1}.`);
+          continue; // Try next proxy
+        }
+        
+        // Success! Return the items
+        return items.slice(0, 10); // Limit to 10 items per feed
+        
+      } catch (error) {
+        console.warn(`Feed ${feedConfig.name} failed with proxy ${proxyIndex + 1}:`, error.message);
+        // Continue to next proxy
       }
-      
-      const xmlText = await response.text();
-      
-      // Parse RSS/Atom XML
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-      
-      // Check for parsing errors
-      const parseError = xmlDoc.querySelector('parsererror');
-      if (parseError) {
-        console.warn(`Feed ${feedConfig.name} XML parsing error.`);
-        return [];
-      }
-      
-      // Parse items (works for both RSS and Atom)
-      const items = this.parseItems(xmlDoc, feedConfig);
-      
-      if (items.length === 0) {
-        console.warn(`Feed ${feedConfig.name} returned no items.`);
-      }
-      
-      return items.slice(0, 10); // Limit to 10 items per feed
-    } catch (error) {
-      console.warn(`Skipping ${feedConfig.name}:`, error.message);
-      return [];
     }
+    
+    // All proxies failed
+    console.warn(`❌ Skipping ${feedConfig.name}: All CORS proxies failed`);
+    return [];
   }
   
   parseItems(xmlDoc, feedConfig) {
@@ -705,24 +730,233 @@ class BlogFeedManager {
   
   attachCardClickHandlers() {
     const cards = this.articlesGrid.querySelectorAll('.article-card');
+    
     cards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        // Don't open reader if clicking on a link directly
-        if (e.target.tagName === 'A' || e.target.closest('a')) {
+      const articleId = card.dataset.articleId;
+      
+      // Like button handler
+      const likeBtn = card.querySelector('.like-btn');
+      likeBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.handleLike(articleId, likeBtn);
+      });
+      
+      // Share button handler
+      const shareBtn = card.querySelector('.share-btn');
+      const shareMenu = card.querySelector('.share-menu');
+      shareBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close other open share menus
+        document.querySelectorAll('.share-menu.active').forEach(menu => {
+          if (menu !== shareMenu) menu.classList.remove('active');
+        });
+        shareMenu?.classList.toggle('active');
+      });
+      
+      // Share options handlers
+      const shareOptions = card.querySelectorAll('.share-option');
+      shareOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const shareType = option.dataset.share;
+          const link = card.querySelector('.article-link');
+          const url = link.getAttribute('data-article-url');
+          const title = link.getAttribute('data-article-title');
+          this.handleShare(shareType, url, title);
+          shareMenu?.classList.remove('active');
+        });
+      });
+      
+      // Comment button handler
+      const commentBtn = card.querySelector('.comment-btn');
+      const commentSection = card.querySelector('.comment-section');
+      commentBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        commentSection?.classList.toggle('active');
+      });
+      
+      // Comment input handler
+      const commentInput = card.querySelector('.comment-input');
+      const commentSubmit = card.querySelector('.comment-submit');
+      
+      commentInput?.addEventListener('input', (e) => {
+        e.stopPropagation();
+        commentSubmit.disabled = !e.target.value.trim();
+      });
+      
+      commentInput?.addEventListener('click', (e) => e.stopPropagation());
+      
+      commentInput?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !commentSubmit.disabled) {
           e.preventDefault();
-          const link = e.target.tagName === 'A' ? e.target : e.target.closest('a');
-          const url = link.getAttribute('href');
-          const title = card.querySelector('.article-title').textContent.trim();
+          this.handleComment(articleId, commentInput, card);
+        }
+      });
+      
+      commentSubmit?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.handleComment(articleId, commentInput, card);
+      });
+      
+      // Card click handler for article reader
+      card.addEventListener('click', (e) => {
+        // Don't open reader if clicking on action buttons, inputs, or footer area
+        if (e.target.closest('.action-btn') || 
+            e.target.closest('.action-buttons') ||
+            e.target.closest('.article-actions') ||
+            e.target.closest('.comment-input') || 
+            e.target.closest('.comment-submit') ||
+            e.target.closest('.comment-section') ||
+            e.target.closest('.share-menu')) {
+          return;
+        }
+        
+        // Only open reader if clicking on title link or read more link
+        if (e.target.tagName === 'A' && (e.target.classList.contains('article-link') || e.target.classList.contains('read-more-link'))) {
+          e.preventDefault();
+          const url = e.target.getAttribute('data-article-url') || e.target.getAttribute('href');
+          const title = e.target.getAttribute('data-article-title') || card.querySelector('.article-title').textContent.trim();
           
           if (window.articleReader) {
             window.articleReader.open(url, title);
           } else {
-            // Fallback to opening in new tab
             window.open(url, '_blank');
+          }
+          return;
+        }
+        
+        // Open reader if clicking on the card itself (but not footer)
+        if (e.target.closest('.article-image') || e.target.closest('.article-title') || e.target.closest('.article-excerpt') || e.target.closest('.article-meta')) {
+          const link = card.querySelector('.article-link');
+          const url = link.getAttribute('data-article-url') || link.getAttribute('href');
+          const title = link.getAttribute('data-article-title') || card.querySelector('.article-title').textContent.trim();
+          
+          if (window.articleReader) {
+            window.articleReader.open(url, title);
           }
         }
       });
     });
+    
+    // Close share menus when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.share-btn') && !e.target.closest('.share-menu')) {
+        document.querySelectorAll('.share-menu.active').forEach(menu => {
+          menu.classList.remove('active');
+        });
+      }
+    });
+  }
+  
+  handleLike(articleId, button) {
+    const interactions = this.getArticleInteractions(articleId);
+    interactions.liked = !interactions.liked;
+    interactions.likes += interactions.liked ? 1 : -1;
+    
+    this.saveArticleInteractions(articleId, interactions);
+    
+    // Update UI
+    const icon = button.querySelector('i');
+    const count = button.querySelector('.action-count');
+    
+    if (interactions.liked) {
+      button.classList.add('liked');
+      icon.className = 'fas fa-heart';
+      this.showToast('Added to liked articles!', 'success');
+    } else {
+      button.classList.remove('liked');
+      icon.className = 'far fa-heart';
+    }
+    
+    count.textContent = interactions.likes;
+  }
+  
+  handleShare(type, url, title) {
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title);
+    
+    let shareUrl = '';
+    
+    switch(type) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(url).then(() => {
+          this.showToast('Link copied to clipboard!', 'success');
+        }).catch(() => {
+          this.showToast('Failed to copy link', 'error');
+        });
+        break;
+    }
+  }
+  
+  handleComment(articleId, input, card) {
+    const text = input.value.trim();
+    if (!text) return;
+    
+    const interactions = this.getArticleInteractions(articleId);
+    
+    // Get author name from localStorage or prompt
+    let authorName = localStorage.getItem('blog_author_name');
+    if (!authorName) {
+      authorName = prompt('Enter your name:') || 'Anonymous';
+      localStorage.setItem('blog_author_name', authorName);
+    }
+    
+    const comment = {
+      author: authorName,
+      text: text,
+      timestamp: Date.now()
+    };
+    
+    interactions.comments.unshift(comment);
+    this.saveArticleInteractions(articleId, interactions);
+    
+    // Update UI
+    const commentsList = card.querySelector('.comments-list');
+    commentsList.insertAdjacentHTML('afterbegin', this.createCommentHTML(comment));
+    
+    // Update comment count
+    const commentCount = card.querySelector('.comment-btn .action-count');
+    commentCount.textContent = interactions.comments.length;
+    
+    // Clear input
+    input.value = '';
+    card.querySelector('.comment-submit').disabled = true;
+    
+    this.showToast('Comment added!', 'success');
+  }
+  
+  showToast(message, type = 'success') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) {
+      existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerHTML = `
+      <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+      <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.animation = 'slideOutRight 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
   }
   
   createArticleCard(article) {
@@ -737,10 +971,16 @@ class BlogFeedManager {
     // Determine category class
     const categoryClass = article.category.toLowerCase().replace(/\s+/g, '-');
     
+    // Generate unique article ID for interactions
+    const articleId = btoa(article.link).replace(/[^a-zA-Z0-9]/g, '').substring(0, 20);
+    
+    // Get stored interactions from localStorage
+    const interactions = this.getArticleInteractions(articleId);
+    
     // Create article card HTML matching your existing format
     return `
-      <article class="article-card" data-category="${article.category} ${article.tags.join(' ').toLowerCase()}" style="cursor: pointer;">
-        <div class="article-image">
+      <article class="article-card" data-category="${article.category} ${article.tags.join(' ').toLowerCase()}" data-article-id="${articleId}">
+        <div class="article-image" style="cursor: pointer;">
           ${article.thumbnail ? 
             `<img src="${article.thumbnail}" alt="${article.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">` :
             `<div class="image-placeholder">
@@ -753,10 +993,10 @@ class BlogFeedManager {
             <span class="category ${categoryClass}">${this.capitalizeCategory(article.category)}</span>
             <time datetime="${isoDate}">${formattedDate}</time>
           </div>
-          <h3 class="article-title">
-            <a href="${article.link}" class="article-link">${article.title}</a>
+          <h3 class="article-title" style="cursor: pointer;">
+            <a href="${article.link}" class="article-link" data-article-url="${article.link}" data-article-title="${this.escapeHtml(article.title)}">${article.title}</a>
           </h3>
-          <p class="article-excerpt">
+          <p class="article-excerpt" style="cursor: pointer;">
             ${article.description}
           </p>
           <div class="article-footer">
@@ -764,11 +1004,110 @@ class BlogFeedManager {
               <span><i class="fas fa-clock"></i> ${article.readTime} min read</span>
               <span><i class="fas fa-book-open"></i> ${article.source}</span>
             </div>
-            <a href="${article.link}" class="read-more-link">Read Article</a>
+            
+            <div class="article-actions">
+              <div class="action-buttons">
+                <button class="action-btn like-btn ${interactions.liked ? 'liked' : ''}" data-action="like" title="Like article">
+                  <i class="${interactions.liked ? 'fas' : 'far'} fa-heart"></i>
+                  <span class="action-count">${interactions.likes}</span>
+                </button>
+                
+                <div style="position: relative;">
+                  <button class="action-btn share-btn" data-action="share" title="Share article">
+                    <i class="fas fa-share-alt"></i>
+                  </button>
+                  <div class="share-menu">
+                    <button class="share-option twitter" data-share="twitter">
+                      <i class="fab fa-twitter"></i>
+                      <span>Twitter</span>
+                    </button>
+                    <button class="share-option facebook" data-share="facebook">
+                      <i class="fab fa-facebook"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button class="share-option linkedin" data-share="linkedin">
+                      <i class="fab fa-linkedin"></i>
+                      <span>LinkedIn</span>
+                    </button>
+                    <button class="share-option copy" data-share="copy">
+                      <i class="fas fa-link"></i>
+                      <span>Copy Link</span>
+                    </button>
+                  </div>
+                </div>
+                
+                <button class="action-btn comment-btn" data-action="comment" title="View comments">
+                  <i class="far fa-comment"></i>
+                  <span class="action-count">${interactions.comments.length}</span>
+                </button>
+              </div>
+              
+              <a href="${article.link}" class="read-more-link" data-article-url="${article.link}" data-article-title="${this.escapeHtml(article.title)}">Read Article</a>
+            </div>
+            
+            <div class="comment-section" data-article-id="${articleId}">
+              <div class="comment-input-wrapper">
+                <input type="text" class="comment-input" placeholder="Add a comment..." maxlength="200">
+                <button class="comment-submit" disabled>Post</button>
+              </div>
+              <div class="comments-list">
+                ${interactions.comments.map(comment => this.createCommentHTML(comment)).join('')}
+              </div>
+            </div>
           </div>
         </div>
       </article>
     `;
+  }
+  
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  createCommentHTML(comment) {
+    const timeAgo = this.getTimeAgo(comment.timestamp);
+    const initial = comment.author.charAt(0).toUpperCase();
+    
+    return `
+      <div class="comment-item">
+        <div class="comment-avatar">${initial}</div>
+        <div class="comment-content">
+          <div class="comment-header">
+            <span class="comment-author">${this.escapeHtml(comment.author)}</span>
+            <span class="comment-time">${timeAgo}</span>
+          </div>
+          <p class="comment-text">${this.escapeHtml(comment.text)}</p>
+        </div>
+      </div>
+    `;
+  }
+  
+  getTimeAgo(timestamp) {
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    
+    if (seconds < 60) return 'Just now';
+    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+    if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`;
+    return `${Math.floor(seconds / 604800)}w ago`;
+  }
+  
+  getArticleInteractions(articleId) {
+    const stored = localStorage.getItem(`article_${articleId}`);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+    return {
+      liked: false,
+      likes: Math.floor(Math.random() * 50) + 5, // Random initial likes
+      comments: []
+    };
+  }
+  
+  saveArticleInteractions(articleId, interactions) {
+    localStorage.setItem(`article_${articleId}`, JSON.stringify(interactions));
   }
   
   capitalizeCategory(category) {
