@@ -109,6 +109,27 @@
   --transition-fast: 150ms ease;
   --transition: 250ms ease;
   --transition-slow: 400ms ease;
+
+  /* Z-Index Scale - Standardized stacking context */
+  --z-particles: 0;
+  --z-background: 1;
+  --z-content: 10;
+  --z-dropdown: 100;
+  --z-sticky: 500;
+  --z-fixed: 600;
+  --z-mobile-nav: 900;
+  --z-footer: 950;
+  --z-scroll-to-top: 990;
+  --z-header: 1000;
+  --z-modal-backdrop: 9000;
+  --z-modal: 9100;
+  --z-cookie-consent: 9500;
+  --z-tooltip: 9900;
+  --z-skip-link: 10000;
+
+  /* Missing accent colors */
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
 }
 
 /* Dark Mode Color Overrides */

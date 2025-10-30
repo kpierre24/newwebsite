@@ -384,4 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-export default PullToRefresh;
+// Make available globally if needed
+if (typeof window !== 'undefined') {
+  window.PullToRefresh = PullToRefresh;
+}

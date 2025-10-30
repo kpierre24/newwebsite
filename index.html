@@ -6,7 +6,7 @@
   <title>Kendell Pierre - Full-Stack Developer | Web & Mobile App Development</title>
   
   <!-- Security Headers (Note: Some headers like X-Frame-Options work best via server, not meta tags) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: http:; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -71,39 +71,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Tailwind CSS (required for Flowbite) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#f5f7ff',
-              100: '#ebefff',
-              200: '#d6dffe',
-              300: '#b3c3fe',
-              400: '#8da0fc',
-              500: '#667eea',
-              600: '#4e54c8',
-              700: '#3f44a8',
-              800: '#2f3689',
-              900: '#1f2669'
-            }
-          },
-          fontFamily: {
-            'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Tailwind CSS & Flowbite REMOVED - Using custom CSS only -->
   
-  <!-- Flowbite CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-  
-  <!-- Custom Styles (after Tailwind & Flowbite) -->
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/accessibility-fixes.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -126,29 +96,19 @@
   
   <!-- Performance hints -->
   <link rel="dns-prefetch" href="//via.placeholder.com">
-  <link rel="dns-prefetch" href="//www.google-analytics.com">
   
-  <!-- Google Analytics 4 (Consent Mode) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    
-    // Default consent to denied (GDPR compliant)
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'wait_for_update': 500
-    });
-    
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX', {
-      'anonymize_ip': true,
-      'cookie_flags': 'SameSite=None;Secure'
-    });
-  </script>
+  <!-- Analytics removed for privacy -->
+
+  <!-- Resource Hints: Preconnect to CDN origins for faster asset loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  
+  <!-- DNS Prefetch for additional performance boost -->
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
 </head>
 <body>
   <!-- Page Loader -->
@@ -170,11 +130,11 @@
         <span class="cursor" aria-hidden="true">|</span>
       </p>
       <div class="floating-elements" aria-hidden="true">
-        <div class="floating-element" style="--delay: 0s">💻</div>
-        <div class="floating-element" style="--delay: 1s">🚀</div>
-        <div class="floating-element" style="--delay: 2s">✨</div>
-        <div class="floating-element" style="--delay: 0.5s">🎨</div>
-        <div class="floating-element" style="--delay: 1.5s">📱</div>
+        <div class="floating-element floating-delay-0">💻</div>
+        <div class="floating-element floating-delay-1">🚀</div>
+        <div class="floating-element floating-delay-2">✨</div>
+        <div class="floating-element floating-delay-0-5">🎨</div>
+        <div class="floating-element floating-delay-1-5">📱</div>
       </div>
     </div>
     <div class="particles" id="particles" aria-hidden="true"></div>
@@ -1009,7 +969,7 @@
   </div>
 
   <!-- Advanced Theme Switcher -->
-  <div class="theme-switcher" id="themeSwitcher" style="position: fixed; top: 20px; right: 20px; z-index: 1001;">
+  <div class="theme-switcher theme-switcher-fixed" id="themeSwitcher">
     <div class="theme-toggle-ball"></div>
   </div>
 
@@ -1023,56 +983,49 @@
   <!-- Loading Progress Bar -->
   <div class="page-loading-bar" id="pageLoadingBar" role="progressbar" aria-label="Page loading progress"></div>
 
+  <!-- Application Configuration (must load first) -->
+  <script src="js/config.js"></script>
+
   <!-- Enhanced Plugin Libraries -->
   <!-- GSAP for professional animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   
   <!-- Typed.js for typing animations -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.16/dist/typed.umd.js"></script>
   
   <!-- CountUp.js for number animations -->
-  <script src="https://cdn.jsdelivr.net/npm/countup@1.8.2/dist/countUp.min.js"></script>
-  
-  <!-- Vanilla Tilt for 3D card effects -->
-  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/countup@1.8.2/dist/countUp.min.js"></script>
   
   <!-- Rellax for parallax scrolling -->
-  <script src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/rellax@1.12.1/rellax.min.js"></script>
   
   <!-- GLightbox for image gallery -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
   <!-- NEW UX ENHANCEMENTS -->
   
   <!-- Lenis - Ultra-smooth scrolling -->
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   
   <!-- AOS - Animate On Scroll (Better scroll animations) -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  
-  <!-- Particles.js - Interactive particle backgrounds -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
   <!-- SweetAlert2 - Beautiful alerts/modals -->
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
   
-  <!-- Splitting.js - Advanced text animations -->
-  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
-  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
-  
-  <!-- Barba.js - Smooth page transitions -->
-  <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.9.7/dist/barba.umd.js"></script>
+  <!-- Lazy Script Loader: Loads decorative scripts after page load (Particles, Vanilla Tilt, Splitting, Barba) -->
+  <script src="js/lazy-loader.js"></script>
 
   <!-- Cookie Consent Banner -->
   <div id="cookieConsent" class="cookie-consent">
     <div class="cookie-content">
       <div class="cookie-text">
         <h3>🍪 We Value Your Privacy</h3>
-        <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies. <a href="pages/privacy.html" style="color: #60a5fa; text-decoration: underline;">Learn more</a></p>
+        <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies. <a href="pages/privacy.html" class="cookie-privacy-link">Learn more</a></p>
       </div>
       <div class="cookie-actions">
         <button class="cookie-btn accept" id="acceptCookies">Accept All</button>
@@ -1086,7 +1039,7 @@
   <div id="cookieModal" class="cookie-modal">
     <div class="cookie-modal-content">
       <h2>Cookie Preferences</h2>
-      <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Manage your cookie preferences. Essential cookies cannot be disabled as they are required for the site to function.</p>
+      <p class="cookie-modal-description">Manage your cookie preferences. Essential cookies cannot be disabled as they are required for the site to function.</p>
       
       <div class="cookie-option">
         <div class="cookie-option-info">
@@ -1121,38 +1074,37 @@
         </label>
       </div>
       
-      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <button class="cookie-btn accept" id="savePreferences" style="flex: 1;">Save Preferences</button>
-        <button class="cookie-btn decline" id="closeModal" style="flex: 1;">Cancel</button>
+      <div class="cookie-modal-actions">
+        <button class="cookie-btn accept cookie-save-btn" id="savePreferences">Save Preferences</button>
+        <button class="cookie-btn decline cookie-cancel-btn" id="closeModal">Cancel</button>
       </div>
     </div>
   </div>
 
   <script src="js/main.js"></script>
-  <script src="js/plugins/analytics.js"></script>
-  <script src="js/utils/security.js"></script>
-  <script src="js/utils/accessibility.js"></script>
+  <!-- Analytics removed -->
+  <script defer src="js/utils/security.js"></script>
+  <script defer src="js/utils/accessibility.js"></script>
   
   <!-- Cookie Consent Script -->
-  <script src="js/plugins/cookie-consent.js"></script>
+  <script defer src="js/plugins/cookie-consent.js"></script>
   
-  <!-- Flowbite JS (required for interactive components) -->
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <!-- Flowbite JS REMOVED - Using custom JavaScript only -->
   
   <!-- Advanced Mobile Enhancements -->
-  <script src="js/progressive-images.js"></script>
-  <script src="js/haptics.js"></script>
-  <script src="js/pull-to-refresh.js"></script>
-  <script src="js/swipe-navigation.js"></script>
-  <script src="js/advanced-touch.js"></script>
-  <script src="js/mobile-init.js"></script>
+  <script defer src="js/progressive-images.js"></script>
+  <script defer src="js/haptics.js"></script>
+  <script defer src="js/pull-to-refresh.js"></script>
+  <script defer src="js/swipe-navigation.js"></script>
+  <script defer src="js/advanced-touch.js"></script>
+  <script defer src="js/mobile-init.js"></script>
   
   <!-- Newsletter & SEO -->
-  <script src="js/newsletter.js"></script>
-  <script src="js/seo-optimizer.js"></script>
-  <script src="js/image-gallery.js"></script>
+  <script defer src="js/newsletter.js"></script>
+  <script defer src="js/seo-optimizer.js"></script>
+  <script defer src="js/image-gallery.js"></script>
   
   <!-- Accessibility Enhancements -->
-  <script src="js/accessibility-enhanced.js"></script>
+  <script defer src="js/accessibility-enhanced.js"></script>
 </body>
 </html>

@@ -514,4 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-export default AdvancedTouchInteractions;
+// Make available globally if needed
+if (typeof window !== 'undefined') {
+  window.AdvancedTouchInteractions = AdvancedTouchInteractions;
+}

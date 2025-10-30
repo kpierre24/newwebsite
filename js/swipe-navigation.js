@@ -385,4 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-export default SwipeNavigation;
+// Make available globally if needed
+if (typeof window !== 'undefined') {
+  window.SwipeNavigation = SwipeNavigation;
+}

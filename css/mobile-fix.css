@@ -207,34 +207,34 @@ button,
   .main-nav {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: var(--z-header);
   }
   
   .nav-links {
-    z-index: 998;
+    z-index: var(--z-footer);
   }
   
   /* Ensure content doesn't overlap with sticky nav */
   .main-content {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-background);
   }
   
   /* Fix floating buttons z-index */
   .scroll-to-top,
   .floating-contact {
-    z-index: 999;
+    z-index: var(--z-scroll-to-top);
   }
   
   /* Ensure modals are above everything */
   .modal {
-    z-index: 10000;
+    z-index: var(--z-skip-link);
   }
   
   /* Fix any fixed/absolute positioned elements causing overlaps */
   .site-header {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-background);
   }
   
   /* Prevent overflow from particle effects or animations */

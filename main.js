@@ -567,7 +567,7 @@ if (contactForm) {
         });
         localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
         
-        console.log('📧 Contact form submitted (stored locally):', { name, email, subject, message });
+        debugLog('📧 Contact form submitted (stored locally):', { name, email, subject, message });
       }
       
       // Show success message with SweetAlert2
@@ -602,13 +602,7 @@ if (contactForm) {
         charCountElement.style.color = '#666';
       }
       
-      // Track with analytics if consent given
-      if (typeof gtag !== 'undefined' && cookieConsent && cookieConsent.getConsent().analytics) {
-        gtag('event', 'form_submit', {
-          event_category: 'Contact',
-          event_label: 'Contact Form Submission'
-        });
-      }
+      // Analytics removed - no tracking
       
     } catch (error) {
       console.error('Contact Form Error:', error);
@@ -700,7 +694,7 @@ function storeContactSubmission(name, email, message) {
   };
   submissions.push(submission);
   localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
-  console.log('Contact submission stored locally:', submission);
+  debugLog('Contact submission stored locally:', submission);
   return submissions;
 }
 
@@ -1268,7 +1262,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(registration => {
-        console.log('Service Worker registered successfully:', registration.scope);
+        debugLog('Service Worker registered successfully:', registration.scope);
         
         // Handle updates
         registration.addEventListener('updatefound', () => {
@@ -1282,7 +1276,7 @@ if ('serviceWorker' in navigator) {
         });
       })
       .catch(error => {
-        console.log('Service Worker registration failed:', error);
+        debugLog('Service Worker registration failed:', error);
       });
   });
 }
@@ -1357,7 +1351,7 @@ function initPerformanceMonitoring() {
     // Largest Contentful Paint
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log('LCP:', entry.startTime);
+        debugLog('LCP:', entry.startTime);
         // Send to analytics if needed
       }
     }).observe({ entryTypes: ['largest-contentful-paint'] });
@@ -1365,7 +1359,7 @@ function initPerformanceMonitoring() {
     // First Input Delay
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log('FID:', entry.processingStart - entry.startTime);
+        debugLog('FID:', entry.processingStart - entry.startTime);
         // Send to analytics if needed
       }
     }).observe({ entryTypes: ['first-input'] });
@@ -1378,7 +1372,7 @@ function initPerformanceMonitoring() {
           clsValue += entry.value;
         }
       }
-      console.log('CLS:', clsValue);
+      debugLog('CLS:', clsValue);
       // Send to analytics if needed
     }).observe({ entryTypes: ['layout-shift'] });
   }
@@ -1386,11 +1380,11 @@ function initPerformanceMonitoring() {
   // Load time monitoring
   window.addEventListener('load', () => {
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-    console.log('Page load time:', loadTime + 'ms');
+    debugLog('Page load time:', loadTime + 'ms');
     
     // Report slow loads
     if (loadTime > 3000) {
-      console.warn('Slow page load detected:', loadTime + 'ms');
+      debugWarn('Slow page load detected:', loadTime + 'ms');
     }
   });
 }
@@ -1429,7 +1423,7 @@ function optimizeImages() {
       const webpSrc = img.src.replace(/\.(jpg|jpeg|png)$/, '.webp');
       // You would check if WebP version exists on server
       // For demo, we'll just log the conversion
-      console.log('WebP optimization available for:', img.src);
+      debugLog('WebP optimization available for:', img.src);
     }
   });
 }
@@ -1448,7 +1442,7 @@ function monitorBundleSize() {
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (entry.transferSize > 100000) { // 100KB threshold
-          console.warn('Large resource detected:', entry.name, `${Math.round(entry.transferSize / 1024)}KB`);
+          debugWarn('Large resource detected:', entry.name, `${Math.round(entry.transferSize / 1024)}KB`);
         }
       }
     }).observe({ entryTypes: ['resource'] });
@@ -1460,7 +1454,7 @@ function monitorMemoryUsage() {
   if ('memory' in performance) {
     const logMemory = () => {
       const memory = performance.memory;
-      console.log('Memory usage:', {
+      debugLog('Memory usage:', {
         used: Math.round(memory.usedJSHeapSize / 1048576) + 'MB',
         total: Math.round(memory.totalJSHeapSize / 1048576) + 'MB',
         limit: Math.round(memory.jsHeapSizeLimit / 1048576) + 'MB'
@@ -1752,7 +1746,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     // Load non-critical features after initial page load
     initAdvancedVisualEffects();
-    console.log('Loading non-critical features...');
+    debugLog('Loading non-critical features...');
   }, 1000);
 });
 
@@ -1949,7 +1943,7 @@ function initCustomCursor() {
       });
     } else {
       // Fallback: If custom cursor failed to create, ensure default cursor is visible
-      console.warn('Custom cursor failed to initialize, using default cursor');
+      debugWarn('Custom cursor failed to initialize, using default cursor');
       document.body.style.cursor = '';
     }
   }, 100);
@@ -1967,12 +1961,12 @@ function initCustomCursor() {
         document.querySelectorAll(interactiveElements).forEach(el => {
           el.style.cursor = '';
         });
-        console.log('🖱️ Custom cursor disabled (window too small)');
+        debugLog('🖱️ Custom cursor disabled (window too small)');
       }
     }, 250);
   });
   
-  console.log('✅ Custom cursor initialized');
+  debugLog('✅ Custom cursor initialized');
 }
 
 
@@ -1993,7 +1987,7 @@ function initScrollProgress() {
 // Animated Counters
 function initCounterAnimations() {
   const counters = document.querySelectorAll('.counter, .stat-number');
-  console.log('Found counters:', counters.length); // Debug log
+  debugLog('Found counters:', counters.length); // Debug log
   
   const observerOptions = {
     threshold: 0.5
@@ -2002,7 +1996,7 @@ function initCounterAnimations() {
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-        console.log('Animating counter:', entry.target); // Debug log
+        debugLog('Animating counter:', entry.target); // Debug log
         entry.target.classList.add('counted');
         animateCounter(entry.target);
       }
@@ -2016,7 +2010,7 @@ function initCounterAnimations() {
 
 function animateCounter(element) {
   const target = parseInt(element.getAttribute('data-target')) || parseInt(element.textContent) || 0;
-  console.log('Counter target:', target, 'Element:', element); // Debug log
+  debugLog('Counter target:', target, 'Element:', element); // Debug log
   const duration = 2000;
   const increment = target / (duration / 16);
   let current = 0;
@@ -2151,7 +2145,7 @@ function initAdvancedVisualEffects() {
   initPerformanceOptimizations();
   initFAQAccordion();
   
-  console.log('🎨 Advanced visual effects initialized!');
+  debugLog('🎨 Advanced visual effects initialized!');
 }
 
 // FAQ Accordion functionality
@@ -2349,12 +2343,12 @@ if (document.readyState === 'loading') {
 
 // Emergency function to ensure counters are visible
 function ensureCountersVisible() {
-  console.log('🔍 Ensuring counters are visible...');
+  debugLog('🔍 Ensuring counters are visible...');
   const counters = document.querySelectorAll('.counter, .trust-number, .stat-number');
-  console.log('Found counter elements:', counters.length);
+  debugLog('Found counter elements:', counters.length);
   
   counters.forEach((counter, index) => {
-    console.log(`Counter ${index}:`, counter, 'Text:', counter.textContent);
+    debugLog(`Counter ${index}:`, counter, 'Text:', counter.textContent);
     
     // Get target number
     let targetNumber = counter.getAttribute('data-target') || counter.textContent.trim();
@@ -2389,7 +2383,7 @@ function ensureCountersVisible() {
     counter.style.fontSize = counter.classList.contains('trust-number') ? '2.5rem' : '2rem';
     counter.style.fontWeight = 'bold';
     
-    console.log(`✅ Counter ${index} set to:`, counter.textContent);
+    debugLog(`✅ Counter ${index} set to:`, counter.textContent);
   });
 }
 
@@ -2688,7 +2682,7 @@ function initUniqueFeatures() {
   initAccessibilityFeatures();
   initPerformanceOptimizations();
   
-  console.log('🎉 All unique UI features initialized!');
+  debugLog('🎉 All unique UI features initialized!');
 }
 
 // Progressive Disclosure for Service Items
@@ -2731,7 +2725,7 @@ function toggleServiceDetails(item) {
     item.classList.add('expanded');
     
     // Add analytics or tracking here if needed
-    console.log('Service expanded:', item.dataset.service);
+    debugLog('Service expanded:', item.dataset.service);
     
     // Smooth scroll to ensure visibility
     setTimeout(() => {
@@ -3218,14 +3212,14 @@ function loadHeavyFeature(featureType) {
   switch (featureType) {
     case 'charts':
       // Load chart library only when needed
-      console.log('Loading charts feature...');
+      debugLog('Loading charts feature...');
       break;
     case 'animations':
       // Load animation library only when needed
-      console.log('Loading animations feature...');
+      debugLog('Loading animations feature...');
       break;
     default:
-      console.log(`Loading ${featureType} feature...`);
+      debugLog(`Loading ${featureType} feature...`);
   }
 }
 
@@ -3392,7 +3386,7 @@ function initGSAPAnimations() {
     });
   });
   
-  console.log('✨ GSAP animations initialized');
+  debugLog('✨ GSAP animations initialized');
 }
 
 // 2. Typed.js for Hero Typing Effect
@@ -3423,7 +3417,7 @@ function initTypedJS() {
       autoInsertCss: true
     });
     
-    console.log('⌨️ Typed.js initialized');
+    debugLog('⌨️ Typed.js initialized');
   }
 }
 
@@ -3451,7 +3445,7 @@ function initCountUpForElement(element) {
 
 function initCountUp() {
   if (typeof CountUp === 'undefined') return;
-  console.log('🔢 CountUp.js ready');
+  debugLog('🔢 CountUp.js ready');
 }
 
 // 4. GLightbox for Image Gallery
@@ -3485,7 +3479,7 @@ function initGLightbox() {
     closeOnOutsideClick: true
   });
   
-  console.log('🖼️ GLightbox initialized');
+  debugLog('🖼️ GLightbox initialized');
   return lightbox;
 }
 
@@ -3529,7 +3523,7 @@ function initVanillaTilt() {
     scale: 1.05
   });
   
-  console.log('🎴 Vanilla Tilt initialized');
+  debugLog('🎴 Vanilla Tilt initialized');
 }
 
 // 6. Rellax for Parallax Scrolling
@@ -3564,13 +3558,13 @@ function initRellax() {
     horizontal: false
   });
   
-  console.log('🌊 Rellax parallax initialized');
+  debugLog('🌊 Rellax parallax initialized');
   return rellax;
 }
 
 // Master initialization function
 function initEnhancedPlugins() {
-  console.log('🚀 Initializing enhanced plugin libraries...');
+  debugLog('🚀 Initializing enhanced plugin libraries...');
   
   setTimeout(() => {
     initGSAPAnimations();
@@ -3580,7 +3574,7 @@ function initEnhancedPlugins() {
     initVanillaTilt();
     initRellax();
     
-    console.log('✅ All enhanced plugins initialized successfully!');
+    debugLog('✅ All enhanced plugins initialized successfully!');
   }, 500);
 }
 
@@ -3591,13 +3585,13 @@ function initEnhancedPlugins() {
 // 1. Lenis - Ultra-smooth scrolling
 function initLenisScrolling() {
   if (typeof Lenis === 'undefined') {
-    console.warn('⚠️ Lenis not loaded');
+    debugWarn('⚠️ Lenis not loaded');
     return;
   }
 
   // Prevent duplicate instances
   if (window.lenis) {
-    console.log('🌊 Lenis already initialized, skipping...');
+    debugLog('🌊 Lenis already initialized, skipping...');
     return window.lenis;
   }
 
@@ -3655,14 +3649,14 @@ function initLenisScrolling() {
     });
   });
 
-  console.log('🌊 Lenis smooth scrolling initialized');
+  debugLog('🌊 Lenis smooth scrolling initialized');
   return lenis;
 }
 
 // 2. AOS - Animate On Scroll
 function initAOS() {
   if (typeof AOS === 'undefined') {
-    console.warn('⚠️ AOS not loaded');
+    debugWarn('⚠️ AOS not loaded');
     return;
   }
 
@@ -3676,13 +3670,13 @@ function initAOS() {
     anchorPlacement: 'top-bottom',
   });
 
-  console.log('✨ AOS (Animate On Scroll) initialized');
+  debugLog('✨ AOS (Animate On Scroll) initialized');
 }
 
 // 3. Particles.js - Interactive background
 function initParticlesJS() {
   if (typeof particlesJS === 'undefined') {
-    console.warn('⚠️ Particles.js not loaded');
+    debugWarn('⚠️ Particles.js not loaded');
     return;
   }
 
@@ -3782,13 +3776,13 @@ function initParticlesJS() {
     retina_detect: true
   });
 
-  console.log('✨ Particles.js initialized');
+  debugLog('✨ Particles.js initialized');
 }
 
 // 4. SweetAlert2 - Enhanced alerts
 function initSweetAlert() {
   if (typeof Swal === 'undefined') {
-    console.warn('⚠️ SweetAlert2 not loaded');
+    debugWarn('⚠️ SweetAlert2 not loaded');
     return;
   }
 
@@ -3826,13 +3820,13 @@ function initSweetAlert() {
     });
   });
 
-  console.log('🎉 SweetAlert2 initialized');
+  debugLog('🎉 SweetAlert2 initialized');
 }
 
 // 5. Splitting.js - Advanced text animations
 function initSplitting() {
   if (typeof Splitting === 'undefined') {
-    console.warn('⚠️ Splitting.js not loaded');
+    debugWarn('⚠️ Splitting.js not loaded');
     return;
   }
 
@@ -3852,13 +3846,13 @@ function initSplitting() {
 
   Splitting();
 
-  console.log('✨ Splitting.js text animations initialized');
+  debugLog('✨ Splitting.js text animations initialized');
 }
 
 // 6. Barba.js - Page transitions
 function initBarba() {
   if (typeof barba === 'undefined') {
-    console.warn('⚠️ Barba.js not loaded');
+    debugWarn('⚠️ Barba.js not loaded');
     return;
   }
 
@@ -3888,12 +3882,12 @@ function initBarba() {
     }]
   });
 
-  console.log('🎭 Barba.js page transitions initialized');
+  debugLog('🎭 Barba.js page transitions initialized');
 }
 
 // Master initialization for new UX plugins
 function initNewUXPlugins() {
-  console.log('🎨 Initializing new UX enhancement plugins...');
+  debugLog('🎨 Initializing new UX enhancement plugins...');
   
   // Initialize Lenis FIRST (synchronously, no delay)
   initLenisScrolling();
@@ -3906,7 +3900,7 @@ function initNewUXPlugins() {
     initSplitting();
     initBarba();
     
-    console.log('✅ All new UX plugins initialized successfully!');
+    debugLog('✅ All new UX plugins initialized successfully!');
   }, 100);
 }
 
@@ -3933,135 +3927,17 @@ if (document.readyState === 'loading') {
 }
 
 // ============================================
-// GOOGLE ANALYTICS 4 TRACKING UTILITIES
+// ANALYTICS REMOVED FOR PRIVACY
 // ============================================
 
-/**
- * Track custom events with GA4 (respects cookie consent)
- * @param {string} eventName - The event name (e.g., 'download', 'click')
- * @param {object} params - Event parameters
- */
-function trackEvent(eventName, params = {}) {
-  if (typeof gtag === 'undefined') {
-    console.warn('⚠️ Google Analytics not loaded');
-    return;
-  }
-  
-  // Check if analytics consent is given
-  const cookieConsent = window.cookieConsent?.getConsent();
-  if (!cookieConsent || !cookieConsent.analytics) {
-    console.log('📊 Analytics tracking skipped (no consent)');
-    return;
-  }
-  
-  gtag('event', eventName, params);
-  console.log('📊 Event tracked:', eventName, params);
-}
+// Analytics tracking has been completely removed to respect user privacy
+// No tracking, no cookies, no data collection
 
-/**
- * Track page views
- * @param {string} pageTitle - The page title
- * @param {string} pagePath - The page path
- */
-function trackPageView(pageTitle, pagePath) {
-  if (typeof gtag === 'undefined') return;
-  
-  const cookieConsent = window.cookieConsent?.getConsent();
-  if (!cookieConsent || !cookieConsent.analytics) return;
-  
-  gtag('event', 'page_view', {
-    page_title: pageTitle,
-    page_path: pagePath
-  });
-}
+// Stub functions to prevent errors if called
+function trackEvent() { /* Analytics removed */ }
+function trackPageView() { /* Analytics removed */ }
 
-// Track outbound links automatically
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a');
-  if (!link) return;
-  
-  const href = link.href;
-  if (href && (href.startsWith('http') || href.startsWith('mailto:'))) {
-    const isExternal = !href.includes(window.location.hostname);
-    
-    if (isExternal) {
-      trackEvent('outbound_link', {
-        event_category: 'Engagement',
-        event_label: href,
-        destination: href
-      });
-    }
-    
-    if (href.startsWith('mailto:')) {
-      trackEvent('email_click', {
-        event_category: 'Contact',
-        event_label: 'Email Link Click'
-      });
-    }
-  }
-});
-
-// Track social media clicks
-document.querySelectorAll('.social-link').forEach(link => {
-  link.addEventListener('click', function() {
-    const platform = this.getAttribute('aria-label') || 'Unknown';
-    trackEvent('social_click', {
-      event_category: 'Social Media',
-      event_label: platform,
-      platform: platform.toLowerCase()
-    });
-  });
-});
-
-// Track scroll depth
-let maxScrollDepth = 0;
-let scrollDepthTracked = {
-  '25': false,
-  '50': false,
-  '75': false,
-  '100': false
-};
-
-window.addEventListener('scroll', () => {
-  const scrollPercentage = Math.round(
-    (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
-  );
-  
-  if (scrollPercentage > maxScrollDepth) {
-    maxScrollDepth = scrollPercentage;
-  }
-  
-  // Track milestones
-  ['25', '50', '75', '100'].forEach(milestone => {
-    const milestoneNum = parseInt(milestone);
-    if (scrollPercentage >= milestoneNum && !scrollDepthTracked[milestone]) {
-      scrollDepthTracked[milestone] = true;
-      trackEvent('scroll_depth', {
-        event_category: 'Engagement',
-        event_label: `${milestone}%`,
-        value: milestoneNum
-      });
-    }
-  });
-});
-
-// Track time on page (send when user leaves)
-let timeOnPage = 0;
-const timeTracker = setInterval(() => {
-  timeOnPage += 10; // Increment every 10 seconds
-}, 10000);
-
-window.addEventListener('beforeunload', () => {
-  clearInterval(timeTracker);
-  trackEvent('time_on_page', {
-    event_category: 'Engagement',
-    event_label: document.title,
-    value: Math.round(timeOnPage / 60), // Convert to minutes
-    seconds: timeOnPage
-  });
-});
-
-// Make tracking functions available globally
+// Make stub functions available globally for compatibility
 window.trackEvent = trackEvent;
 window.trackPageView = trackPageView;
 
@@ -4072,7 +3948,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
-        console.log('✅ Service Worker registered successfully:', registration.scope);
+        debugLog('✅ Service Worker registered successfully:', registration.scope);
         
         // Check for updates periodically
         setInterval(() => {
@@ -4111,7 +3987,7 @@ if ('serviceWorker' in navigator) {
     
     // Handle controller change (new SW activated)
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      console.log('🔄 New Service Worker activated');
+      debugLog('🔄 New Service Worker activated');
     });
   });
 }
@@ -4120,7 +3996,7 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  console.log('💾 PWA install prompt available');
+  debugLog('💾 PWA install prompt available');
   e.preventDefault();
   deferredPrompt = e;
   
@@ -4130,7 +4006,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 function showInstallPromotion() {
   // You can show a custom install button here
-  console.log('📱 App can be installed');
+  debugLog('📱 App can be installed');
   
   if (typeof Swal !== 'undefined') {
     Swal.fire({
@@ -4147,7 +4023,7 @@ function showInstallPromotion() {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('✅ User accepted PWA install');
+            debugLog('✅ User accepted PWA install');
           }
           deferredPrompt = null;
         });
@@ -4157,7 +4033,7 @@ function showInstallPromotion() {
 }
 
 window.addEventListener('appinstalled', () => {
-  console.log('✅ PWA installed successfully');
+  debugLog('✅ PWA installed successfully');
   deferredPrompt = null;
   
   if (typeof Swal !== 'undefined') {
@@ -4183,7 +4059,7 @@ window.addEventListener('appinstalled', () => {
  */
 function showToast(message, type = 'info', duration = 3000) {
   if (typeof Swal === 'undefined') {
-    console.log('Toast:', message);
+    debugLog('Toast:', message);
     return;
   }
 

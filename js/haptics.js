@@ -357,5 +357,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Export for module usage
-export default HapticFeedback;
+// Make available globally if needed
+if (typeof window !== 'undefined') {
+  window.HapticFeedback = HapticFeedback;
+}

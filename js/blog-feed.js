@@ -5,13 +5,17 @@
 
 class BlogFeedManager {
   constructor() {
-    // Using AllOrigins as CORS proxy + direct RSS parsing
-    // Fallback to corsproxy.io if AllOrigins fails
+    // Multiple CORS proxy options for reliability
+    // Will try each proxy in sequence until one works
     this.corsProxies = [
       'https://api.allorigins.win/raw?url=',
-      'https://corsproxy.io/?'
+      'https://api.codetabs.com/v1/proxy?quest=',
+      'https://corsproxy.io/?',
+      // Fallback: try direct fetch (some feeds allow CORS)
+      ''
     ];
     this.currentProxyIndex = 0;
+    this.failedFeeds = new Set(); // Track permanently failed feeds
     
     // Tech blog RSS feeds - Comprehensive coverage (tested and working)
     this.feeds = [
@@ -453,23 +457,38 @@ class BlogFeedManager {
       .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
       .slice(0, 20); // Limit to 20 most recent articles
     
-    console.log(`✅ Successfully loaded ${successCount}/${this.feeds.length} feeds (${failCount} skipped)`);
-    console.log(`📰 Displaying ${this.articles.length} articles`);
+    debugLog(`✅ Successfully loaded ${successCount}/${this.feeds.length} feeds (${failCount} skipped)`);
+    debugLog(`📰 Displaying ${this.articles.length} articles`);
   }
   
   async fetchFeed(feedConfig) {
+    // Skip if this feed has permanently failed
+    if (this.failedFeeds.has(feedConfig.name)) {
+      return [];
+    }
+
     // Try each CORS proxy until one works
     for (let proxyIndex = 0; proxyIndex < this.corsProxies.length; proxyIndex++) {
       try {
         const corsProxy = this.corsProxies[proxyIndex];
+        const proxyName = corsProxy || 'Direct';
+        const fetchUrl = corsProxy ? `${corsProxy}${encodeURIComponent(feedConfig.url)}` : feedConfig.url;
         
-        // Fetch RSS feed through CORS proxy
-        const response = await fetch(`${corsProxy}${encodeURIComponent(feedConfig.url)}`, {
-          signal: AbortSignal.timeout(10000) // 10 second timeout
+        // Fetch RSS feed with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+        
+        const response = await fetch(fetchUrl, {
+          signal: controller.signal,
+          headers: {
+            'Accept': 'application/rss+xml, application/xml, text/xml, application/atom+xml'
+          }
         });
         
+        clearTimeout(timeoutId);
+        
         if (!response.ok) {
-          console.warn(`Feed ${feedConfig.name} returned HTTP ${response.status} with proxy ${proxyIndex + 1}.`);
+          debugWarn(`Feed ${feedConfig.name} returned HTTP ${response.status} with ${proxyName}.`);
           continue; // Try next proxy
         }
         
@@ -477,7 +496,7 @@ class BlogFeedManager {
         
         // Check if response is actually XML/HTML, not an error page
         if (!xmlText.includes('<?xml') && !xmlText.includes('<rss') && !xmlText.includes('<feed')) {
-          console.warn(`Feed ${feedConfig.name} returned invalid XML with proxy ${proxyIndex + 1}.`);
+          debugWarn(`Feed ${feedConfig.name} returned invalid XML with proxy ${proxyIndex + 1}.`);
           continue; // Try next proxy
         }
         
@@ -488,7 +507,7 @@ class BlogFeedManager {
         // Check for parsing errors
         const parseError = xmlDoc.querySelector('parsererror');
         if (parseError) {
-          console.warn(`Feed ${feedConfig.name} XML parsing error with proxy ${proxyIndex + 1}.`);
+          debugWarn(`Feed ${feedConfig.name} XML parsing error with ${proxyName}.`);
           continue; // Try next proxy
         }
         
@@ -496,21 +515,30 @@ class BlogFeedManager {
         const items = this.parseItems(xmlDoc, feedConfig);
         
         if (items.length === 0) {
-          console.warn(`Feed ${feedConfig.name} returned no items with proxy ${proxyIndex + 1}.`);
+          debugWarn(`Feed ${feedConfig.name} returned no items with ${proxyName}.`);
           continue; // Try next proxy
         }
         
         // Success! Return the items
+        debugLog(`✅ ${feedConfig.name}: Loaded ${items.length} articles via ${proxyName}`);
         return items.slice(0, 10); // Limit to 10 items per feed
         
       } catch (error) {
-        console.warn(`Feed ${feedConfig.name} failed with proxy ${proxyIndex + 1}:`, error.message);
+        const proxyName = this.corsProxies[proxyIndex] || 'Direct';
+        
+        // Handle specific error types
+        if (error.name === 'AbortError') {
+          debugWarn(`Feed ${feedConfig.name} timeout with ${proxyName}`);
+        } else {
+          debugWarn(`Feed ${feedConfig.name} error with ${proxyName}:`, error.message);
+        }
         // Continue to next proxy
       }
     }
     
-    // All proxies failed
-    console.warn(`❌ Skipping ${feedConfig.name}: All CORS proxies failed`);
+    // All proxies failed - mark feed as failed
+    this.failedFeeds.add(feedConfig.name);
+    console.error(`❌ ${feedConfig.name}: All proxies failed. Feed will be skipped.`);
     return [];
   }
   

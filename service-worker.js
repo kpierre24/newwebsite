@@ -1,10 +1,16 @@
 /**
  * Service Worker - Intelligent Caching Strategy
- * Version: 1.0.0
+ * Version: 1.0.1
  * Provides offline support and faster repeat visits
  */
 
-const CACHE_VERSION = 'v1.0.0';
+// Debug mode (set to false for production)
+const DEBUG = false;
+const debugLog = (...args) => DEBUG ? console.log(...args) : null;
+const debugWarn = (...args) => DEBUG ? console.warn(...args) : null;
+const debugError = (...args) => console.error(...args); // Always log errors
+
+const CACHE_VERSION = 'v1.0.1';
 const CACHE_NAME = `portfolio-${CACHE_VERSION}`;
 
 // Cache strategies
@@ -27,16 +33,16 @@ const MAX_RUNTIME_CACHE_SIZE = 30;
 
 // Install event - precache critical assets
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
+  debugLog('[Service Worker] Installing...');
   
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[Service Worker] Precaching critical assets');
+        debugLog('[Service Worker] Precaching critical assets');
         return cache.addAll(PRECACHE_URLS);
       })
       .then(() => {
-        console.log('[Service Worker] Installation complete');
+        debugLog('[Service Worker] Installation complete');
         return self.skipWaiting(); // Activate immediately
       })
       .catch((error) => {
@@ -47,7 +53,7 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating...');
+  debugLog('[Service Worker] Activating...');
   
   event.waitUntil(
     caches.keys()
@@ -57,14 +63,14 @@ self.addEventListener('activate', (event) => {
             if (cacheName !== CACHE_NAME && 
                 cacheName !== RUNTIME_CACHE && 
                 cacheName !== IMAGE_CACHE) {
-              console.log('[Service Worker] Deleting old cache:', cacheName);
+              debugLog('[Service Worker] Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
         );
       })
       .then(() => {
-        console.log('[Service Worker] Activation complete');
+        debugLog('[Service Worker] Activation complete');
         return self.clients.claim(); // Take control immediately
       })
   );
@@ -113,7 +119,7 @@ async function networkFirst(request, cacheName) {
     
     return networkResponse;
   } catch (error) {
-    console.log('[Service Worker] Network failed, trying cache:', request.url);
+    debugLog('[Service Worker] Network failed, trying cache:', request.url);
     
     const cachedResponse = await caches.match(request);
     
@@ -192,9 +198,27 @@ async function staleWhileRevalidate(request, cacheName) {
 
 /**
  * Network Only Strategy (for external requests)
+ * Silently fail for CORS proxy requests to avoid console spam
  */
 async function networkOnly(request) {
-  return fetch(request);
+  try {
+    const response = await fetch(request);
+    return response;
+  } catch (error) {
+    // Silently handle CORS proxy failures
+    // These are expected when proxies are down or rate-limited
+    const url = request.url || '';
+    if (url.includes('corsproxy.io') || url.includes('allorigins.win') || url.includes('codetabs.com')) {
+      // Return a minimal error response instead of throwing
+      return new Response('CORS proxy unavailable', {
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: { 'Content-Type': 'text/plain' }
+      });
+    }
+    // For other errors, re-throw
+    throw error;
+  }
 }
 
 /**
@@ -224,7 +248,7 @@ if ('sync' in self.registration) {
 
 async function syncMessages() {
   // Implement background sync for form submissions, etc.
-  console.log('[Service Worker] Background sync triggered');
+  debugLog('[Service Worker] Background sync triggered');
 }
 
 // Push notification support (if needed in future)
@@ -258,4 +282,4 @@ self.addEventListener('message', (event) => {
   }
 });
 
-console.log('[Service Worker] Loaded successfully');
+debugLog('[Service Worker] Loaded successfully');

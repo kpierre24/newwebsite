@@ -47,54 +47,7 @@ setInterval(() => {
   });
 }, 60 * 60 * 1000);
 
-// PWA Install Prompt
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  e.preventDefault();
-  
-  // Stash the event so it can be triggered later
-  deferredPrompt = e;
-  
-  console.log('💡 PWA install prompt available');
-  
-  // Show custom install button (if exists)
-  const installBtn = document.querySelector('#install-app-btn');
-  if (installBtn) {
-    installBtn.style.display = 'block';
-    
-    installBtn.addEventListener('click', () => {
-      // Hide the button
-      installBtn.style.display = 'none';
-      
-      // Show the prompt
-      deferredPrompt.prompt();
-      
-      // Wait for the user to respond
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('✅ User accepted PWA install');
-          if (window.haptics) window.haptics.success();
-        } else {
-          console.log('❌ User dismissed PWA install');
-        }
-        deferredPrompt = null;
-      });
-    });
-  }
-});
-
-// PWA installed event
-window.addEventListener('appinstalled', () => {
-  console.log('✅ PWA installed successfully');
-  if (window.showToast) {
-    window.showToast('App installed! You can now use it offline.');
-  }
-  if (window.haptics) {
-    window.haptics.success();
-  }
-});
+// Note: PWA Install Prompt is handled in main.js to avoid duplication
 
 // Network status monitoring
 window.addEventListener('online', () => {
