@@ -29,8 +29,12 @@ body {
 section {
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   box-sizing: border-box;
   overflow-x: hidden;
+  position: relative;
+  clear: both;
 }
 
 /* Fix header padding on mobile */
@@ -198,4 +202,46 @@ button,
   .aos-init[data-aos] {
     transform: none !important;
   }
+  
+  /* Fix z-index stacking for mobile navigation */
+  .main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-links {
+    z-index: 998;
+  }
+  
+  /* Ensure content doesn't overlap with sticky nav */
+  .main-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Fix floating buttons z-index */
+  .scroll-to-top,
+  .floating-contact {
+    z-index: 999;
+  }
+  
+  /* Ensure modals are above everything */
+  .modal {
+    z-index: 10000;
+  }
+  
+  /* Fix any fixed/absolute positioned elements causing overlaps */
+  .site-header {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Prevent overflow from particle effects or animations */
+  .particles,
+  .floating-elements,
+  .geometric-shapes {
+    display: none !important;
+  }
 }
+
