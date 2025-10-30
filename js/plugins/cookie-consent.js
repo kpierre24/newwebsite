@@ -284,8 +284,8 @@ class CookieConsent {
 // Initialize cookie consent when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    new CookieConsent();
+    window.cookieConsent = new CookieConsent();
   });
 } else {
-  new CookieConsent();
+  window.cookieConsent = new CookieConsent();
 }

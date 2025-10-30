@@ -761,6 +761,9 @@ fadeElements.forEach(el => observer.observe(el));
 // ✅ Scroll Progress Bar and Scroll to Top
 const scrollProgress = document.getElementById('scrollProgress');
 const scrollToTopBtn = document.getElementById('scrollToTop');
+const floatingContact = document.getElementById('floating-contact');
+const smartFab = document.getElementById('smartFab');
+const footer = document.querySelector('.site-footer, footer');
 
 function updateScrollProgress() {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -771,12 +774,43 @@ function updateScrollProgress() {
     scrollProgress.style.width = `${scrollPercentage}%`;
   }
   
+  // Check if footer is in viewport
+  let isFooterVisible = false;
+  if (footer) {
+    const footerRect = footer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    // Footer is considered visible if any part is in viewport
+    isFooterVisible = footerRect.top < windowHeight && footerRect.bottom > 0;
+  }
+  
   // Show/hide scroll to top button
   if (scrollToTopBtn) {
-    if (scrollTop > 300) {
+    if (scrollTop > 300 && !isFooterVisible) {
       scrollToTopBtn.classList.add('visible');
     } else {
       scrollToTopBtn.classList.remove('visible');
+    }
+  }
+  
+  // Show/hide floating contact button
+  if (floatingContact) {
+    if (!isFooterVisible) {
+      floatingContact.style.opacity = '1';
+      floatingContact.style.visibility = 'visible';
+    } else {
+      floatingContact.style.opacity = '0';
+      floatingContact.style.visibility = 'hidden';
+    }
+  }
+  
+  // Show/hide smart FAB menu
+  if (smartFab) {
+    if (!isFooterVisible) {
+      smartFab.style.opacity = '1';
+      smartFab.style.visibility = 'visible';
+    } else {
+      smartFab.style.opacity = '0';
+      smartFab.style.visibility = 'hidden';
     }
   }
 }
@@ -984,7 +1018,6 @@ function generateResumeHTML() {
             <span>📧 your.email@example.com</span>
             <span>📱 (555) 123-4567</span>
             <span>🌐 yourportfolio.com</span>
-            <span>💼 linkedin.com/in/yourname</span>
         </div>
     </div>
 
@@ -1906,11 +1939,20 @@ function initCustomCursor() {
     document.body.classList.remove('cursor-click');
   });
 
-  // Hide default cursor ONLY after custom cursor is created and working
-  document.body.style.cursor = 'none';
-  document.querySelectorAll(interactiveElements).forEach(el => {
-    el.style.cursor = 'none';
-  });
+  // Hide default cursor ONLY after confirming custom cursor elements were created
+  // Wait a brief moment to ensure elements are rendered
+  setTimeout(() => {
+    if (document.querySelector('.cursor-dot') && document.querySelector('.cursor-outline')) {
+      document.body.style.cursor = 'none';
+      document.querySelectorAll(interactiveElements).forEach(el => {
+        el.style.cursor = 'none';
+      });
+    } else {
+      // Fallback: If custom cursor failed to create, ensure default cursor is visible
+      console.warn('Custom cursor failed to initialize, using default cursor');
+      document.body.style.cursor = '';
+    }
+  }, 100);
   
   // Handle window resize - restore default cursor if window becomes too small
   let resizeTimer;

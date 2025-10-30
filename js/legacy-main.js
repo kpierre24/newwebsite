@@ -984,7 +984,6 @@ function generateResumeHTML() {
             <span>📧 your.email@example.com</span>
             <span>📱 (555) 123-4567</span>
             <span>🌐 yourportfolio.com</span>
-            <span>💼 linkedin.com/in/yourname</span>
         </div>
     </div>
 
