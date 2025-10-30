@@ -1775,13 +1775,17 @@ function initScrollAnimations() {
 
 // Parallax Effect - Updated for Lenis compatibility
 function initParallax() {
+  // Prefer GSAP ScrollTrigger-based parallax when available
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    initParallaxGSAP();
+    return;
+  }
+
+  // Fallback: simple translateY parallax tied to scroll
   const parallaxElements = document.querySelectorAll('.parallax-element');
-  
-  // Use Lenis scroll event if available, otherwise fallback to window scroll
-  if (window.lenis) {
+  if (window.lenis && typeof window.lenis.on === 'function') {
     window.lenis.on('scroll', ({ scroll }) => {
       const rate = scroll * -0.5;
-      
       parallaxElements.forEach(element => {
         element.style.transform = `translateY(${rate}px)`;
       });
@@ -1790,11 +1794,10 @@ function initParallax() {
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.5;
-      
       parallaxElements.forEach(element => {
         element.style.transform = `translateY(${rate}px)`;
       });
-    });
+    }, { passive: true });
   }
 }
 
@@ -3163,6 +3166,11 @@ function preloadCriticalResources() {
 }
 
 function optimizeScrollPerformance() {
+  // If GSAP ScrollTrigger is available, it handles scroll-linked transforms efficiently.
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    debugLog('🛑 Skipping manual scroll optimizations (handled by GSAP/ScrollTrigger)');
+    return;
+  }
   let ticking = false;
   
   function updateScrollElements() {
@@ -3486,80 +3494,45 @@ function initGLightbox() {
 // 5. Vanilla Tilt for 3D Card Effects
 function initVanillaTilt() {
   if (typeof VanillaTilt === 'undefined') return;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const common = { speed: 400, glare: true };
+  const mobile = { max: 4, scale: 1.01, 'max-glare': 0.1, perspective: 800 };
+  const desktop = { max: 10, scale: 1.03, 'max-glare': 0.25, perspective: 1000 };
   
   // Apply tilt to project cards
-  VanillaTilt.init(document.querySelectorAll('.project-card, .sample-card'), {
-    max: 8,
-    speed: 400,
-    glare: true,
-    'max-glare': 0.3,
-    scale: 1.03,
-    perspective: 1000
-  });
+  VanillaTilt.init(document.querySelectorAll('.project-card, .sample-card'), { ...(isMobile ? mobile : desktop), ...common });
   
   // Apply tilt to service cards
-  VanillaTilt.init(document.querySelectorAll('.service-card'), {
-    max: 6,
-    speed: 400,
-    glare: true,
-    'max-glare': 0.2,
-    scale: 1.02
-  });
+  VanillaTilt.init(document.querySelectorAll('.service-card'), { ...(isMobile ? mobile : desktop), ...common });
   
   // Apply tilt to testimonial cards
-  VanillaTilt.init(document.querySelectorAll('.testimonial-card'), {
-    max: 5,
-    speed: 400,
-    glare: false,
-    scale: 1.02
-  });
+  VanillaTilt.init(document.querySelectorAll('.testimonial-card'), { ...(isMobile ? mobile : desktop), speed: 400, glare: false, scale: isMobile ? 1.01 : 1.02 });
   
   // Apply tilt to skill cards
-  VanillaTilt.init(document.querySelectorAll('.skill-card, .tech-card'), {
-    max: 10,
-    speed: 300,
-    glare: true,
-    'max-glare': 0.4,
-    scale: 1.05
-  });
+  VanillaTilt.init(document.querySelectorAll('.skill-card, .tech-card'), { ...(isMobile ? mobile : desktop), speed: 300, glare: true, 'max-glare': isMobile ? 0.15 : 0.4, scale: isMobile ? 1.02 : 1.05 });
   
   debugLog('🎴 Vanilla Tilt initialized');
 }
 
 // 6. Rellax for Parallax Scrolling
 function initRellax() {
-  if (typeof Rellax === 'undefined') return;
-  
-  // Add parallax data attributes to elements
-  const decorativeElements = document.querySelectorAll('.blob, .floating-shape, .background-decoration');
-  decorativeElements.forEach((el, index) => {
-    el.setAttribute('data-rellax-speed', (index % 3 - 1) * 2);
-  });
-  
-  // Add parallax to hero visual
-  const heroVisual = document.querySelector('.hero-visual');
-  if (heroVisual) {
-    heroVisual.setAttribute('data-rellax-speed', '-2');
+  // Rellax removed in favor of GSAP ScrollTrigger-based parallax
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    initParallaxGSAP();
+    debugLog('ℹ️ Rellax deprecated; using GSAP ScrollTrigger parallax');
+    return;
   }
-  
-  // Add parallax to section backgrounds
-  const sections = document.querySelectorAll('section:nth-child(even)');
-  sections.forEach(section => {
-    section.setAttribute('data-rellax-speed', '-1');
-  });
-  
-  // Initialize Rellax
-  const rellax = new Rellax('[data-rellax-speed]', {
-    speed: -2,
-    center: false,
-    wrapper: null,
-    round: true,
-    vertical: true,
-    horizontal: false
-  });
-  
-  debugLog('🌊 Rellax parallax initialized');
-  return rellax;
+  // If GSAP isn't available either, safely no-op if Rellax missing
+  if (typeof Rellax === 'undefined') {
+    return;
+  }
+  // Legacy fallback: attempt to init Rellax if present
+  try {
+    const rellax = new Rellax('[data-rellax-speed]');
+    return rellax;
+  } catch (e) {
+    debugWarn('Rellax init failed; parallax disabled');
+  }
 }
 
 // Master initialization function
@@ -3572,7 +3545,8 @@ function initEnhancedPlugins() {
     initCountUp();
     initGLightbox();
     initVanillaTilt();
-    initRellax();
+    // Use GSAP-based parallax
+    initParallax();
     
     debugLog('✅ All enhanced plugins initialized successfully!');
   }, 500);
@@ -3630,6 +3604,25 @@ function initLenisScrolling() {
     });
     
     gsap.ticker.lagSmoothing(0);
+
+    // Configure scrollerProxy for accurate pinning and triggers
+    if (typeof ScrollTrigger.scrollerProxy === 'function') {
+      ScrollTrigger.scrollerProxy(document.documentElement, {
+        scrollTop(value) {
+          if (arguments.length) {
+            lenis.scrollTo(value, { immediate: true });
+          }
+          return window.pageYOffset || document.documentElement.scrollTop;
+        },
+        getBoundingClientRect() {
+          return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        },
+        pinType: document.documentElement.style.transform ? 'transform' : 'fixed'
+      });
+
+      ScrollTrigger.addEventListener('refresh', () => lenis.update());
+      setTimeout(() => ScrollTrigger.refresh(), 0);
+    }
   }
 
   // Override anchor link behavior for smooth scrolling
@@ -3653,24 +3646,100 @@ function initLenisScrolling() {
   return lenis;
 }
 
-// 2. AOS - Animate On Scroll
+// 2. Reveal-on-scroll (AOS-compatible) using GSAP ScrollTrigger
 function initAOS() {
-  if (typeof AOS === 'undefined') {
-    debugWarn('⚠️ AOS not loaded');
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    debugWarn('⚠️ GSAP/ScrollTrigger not available for reveals');
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  const revealEls = document.querySelectorAll('[data-aos]');
+  revealEls.forEach((el) => {
+    const type = el.getAttribute('data-aos') || 'fade-up';
+    const delay = parseInt(el.getAttribute('data-aos-delay') || '0', 10) / 1000;
+    const base = { opacity: 0, duration: 0.8, ease: 'power2.out', delay };
+    let fromVars = { ...base };
+
+    switch (type) {
+      case 'fade-down': fromVars.y = -30; break;
+      case 'fade-left': fromVars.x = -30; break;
+      case 'fade-right': fromVars.x = 30; break;
+      case 'zoom-in': fromVars.scale = 0.95; break;
+      case 'fade-up':
+      default: fromVars.y = 30; break;
+    }
+
+    gsap.from(el, {
+      ...fromVars,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+        once: true
+      }
+    });
+  });
+
+  debugLog('✨ Reveal animations initialized via GSAP');
+}
+
+// Parallax via GSAP ScrollTrigger (replaces Rellax/manual)
+function initParallaxGSAP() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    debugWarn('⚠️ GSAP/ScrollTrigger not available for parallax');
     return;
   }
 
-  AOS.init({
-    duration: 800,
-    easing: 'ease-in-out',
-    once: true,
-    mirror: false,
-    offset: 100,
-    delay: 0,
-    anchorPlacement: 'top-bottom',
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    debugLog('♿ Parallax disabled due to reduced motion');
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const selectors = [
+    '[data-parallax-speed]',
+    '[data-rellax-speed]',
+    '.parallax',
+    '.parallax-element'
+  ];
+
+  const elements = new Set();
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => elements.add(el));
   });
 
-  debugLog('✨ AOS (Animate On Scroll) initialized');
+  elements.forEach((el) => {
+    if (el.dataset.parallaxInited) return;
+    el.dataset.parallaxInited = 'true';
+
+    const speedAttr = parseFloat(el.getAttribute('data-parallax-speed') || el.getAttribute('data-rellax-speed') || '0.5');
+    const speed = isNaN(speedAttr) ? 0.5 : speedAttr;
+    const baseDistance = parseFloat(el.getAttribute('data-parallax-distance') || '120');
+    const distance = baseDistance * speed;
+
+    gsap.to(el, {
+      y: distance,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        invalidateOnRefresh: true
+      }
+    });
+  });
+
+  // Ensure triggers account for layout
+  setTimeout(() => {
+    if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh) {
+      ScrollTrigger.refresh();
+    }
+  }, 0);
+
+  debugLog('🌊 Parallax initialized via GSAP ScrollTrigger');
 }
 
 // 3. Particles.js - Interactive background
@@ -3692,10 +3761,15 @@ function initParticlesJS() {
     heroSection.insertBefore(particlesContainer, heroSection.firstChild);
   }
 
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = window.matchMedia('(max-width: 767px)').matches;
+  const baseCount = 80;
+  const count = prefersReduced ? 0 : (isSmall ? Math.round(baseCount * 0.5) : baseCount);
+
   particlesJS('particles-js', {
     particles: {
       number: {
-        value: 80,
+        value: count,
         density: {
           enable: true,
           value_area: 800
@@ -3740,7 +3814,7 @@ function initParticlesJS() {
       },
       move: {
         enable: true,
-        speed: 2,
+        speed: prefersReduced ? 0 : (isSmall ? 1.2 : 2),
         direction: 'none',
         random: false,
         straight: false,
@@ -3751,12 +3825,9 @@ function initParticlesJS() {
     interactivity: {
       detect_on: 'canvas',
       events: {
-        onhover: {
-          enable: true,
-          mode: 'grab'
-        },
+        onhover: { enable: !prefersReduced, mode: 'grab' },
         onclick: {
-          enable: true,
+          enable: !prefersReduced,
           mode: 'push'
         },
         resize: true
@@ -3872,6 +3943,21 @@ function initBarba() {
         });
       }
     }],
+    hooks: {
+      after(data) {
+        // Move focus to main after route change and announce
+        const main = document.getElementById('main-content');
+        if (main) {
+          main.setAttribute('tabindex', '-1');
+          main.focus({ preventScroll: true });
+          setTimeout(() => main.removeAttribute('tabindex'), 0);
+        }
+        const live = document.getElementById('liveRegion');
+        if (live && document.title) {
+          live.textContent = `Navigated to ${document.title}`;
+        }
+      }
+    },
     views: [{
       namespace: 'home',
       beforeEnter() {
@@ -3899,9 +3985,25 @@ function initNewUXPlugins() {
     initSweetAlert();
     initSplitting();
     initBarba();
+    enhanceImages();
     
     debugLog('✅ All new UX plugins initialized successfully!');
   }, 100);
+}
+
+// Enhance image loading attributes for better performance
+function enhanceImages() {
+  const imgs = Array.from(document.images || []);
+  imgs.forEach((img, index) => {
+    const isHero = img.closest('.hero-section');
+    if (!isHero) {
+      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+      if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    } else {
+      // Prioritize hero image
+      if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority', 'high');
+    }
+  });
 }
 
 // Initialize Lenis IMMEDIATELY on script load (before everything else)

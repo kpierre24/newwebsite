@@ -910,9 +910,87 @@ body {
 
 /* Container */
 .container {
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto;
+  /* Responsive container with gutters */
+  --container-max: 1200px;
+  --gutter: 1rem;
+  width: min(var(--container-max), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .container { --gutter: 2rem; }
+}
+
+@media (min-width: 1280px) {
+  .container { --gutter: 3rem; --container-max: 1200px; }
+}
+
+/* Anchor offset so sticky headers don't cover targets */
+:target {
+  scroll-margin-top: var(--header-height, 72px);
+}
+
+/* Typography scale with clamp */
+h1 {
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2.5vw + 1rem, 2.5rem);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.8vw + 0.9rem, 1.75rem);
+  line-height: 1.3;
+}
+
+/* Button variants and focus rings */
+.btn {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn--primary {
+  background: var(--primary-600);
+  color: var(--text-inverse);
+}
+.btn--primary:hover { background: var(--primary-700); }
+
+.btn--secondary {
+  background: transparent;
+  color: var(--primary-600);
+  border-color: var(--primary-600);
+}
+.btn--secondary:hover { color: var(--primary-700); border-color: var(--primary-700); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-primary, #111);
+}
+
+.btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary-400) 60%, white);
+  outline-offset: 2px;
+}
+
+/* Cards: media ratio and title clamp */
+.card-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ✨ Enhanced Header */
